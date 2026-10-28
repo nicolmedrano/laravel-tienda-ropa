@@ -1,0 +1,28 @@
+/* Boutique Elegance - Estilos Complementarios para Laravel & Blade */
+:root {
+    --boutique-bg: #FDFBF9;
+    --boutique-card: #FFFFFF;
+    --boutique-text: #2A2421;
+    --boutique-border: #EFE9E4;
+    --boutique-rose: #E8B4B8;
+    --boutique-rose-hover: #DCA0A5;
+    --boutique-soft-rose: #FDF2F4;
+    --boutique-dark: #1E1B18;
+}
+
+body {
+    background-color: var(--boutique-bg);
+    color: var(--boutique-text);
+}
+
+.table-boutique {
+    background: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-boutique th {
+    background-color: #FAF8F6;
+    color: #6B635D;
+    font-weight: 600;
+}
