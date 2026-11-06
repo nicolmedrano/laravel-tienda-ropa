@@ -7,8 +7,8 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-dark text-white px-2 py-1" style="font-size: 0.72rem;">Módulo 5 de 6</span>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--boutique-dark);">Gestión de Proveedores</h2>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 5 de 6</span>
+                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Gestión de Proveedores</h2>
             </div>
             <p class="text-muted m-0">Empresas fabricantes y distribuidoras asociadas al módulo de Compras.</p>
         </div>
@@ -24,7 +24,7 @@
         <form action="{{ route('proveedores.index') }}" method="GET" class="row g-2 align-items-center">
             <div class="col-12 col-md-8">
                 <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text border-end-0"><i class="bi bi-search"></i></span>
                     <input type="text" name="buscar" class="form-control border-start-0" placeholder="Buscar por razón social, contacto, teléfono o correo..." value="{{ request('buscar') }}">
                 </div>
             </div>
@@ -41,7 +41,7 @@
     <div class="card-boutique overflow-hidden">
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
+                <thead>
                     <tr style="font-size: 0.82rem;">
                         <th>ID</th>
                         <th>Razón Social / Empresa</th>
@@ -58,7 +58,7 @@
                         <tr>
                             <td><span class="text-muted">#{{ $prov->id_proveedor }}</span></td>
                             <td>
-                                <div class="fw-bold">{{ $prov->nombre_empresa }}</div>
+                                <div class="fw-bold" style="color: var(--color-text-dark);">{{ $prov->nombre_empresa }}</div>
                                 <small class="text-muted">{{ $prov->direccion ?? 'Sin dirección' }}</small>
                             </td>
                             <td>{{ $prov->contacto }}</td>
@@ -75,7 +75,7 @@
                             <td class="text-end">
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-light border" onclick="editarProveedor({{ json_encode($prov) }})" title="Editar">
-                                        <i class="bi bi-pencil"></i>
+                                        <i class="bi bi-pencil text-primary"></i>
                                     </button>
                                     <form action="{{ route('proveedores.toggle', $prov->id_proveedor) }}" method="POST" class="d-inline">
                                         @csrf
@@ -152,7 +152,7 @@
     <div class="modal-dialog">
         <div class="modal-content border-0 shadow">
             <div class="modal-header border-bottom">
-                <h5 class="modal-title font-serif fw-bold">Editar Proveedor</h5>
+                <h5 class="modal-title font-serif fw-bold">Editar Empresa Proveedora</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form id="formEditProveedor" method="POST">
@@ -160,8 +160,8 @@
                 @method('PUT')
                 <div class="modal-body">
                     <div class="mb-2">
-                        <label class="form-label small fw-semibold">Empresa / Razón Social <span class="text-danger">*</span></label>
-                        <input type="text" name="nombre_empresa" id="edit_empresa" class="form-control form-control-sm" required>
+                        <label class="form-label small fw-semibold">Razón Social <span class="text-danger">*</span></label>
+                        <input type="text" name="nombre_empresa" id="edit_nombre_empresa" class="form-control form-control-sm" required>
                     </div>
                     <div class="row g-2 mb-2">
                         <div class="col-6">
@@ -170,16 +170,16 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label small fw-semibold">Teléfono <span class="text-danger">*</span></label>
-                            <input type="text" name="telefono" id="edit_tel" class="form-control form-control-sm" required>
+                            <input type="text" name="telefono" id="edit_telefono" class="form-control form-control-sm" required>
                         </div>
                     </div>
                     <div class="mb-2">
-                        <label class="form-label small fw-semibold">Email</label>
-                        <input type="email" name="email" id="edit_mail" class="form-control form-control-sm">
+                        <label class="form-label small fw-semibold">Correo Electrónico</label>
+                        <input type="email" name="email" id="edit_email" class="form-control form-control-sm">
                     </div>
                     <div class="mb-0">
                         <label class="form-label small fw-semibold">Dirección</label>
-                        <input type="text" name="direccion" id="edit_dir" class="form-control form-control-sm">
+                        <input type="text" name="direccion" id="edit_direccion" class="form-control form-control-sm">
                     </div>
                 </div>
                 <div class="modal-footer border-top">
@@ -196,11 +196,11 @@
 <script>
     function editarProveedor(prov) {
         document.getElementById('formEditProveedor').action = `/proveedores/${prov.id_proveedor}`;
-        document.getElementById('edit_empresa').value = prov.nombre_empresa || '';
+        document.getElementById('edit_nombre_empresa').value = prov.nombre_empresa || '';
         document.getElementById('edit_contacto').value = prov.contacto || '';
-        document.getElementById('edit_tel').value = prov.telefono || '';
-        document.getElementById('edit_mail').value = prov.email || '';
-        document.getElementById('edit_dir').value = prov.direccion || '';
+        document.getElementById('edit_telefono').value = prov.telefono || '';
+        document.getElementById('edit_email').value = prov.email || '';
+        document.getElementById('edit_direccion').value = prov.direccion || '';
         new bootstrap.Modal(document.getElementById('modalEditarProveedor')).show();
     }
 </script>

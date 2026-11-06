@@ -11,11 +11,11 @@
                 <a href="{{ route('productos.index') }}" class="btn btn-sm btn-light border py-1 px-2 text-muted">
                     <i class="bi bi-arrow-left"></i>
                 </a>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--boutique-dark);">Editar Prenda: {{ $producto->nombre }}</h2>
+                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Editar Prenda: {{ $producto->nombre }}</h2>
             </div>
             <p class="text-muted m-0">Actualice la fotografía, datos comerciales o conserve la imagen actual.</p>
         </div>
-        <span class="badge bg-light text-dark border px-3 py-2">Código: {{ $producto->codigo }}</span>
+        <span class="badge badge-module px-3 py-2">Código: {{ $producto->codigo }}</span>
     </div>
 
     <form action="{{ route('productos.update', $producto->id_producto) }}" method="POST" enctype="multipart/form-data">
@@ -30,7 +30,7 @@
                     <p class="text-muted small mb-3">Formatos: <strong>JPG, JPEG, PNG, WEBP</strong> (máx. 5 MB). Puede cambiarla o conservarla.</p>
 
                     <!-- CONTENEDOR DE VISTA PREVIA (ACTUAL / NUEVA) -->
-                    <div id="previewContainer" class="border rounded p-2 text-center mb-3" style="min-height: 220px; background-color: #FAF8F6; display: flex; align-items: center; justify-content: center;">
+                    <div id="previewContainer" class="border rounded p-2 text-center mb-3" style="min-height: 220px; background-color: var(--color-bg-subtle); border-color: var(--color-border) !important; display: flex; align-items: center; justify-content: center;">
                         @if($producto->imagen_url)
                             <img id="imgPreview" src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" style="max-height: 200px; max-width: 100%; object-fit: contain; border-radius: 6px;">
                             <div id="placeholderPreview" class="text-muted py-4" style="display: none;">
@@ -40,10 +40,10 @@
                         @else
                             <img id="imgPreview" src="" alt="Vista previa" style="max-height: 200px; max-width: 100%; object-fit: contain; display: none; border-radius: 6px;">
                             <div id="placeholderPreview" class="text-muted py-4">
-                                <div style="width: 64px; height: 64px; border-radius: 50%; background: #F3EAE4; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px;">
-                                    <i class="bi bi-handbag" style="font-size: 1.8rem; color: #8F7668;"></i>
+                                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--color-bg-light); border: 1px solid var(--color-accent); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px;">
+                                    <i class="bi bi-handbag" style="font-size: 1.8rem; color: var(--color-primary);"></i>
                                 </div>
-                                <div class="fw-semibold small">Sin fotografía cargada</div>
+                                <div class="fw-semibold small" style="color: var(--color-text-dark);">Sin fotografía cargada</div>
                             </div>
                         @endif
                     </div>
@@ -51,7 +51,7 @@
                     <!-- BOTÓN SELECCIONAR NUEVA IMAGEN -->
                     <div class="d-grid gap-2">
                         <label for="inputImagenEdit" class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2" style="cursor: pointer;">
-                            <i class="bi bi-arrow-repeat"></i> Cambiar imagen
+                            <i class="bi bi-arrow-repeat text-primary"></i> Cambiar imagen
                         </label>
                         <input type="file" name="imagen" id="inputImagenEdit" class="d-none" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                         <small id="fileNameDisplayEdit" class="text-muted text-center" style="font-size: 0.78rem;">
@@ -61,7 +61,7 @@
                     </div>
 
                     @if($producto->imagen)
-                        <div class="form-check mt-3 pt-2 border-top">
+                        <div class="form-check mt-3 pt-2 border-top" style="border-color: var(--color-border) !important;">
                             <input class="form-check-input" type="checkbox" name="conservar_imagen" value="1" id="conservarImagen" checked>
                             <label class="form-check-label small" for="conservarImagen">
                                 Conservar fotografía actual si no se selecciona una nueva
@@ -83,7 +83,7 @@
             <!-- COLUMNA DERECHA: DATOS DEL FORMULARIO -->
             <div class="col-12 col-md-7">
                 <div class="card-boutique p-4 mb-4">
-                    <h6 class="fw-bold mb-3">Información General</h6>
+                    <h6 class="fw-bold mb-3" style="color: var(--color-text-dark);">Información General</h6>
 
                     <div class="row g-3 mb-3">
                         <div class="col-12 col-sm-5">
@@ -116,14 +116,14 @@
                         <div class="col-12 col-sm-6">
                             <label class="form-label fw-semibold small">Precio de Venta (Bs.) <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light">Bs.</span>
+                                <span class="input-group-text">Bs.</span>
                                 <input type="number" step="0.50" name="precio_venta" class="form-control" value="{{ old('precio_venta', $producto->precio_venta) }}" required min="0">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6">
                             <label class="form-label fw-semibold small">Costo de Compra (Bs.) <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light">Bs.</span>
+                                <span class="input-group-text">Bs.</span>
                                 <input type="number" step="0.50" name="costo_compra" class="form-control" value="{{ old('costo_compra', $producto->costo_compra) }}" required min="0">
                             </div>
                         </div>
@@ -137,12 +137,12 @@
 
                 <!-- Variantes existentes -->
                 <div class="card-boutique p-4 mb-4">
-                    <h6 class="fw-bold mb-2">Variantes de Stock Actual</h6>
+                    <h6 class="fw-bold mb-2" style="color: var(--color-text-dark);">Variantes de Stock Actual</h6>
                     <p class="text-muted small mb-3">Tallas y colores registrados para esta prenda:</p>
 
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered align-middle mb-0">
-                            <thead class="table-light">
+                        <table class="table table-sm align-middle mb-0">
+                            <thead>
                                 <tr style="font-size: 0.78rem;">
                                     <th>SKU</th>
                                     <th>Talla</th>
@@ -153,10 +153,10 @@
                             <tbody>
                                 @foreach($producto->variantes as $v)
                                     <tr>
-                                        <td><code>{{ $v->codigo_sku }}</code></td>
+                                        <td><code style="color: var(--color-primary);">{{ $v->codigo_sku }}</code></td>
                                         <td><span class="badge bg-light text-dark border">{{ $v->talla }}</span></td>
                                         <td>{{ $v->color }}</td>
-                                        <td class="text-center fw-bold">{{ $v->stock_actual }} un.</td>
+                                        <td class="text-center fw-bold" style="color: var(--color-primary);">{{ $v->stock_actual }} un.</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -45,7 +45,7 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard'))
-            ->with('success', "Bienvenida/o {$usuario->nombre} al sistema de Boutique Elegance.");
+            ->with('success', "Bienvenida/o {$usuario->nombre} al sistema de Bella Girls.");
     }
 
     public function logout(Request $request)

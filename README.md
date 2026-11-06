@@ -1,4 +1,4 @@
-# Boutique Elegance - Sistema Web de Gestión de Tienda de Ropa (Laravel + PostgreSQL)
+# Bella Girls - Sistema Web de Gestión de Tienda de Ropa (Laravel + PostgreSQL)
 
 Sistema web profesional, modular y completo para la gestión operativa y comercial de una tienda de ropa y boutique de modas. Desarrollado con **PHP 8.2+**, **Laravel 11**, motor de plantillas **Blade**, estilos modernos con **Bootstrap 5.3** y **PostgreSQL** como único sistema gestor de base de datos relacional.
 

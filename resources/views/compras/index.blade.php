@@ -7,8 +7,8 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-dark text-white px-2 py-1" style="font-size: 0.72rem;">Módulo 3 de 6</span>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--boutique-dark);">Compras & Abastecimiento</h2>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 3 de 6</span>
+                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Compras & Abastecimiento</h2>
             </div>
             <p class="text-muted m-0">Recepción de mercadería de proveedores y actualización automática de existencias.</p>
         </div>
@@ -24,7 +24,7 @@
         <form action="{{ route('compras.index') }}" method="GET" class="row g-2 align-items-center">
             <div class="col-12 col-md-6">
                 <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text border-end-0"><i class="bi bi-search"></i></span>
                     <input type="text" name="buscar" class="form-control border-start-0" placeholder="Buscar por comprobante o proveedor..." value="{{ request('buscar') }}">
                 </div>
             </div>
@@ -48,7 +48,7 @@
     <div class="card-boutique overflow-hidden">
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
+                <thead>
                     <tr style="font-size: 0.82rem;">
                         <th>Comprobante</th>
                         <th>Fecha</th>
@@ -63,10 +63,10 @@
                 <tbody>
                     @forelse($compras as $c)
                         <tr>
-                            <td><span class="fw-bold font-monospace">{{ $c->numero_comprobante }}</span></td>
+                            <td><span class="fw-bold font-monospace" style="color: var(--color-primary);">{{ $c->numero_comprobante }}</span></td>
                             <td>{{ $c->fecha_compra ? $c->fecha_compra->format('d/m/Y H:i') : '' }}</td>
                             <td>
-                                <div class="fw-semibold">{{ $c->proveedor->nombre_empresa ?? 'Proveedor General' }}</div>
+                                <div class="fw-semibold" style="color: var(--color-text-dark);">{{ $c->proveedor->nombre_empresa ?? 'Proveedor General' }}</div>
                                 <small class="text-muted">{{ $c->proveedor->contacto ?? '' }}</small>
                             </td>
                             <td>
@@ -75,7 +75,7 @@
                             <td>
                                 <small class="text-muted">{{ $c->detalles->sum('cantidad') }} un. ingresadas</small>
                             </td>
-                            <td class="text-end fw-bold">
+                            <td class="text-end fw-bold" style="color: var(--color-primary);">
                                 Bs. {{ number_format($c->total, 2) }}
                             </td>
                             <td class="text-center">

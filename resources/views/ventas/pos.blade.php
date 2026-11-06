@@ -8,13 +8,13 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-dark text-white px-2 py-1" style="font-size: 0.72rem;">Módulo 2 de 6</span>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--boutique-dark);">Punto de Venta (POS)</h2>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 2 de 6</span>
+                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Punto de Venta (POS)</h2>
             </div>
             <p class="text-muted m-0 small">Seleccione las prendas y variantes disponibles para emitir la factura y procesar el cobro.</p>
         </div>
         <div>
-            <a href="{{ route('ventas.index') }}" class="btn btn-sm btn-outline-secondary">
+            <a href="{{ route('ventas.index') }}" class="btn btn-sm btn-outline-boutique">
                 <i class="bi bi-clock-history me-1"></i> Historial de Ventas
             </a>
         </div>
@@ -25,7 +25,7 @@
         <div class="col-12 col-lg-7 col-xl-8">
             <div class="card-boutique p-3 mb-3">
                 <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text border-end-0"><i class="bi bi-search"></i></span>
                     <input type="text" id="filtroPrendas" class="form-control border-start-0" placeholder="Buscar por nombre o código de prenda...">
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 @foreach($productos as $p)
                     <div class="col-12 col-sm-6 col-xl-4 prenda-item" data-nombre="{{ strtolower($p->nombre) }}" data-codigo="{{ strtolower($p->codigo) }}">
                         <div class="card-boutique h-100 p-2 d-flex flex-column">
-                            <div style="height: 140px; background: #FAF8F6; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 8px;">
+                            <div style="height: 140px; background: var(--color-bg-subtle); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 8px; border: 1px solid var(--color-border);">
                                 @if($p->imagen_url)
                                     <img src="{{ $p->imagen_url }}" alt="{{ $p->nombre }}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
                                 @else
@@ -44,11 +44,11 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="badge bg-light text-muted border" style="font-size: 0.68rem;">{{ $p->codigo }}</span>
-                                <span class="fw-bold text-dark" style="font-size: 0.95rem;">Bs. {{ number_format($p->precio_venta, 2) }}</span>
+                                <span class="badge bg-light text-dark border" style="font-size: 0.68rem;">{{ $p->codigo }}</span>
+                                <span class="fw-bold" style="font-size: 0.95rem; color: var(--color-primary);">Bs. {{ number_format($p->precio_venta, 2) }}</span>
                             </div>
 
-                            <h6 class="fw-semibold text-truncate mb-2" title="{{ $p->nombre }}" style="font-size: 0.88rem;">{{ $p->nombre }}</h6>
+                            <h6 class="fw-semibold text-truncate mb-2" title="{{ $p->nombre }}" style="font-size: 0.88rem; color: var(--color-text-dark);">{{ $p->nombre }}</h6>
 
                             <!-- Selector de Variante (Talla y Color) -->
                             <div class="mt-auto">
@@ -90,8 +90,8 @@
         <!-- COLUMNA DERECHA: CARRITO, CLIENTE Y FINALIZAR VENTA -->
         <div class="col-12 col-lg-5 col-xl-4">
             <div class="card-boutique p-3 d-flex flex-column" style="min-height: 650px;">
-                <div class="d-flex justify-content-between align-items-center pb-2 border-bottom mb-3">
-                    <h5 class="font-serif fw-bold m-0"><i class="bi bi-bag-check me-1 text-danger"></i> Comprobante de Venta</h5>
+                <div class="d-flex justify-content-between align-items-center pb-2 border-bottom mb-3" style="border-color: var(--color-border) !important;">
+                    <h5 class="font-serif fw-bold m-0" style="color: var(--color-primary);"><i class="bi bi-bag-check me-1"></i> Comprobante de Venta</h5>
                     <button type="button" class="btn btn-sm btn-link text-muted p-0 text-decoration-none" onclick="limpiarCarrito()">
                         <i class="bi bi-trash"></i> Vaciar
                     </button>
@@ -114,7 +114,7 @@
                     <!-- 2. Ítems en Carrito -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold small mb-1">Prendas Seleccionadas</label>
-                        <div id="listaCarrito" style="max-height: 250px; overflow-y: auto;" class="border rounded p-2 bg-light">
+                        <div id="listaCarrito" style="max-height: 250px; overflow-y: auto; background-color: var(--color-bg-subtle);" class="border rounded p-2">
                             <div id="carritoVacio" class="text-center py-4 text-muted small">
                                 <i class="bi bi-cart3 display-6 d-block mb-2 text-muted"></i>
                                 El carrito está vacío. Agregue prendas desde el catálogo.
@@ -123,7 +123,7 @@
                     </div>
 
                     <!-- 3. Totales y Descuento -->
-                    <div class="border-top pt-2 mb-3">
+                    <div class="border-top pt-2 mb-3" style="border-color: var(--color-border) !important;">
                         <div class="d-flex justify-content-between mb-1 small text-muted">
                             <span>Subtotal:</span>
                             <span class="fw-semibold text-dark" id="displaySubtotal">Bs. 0.00</span>
@@ -132,7 +132,7 @@
                             <span>Descuento (Bs.):</span>
                             <input type="number" step="0.50" min="0" name="descuento" id="inputDescuento" value="0.00" class="form-control form-control-sm text-end" style="width: 100px;" oninput="calcularTotales()">
                         </div>
-                        <div class="d-flex justify-content-between pt-2 border-top fs-5 fw-bold" style="color: var(--boutique-dark);">
+                        <div class="d-flex justify-content-between pt-2 border-top fs-5 fw-bold" style="color: var(--color-primary); border-color: var(--color-border) !important;">
                             <span>Total a Cobrar:</span>
                             <span id="displayTotal">Bs. 0.00</span>
                         </div>
@@ -292,9 +292,9 @@
         carrito.forEach((item, index) => {
             const subtotal = item.cantidad * item.precio_unitario;
             html += `
-                <div class="d-flex align-items-center justify-content-between p-2 mb-2 bg-white border rounded">
+                <div class="d-flex align-items-center justify-content-between p-2 mb-2 bg-white border rounded" style="border-color: var(--color-border) !important;">
                     <div style="flex-grow: 1; padding-right: 8px;">
-                        <div class="fw-semibold small">${item.nombre}</div>
+                        <div class="fw-semibold small" style="color: var(--color-text-dark);">${item.nombre}</div>
                         <small class="text-muted d-block" style="font-size: 0.72rem;">
                             ${item.talla} / ${item.color} &bull; Bs. ${item.precio_unitario.toFixed(2)} c/u
                         </small>
@@ -302,12 +302,12 @@
 
                     <div class="d-flex align-items-center gap-1">
                         <button type="button" class="btn btn-sm btn-light border py-0 px-2" onclick="cambiarCantidad(${item.id_variante}, -1)">-</button>
-                        <span class="fw-bold px-1" style="min-width: 22px; text-align: center; font-size: 0.85rem;">${item.cantidad}</span>
+                        <span class="fw-bold px-1" style="min-width: 22px; text-align: center; font-size: 0.85rem; color: var(--color-text-dark);">${item.cantidad}</span>
                         <button type="button" class="btn btn-sm btn-light border py-0 px-2" onclick="cambiarCantidad(${item.id_variante}, 1)">+</button>
                     </div>
 
                     <div class="text-end ps-2" style="min-width: 80px;">
-                        <span class="fw-bold small">Bs. ${subtotal.toFixed(2)}</span>
+                        <span class="fw-bold small" style="color: var(--color-primary);">Bs. ${subtotal.toFixed(2)}</span>
                         <button type="button" class="btn btn-link text-danger p-0 ms-1" onclick="eliminarItem(${item.id_variante})" title="Quitar">
                             <i class="bi bi-x"></i>
                         </button>

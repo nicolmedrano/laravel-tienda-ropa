@@ -1,4 +1,4 @@
-// Boutique Elegance - Scripts de interacción
+// Bella Girls - Scripts de interacción
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('[Boutique Elegance] Frontend inicializado con soporte PostgreSQL y Laravel.');
+    console.log('[Bella Girls] Frontend inicializado con soporte PostgreSQL y Laravel.');
 });

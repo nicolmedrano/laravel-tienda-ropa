@@ -21,10 +21,11 @@ class ProductoSeeder extends Seeder
                 'stock_minimo' => 4,
                 'imagen' => '/uploads/productos/prod-blusa-chiffon.svg',
                 'variantes' => [
-                    ['sku' => 'BLU-001-S-BEI', 'talla' => 'S', 'color' => 'Beige', 'stock' => 8],
-                    ['sku' => 'BLU-001-M-BEI', 'talla' => 'M', 'color' => 'Beige', 'stock' => 12],
-                    ['sku' => 'BLU-001-M-ROS', 'talla' => 'M', 'color' => 'Rosa Suave', 'stock' => 7],
-                    ['sku' => 'BLU-001-L-ROS', 'talla' => 'L', 'color' => 'Rosa Suave', 'stock' => 2],
+                    ['sku' => 'BLU-001-S-FUC', 'talla' => 'S', 'color' => 'Fucsia Intenso (#f70071)', 'stock' => 8],
+                    ['sku' => 'BLU-001-M-MAG', 'talla' => 'M', 'color' => 'Magenta Vibrante (#ff1b82)', 'stock' => 12],
+                    ['sku' => 'BLU-001-M-RCH', 'talla' => 'M', 'color' => 'Rosa Chicle (#ff5aa4)', 'stock' => 7],
+                    ['sku' => 'BLU-001-L-RPA', 'talla' => 'L', 'color' => 'Rosa Pastel (#ff96c5)', 'stock' => 6],
+                    ['sku' => 'BLU-001-XL-RCL', 'talla' => 'XL', 'color' => 'Rosa Claro (#ffc0dc)', 'stock' => 5],
                 ]
             ],
             [

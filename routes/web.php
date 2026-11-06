@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Tienda de Ropa (Boutique Elegance)
+| Web Routes - Tienda de Ropa (Bella Girls)
 | Módulos Principales: Cliente, Usuario, Proveedor, Venta, Compra, Producto
 |--------------------------------------------------------------------------
 */

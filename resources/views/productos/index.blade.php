@@ -8,13 +8,13 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-dark text-white px-2 py-1" style="font-size: 0.72rem;">Módulo 1 de 6</span>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--boutique-dark);">Catálogo de Productos</h2>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 1 de 6</span>
+                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Catálogo de Productos</h2>
             </div>
             <p class="text-muted m-0">Prendas de vestir con fotografía, control de tallas, colores y existencias sincronizadas.</p>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('productos.tabla') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('productos.tabla') }}" class="btn btn-outline-boutique">
                 <i class="bi bi-table me-1"></i> Vista Tabla
             </a>
             <a href="{{ route('productos.create') }}" class="btn btn-boutique-rose">
@@ -28,7 +28,7 @@
         <form action="{{ route('productos.index') }}" method="GET" class="row g-2 align-items-center">
             <div class="col-12 col-md-5">
                 <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text border-end-0"><i class="bi bi-search"></i></span>
                     <input type="text" name="buscar" class="form-control border-start-0" placeholder="Buscar por nombre o código (ej. BLU-001)..." value="{{ request('buscar') }}">
                 </div>
             </div>
@@ -62,27 +62,27 @@
                 $coloresUnicos = $producto->variantes->pluck('color')->unique()->values();
             @endphp
             <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                <div class="card-boutique h-100 d-flex flex-column overflow-hidden position-relative" style="transition: transform 0.2s ease, box-shadow 0.2s ease;">
+                <div class="card-boutique h-100 d-flex flex-column overflow-hidden position-relative">
                     
                     <!-- FOTOGRAFÍA UNIFORME EN LA PARTE SUPERIOR (object-fit: contain) -->
-                    <div style="height: 240px; background: #FBF8F6; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid var(--boutique-border); padding: 12px;">
+                    <div style="height: 240px; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid var(--color-border); padding: 12px;">
                         @if($producto->imagen_url)
                             <img src="{{ $producto->imagen_url }}" 
                                  alt="{{ $producto->nombre }}" 
                                  style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 6px;"
-                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'text-center text-muted\'><i class=\'bi bi-handbag display-4\' style=\'color: #D3C3B9;\'></i><span class=\'d-block small mt-1\'>Sin foto</span></div>';">
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'text-center text-muted\'><i class=\'bi bi-handbag display-4\' style=\'color: var(--color-secondary);\'></i><span class=\'d-block small mt-1\'>Sin foto</span></div>';">
                         @else
-                            <!-- IMAGEN DE RESPALDO ELEGANTE CON ICONO DE ROPA -->
+                            <!-- IMAGEN DE RESPALDO CON PALETA ROSADA -->
                             <div class="text-center text-muted py-4">
-                                <div style="width: 72px; height: 72px; border-radius: 50%; background: #F2E8E1; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px;">
-                                    <i class="bi bi-handbag" style="font-size: 2rem; color: #8F7668;"></i>
+                                <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--color-bg-light); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px; border: 1px solid var(--color-accent);">
+                                    <i class="bi bi-handbag" style="font-size: 2rem; color: var(--color-primary);"></i>
                                 </div>
                                 <span class="d-block text-muted" style="font-size: 0.78rem;">Prenda sin fotografía</span>
                             </div>
                         @endif
 
                         <!-- Badge de stock disponible arriba a la derecha -->
-                        <span class="position-absolute top-0 end-0 m-2 badge {{ $stockTotal > 5 ? 'bg-white text-dark border' : ($stockTotal > 0 ? 'bg-warning text-dark' : 'bg-danger text-white') }}" style="box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
+                        <span class="position-absolute top-0 end-0 m-2 badge {{ $stockTotal > 5 ? 'bg-light text-dark border' : ($stockTotal > 0 ? 'bg-warning' : 'bg-danger') }}" style="box-shadow: var(--shadow-pink-xs);">
                             @if($stockTotal > 0)
                                 Stock: {{ $stockTotal }} un.
                             @else
@@ -96,14 +96,14 @@
                         <!-- Código y Categoría -->
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="text-muted fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.5px;">{{ $producto->codigo }}</span>
-                            <span class="badge" style="background-color: var(--boutique-soft-rose); color: #8C4755; font-size: 0.72rem;">
+                            <span class="badge badge-pink-soft" style="font-size: 0.72rem;">
                                 {{ $producto->categoria->nombre ?? 'Sin Categoría' }}
                             </span>
                         </div>
 
                         <!-- Nombre de la Prenda -->
-                        <h5 class="fw-bold mb-1" style="font-size: 1.05rem; color: var(--boutique-dark);">
-                            <a href="{{ route('productos.show', $producto->id_producto) }}" class="text-decoration-none text-dark">
+                        <h5 class="fw-bold mb-1" style="font-size: 1.05rem; color: var(--color-text-dark);">
+                            <a href="{{ route('productos.show', $producto->id_producto) }}" class="text-decoration-none" style="color: var(--color-text-dark);">
                                 {{ $producto->nombre }}
                             </a>
                         </h5>
@@ -114,7 +114,7 @@
                         </p>
 
                         <!-- Tallas y Colores disponibles -->
-                        <div class="mb-3 pt-2 border-top" style="border-color: #F6EFEA !important;">
+                        <div class="mb-3 pt-2 border-top" style="border-color: var(--color-border) !important;">
                             <div class="d-flex align-items-center justify-content-between mb-1" style="font-size: 0.75rem;">
                                 <span class="text-muted">Tallas:</span>
                                 <div class="d-flex gap-1 flex-wrap justify-content-end">
@@ -125,24 +125,24 @@
                             </div>
                             <div class="d-flex align-items-center justify-content-between" style="font-size: 0.75rem;">
                                 <span class="text-muted">Colores:</span>
-                                <span class="text-dark fw-medium text-end" style="max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                <span class="fw-semibold text-end" style="color: var(--color-text-dark); max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     {{ $coloresUnicos->implode(', ') }}
                                 </span>
                             </div>
                         </div>
 
                         <!-- PRECIO EN BOLIVIANOS (Bs.) Y BOTÓN AGREGAR AL CARRITO "+" -->
-                        <div class="mt-auto d-flex align-items-center justify-content-between pt-2 border-top" style="border-color: var(--boutique-border) !important;">
+                        <div class="mt-auto d-flex align-items-center justify-content-between pt-2 border-top" style="border-color: var(--color-border) !important;">
                             <div>
                                 <small class="text-muted d-block" style="font-size: 0.72rem; line-height: 1;">Precio venta</small>
-                                <span class="fw-bold" style="font-size: 1.25rem; color: var(--boutique-dark);">
+                                <span class="fw-bold" style="font-size: 1.25rem; color: var(--color-primary);">
                                     Bs. {{ number_format($producto->precio_venta, 2) }}
                                 </span>
                             </div>
 
                             <div class="d-flex gap-1">
                                 <a href="{{ route('productos.edit', $producto->id_producto) }}" class="btn btn-sm btn-light border py-2 px-2" title="Editar prenda y foto">
-                                    <i class="bi bi-pencil"></i>
+                                    <i class="bi bi-pencil text-primary"></i>
                                 </a>
                                 @if($stockTotal > 0)
                                     <a href="{{ route('ventas.pos') }}?agregar={{ $producto->id_producto }}" class="btn btn-boutique-rose py-2 px-3 fw-bold" title="Agregar al carrito de venta" style="border-radius: 8px;">
@@ -162,8 +162,8 @@
         @empty
             <div class="col-12">
                 <div class="card-boutique p-5 text-center text-muted">
-                    <i class="bi bi-search display-4 d-block mb-3" style="color: var(--boutique-rose);"></i>
-                    <h5 class="fw-bold">No se encontraron prendas con los filtros seleccionados</h5>
+                    <i class="bi bi-search display-4 d-block mb-3" style="color: var(--color-primary);"></i>
+                    <h5 class="fw-bold" style="color: var(--color-text-dark);">No se encontraron prendas con los filtros seleccionados</h5>
                     <p class="mb-3">Puede modificar la búsqueda o registrar una nueva prenda en el catálogo.</p>
                     <a href="{{ route('productos.create') }}" class="btn btn-boutique-rose">
                         <i class="bi bi-plus-lg me-1"></i> Registrar Nueva Prenda

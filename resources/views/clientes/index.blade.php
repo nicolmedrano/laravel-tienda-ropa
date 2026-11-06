@@ -7,8 +7,8 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge bg-dark text-white px-2 py-1" style="font-size: 0.72rem;">Módulo 4 de 6</span>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--boutique-dark);">Gestión de Clientes</h2>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 4 de 6</span>
+                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Gestión de Clientes</h2>
             </div>
             <p class="text-muted m-0">Registro, edición y trazabilidad de compras asociadas al módulo de Ventas.</p>
         </div>
@@ -24,7 +24,7 @@
         <form action="{{ route('clientes.index') }}" method="GET" class="row g-2 align-items-center">
             <div class="col-12 col-md-8">
                 <div class="input-group">
-                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text border-end-0"><i class="bi bi-search"></i></span>
                     <input type="text" name="buscar" class="form-control border-start-0" placeholder="Buscar por nombre, apellido, teléfono o email..." value="{{ request('buscar') }}">
                 </div>
             </div>
@@ -41,7 +41,7 @@
     <div class="card-boutique overflow-hidden">
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
+                <thead>
                     <tr style="font-size: 0.82rem;">
                         <th>ID</th>
                         <th>Cliente</th>
@@ -58,7 +58,7 @@
                         <tr>
                             <td><span class="text-muted">#{{ $cli->id_cliente }}</span></td>
                             <td>
-                                <div class="fw-bold">{{ $cli->nombre_completo }}</div>
+                                <div class="fw-bold" style="color: var(--color-text-dark);">{{ $cli->nombre_completo }}</div>
                                 <small class="text-muted">Registrado: {{ $cli->created_at ? $cli->created_at->format('d/m/Y') : '' }}</small>
                             </td>
                             <td>{{ $cli->telefono ?? '—' }}</td>
@@ -75,7 +75,7 @@
                             <td class="text-end">
                                 <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-light border" onclick="editarCliente({{ json_encode($cli) }})" title="Editar datos">
-                                        <i class="bi bi-pencil"></i>
+                                        <i class="bi bi-pencil text-primary"></i>
                                     </button>
                                     <form action="{{ route('clientes.toggle', $cli->id_cliente) }}" method="POST" class="d-inline">
                                         @csrf

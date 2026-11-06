@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/health', function () {
     return response()->json([
         'status' => 'ok',
-        'sistema' => 'Boutique Elegance API (Laravel + PostgreSQL)',
+        'sistema' => 'Bella Girls API (Laravel + PostgreSQL)',
         'database' => config('database.default'),
         'timestamp' => now()->toIso8601String(),
     ]);

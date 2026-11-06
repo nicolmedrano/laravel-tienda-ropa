@@ -19,21 +19,24 @@
         </div>
     </div>
 
-    <!-- TICKET DE VENTA (ESTILO TÉRMICO ELEGANTE) -->
-    <div class="card-boutique p-4 bg-white shadow-sm ticket-imprimible" style="width: 100%; max-width: 460px; font-family: 'Plus Jakarta Sans', monospace; font-size: 0.88rem; border: 1px dashed var(--boutique-border);">
+    <!-- TICKET DE VENTA (ESTILO TÉRMICO ELEGANTE ROSA) -->
+    <div class="card-boutique p-4 bg-white shadow-sm ticket-imprimible" style="width: 100%; max-width: 460px; font-family: 'Plus Jakarta Sans', monospace; font-size: 0.88rem; border: 1.5px dashed var(--color-border-strong);">
         <!-- Encabezado de la Tienda -->
-        <div class="text-center pb-3 border-bottom mb-3">
-            <h4 class="font-serif fw-bold m-0" style="letter-spacing: -0.5px;">BOUTIQUE ELEGANCE</h4>
+        <div class="text-center pb-3 border-bottom mb-3" style="border-color: var(--color-border) !important;">
+            <div class="mb-2">
+                <img src="{{ asset('images/logo-bella-girls.png') }}" alt="Bella Girls" style="width: 48px; height: 48px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 10px rgba(142, 43, 68, 0.2);">
+            </div>
+            <h4 class="font-serif fw-bold m-0" style="letter-spacing: -0.5px; color: var(--color-primary);">BELLA GIRLS</h4>
             <div class="text-muted small">Alta Costura y Confecciones</div>
-            <div class="small">Av. Principal Los Rosales #1024, La Paz - Bolivia</div>
-            <div class="small">Teléfono: +591 2 2790000 &bull; NIT: 8493021018</div>
+            <div class="small text-muted">Av. Principal Los Rosales #1024, La Paz - Bolivia</div>
+            <div class="small text-muted">Teléfono: +591 2 2790000 &bull; NIT: 8493021018</div>
         </div>
 
         <!-- Datos del Comprobante y Relaciones del Sistema -->
         <div class="mb-3 small">
             <div class="d-flex justify-content-between">
                 <span class="text-muted">Factura N°:</span>
-                <span class="fw-bold">{{ $venta->numero_factura }}</span>
+                <span class="fw-bold font-monospace" style="color: var(--color-primary);">{{ $venta->numero_factura }}</span>
             </div>
             <div class="d-flex justify-content-between">
                 <span class="text-muted">Fecha y Hora:</span>
@@ -43,9 +46,9 @@
                 <span class="text-muted">Atendido por:</span>
                 <span>{{ $venta->usuario->nombre ?? 'Valentina' }} {{ $venta->usuario->apellido ?? 'Nicol' }} ({{ ucfirst($venta->usuario->rol ?? 'Vendedora') }})</span>
             </div>
-            <div class="d-flex justify-content-between pt-1 mt-1 border-top">
+            <div class="d-flex justify-content-between pt-1 mt-1 border-top" style="border-color: var(--color-border) !important;">
                 <span class="text-muted">Cliente:</span>
-                <span class="fw-semibold">{{ $venta->cliente ? $venta->cliente->nombre_completo : 'Cliente Ocasional' }}</span>
+                <span class="fw-semibold" style="color: var(--color-text-dark);">{{ $venta->cliente ? $venta->cliente->nombre_completo : 'Cliente Ocasional' }}</span>
             </div>
             @if($venta->cliente && $venta->cliente->telefono)
                 <div class="d-flex justify-content-between">
@@ -56,10 +59,10 @@
         </div>
 
         <!-- Tabla de Prendas Vendidas -->
-        <div class="border-top border-bottom py-2 mb-3">
+        <div class="border-top border-bottom py-2 mb-3" style="border-color: var(--color-border) !important;">
             <table class="w-100 small">
                 <thead>
-                    <tr class="text-muted border-bottom" style="font-size: 0.75rem;">
+                    <tr class="text-muted border-bottom" style="font-size: 0.75rem; border-color: var(--color-border) !important;">
                         <th class="text-start pb-1">Prenda / Talla / Color</th>
                         <th class="text-center pb-1">Cant.</th>
                         <th class="text-end pb-1">P. Unit</th>
@@ -70,12 +73,12 @@
                     @foreach($venta->detalles as $det)
                         <tr>
                             <td class="py-1">
-                                <div class="fw-semibold">{{ $det->variante->producto->nombre ?? 'Prenda' }}</div>
+                                <div class="fw-semibold" style="color: var(--color-text-dark);">{{ $det->variante->producto->nombre ?? 'Prenda' }}</div>
                                 <small class="text-muted">{{ $det->variante->talla ?? '' }} / {{ $det->variante->color ?? '' }}</small>
                             </td>
                             <td class="text-center py-1">{{ $det->cantidad }}</td>
                             <td class="text-end py-1">Bs. {{ number_format($det->precio_unitario, 2) }}</td>
-                            <td class="text-end py-1 fw-bold">Bs. {{ number_format($det->subtotal, 2) }}</td>
+                            <td class="text-end py-1 fw-bold" style="color: var(--color-primary);">Bs. {{ number_format($det->subtotal, 2) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -89,24 +92,24 @@
                 <span>Bs. {{ number_format($venta->subtotal, 2) }}</span>
             </div>
             @if($venta->descuento > 0)
-                <div class="d-flex justify-content-between mb-1 text-success">
+                <div class="d-flex justify-content-between mb-1" style="color: var(--color-success-text);">
                     <span>Descuento aplicado:</span>
                     <span>- Bs. {{ number_format($venta->descuento, 2) }}</span>
                 </div>
             @endif
-            <div class="d-flex justify-content-between fs-5 fw-bold pt-1 border-top" style="color: var(--boutique-dark);">
+            <div class="d-flex justify-content-between fs-5 fw-bold pt-2 border-top" style="color: var(--color-primary); border-color: var(--color-border) !important;">
                 <span>TOTAL:</span>
                 <span>Bs. {{ number_format($venta->total, 2) }}</span>
             </div>
         </div>
 
         <!-- Métodos de Pago Registrados -->
-        <div class="p-2 bg-light rounded small mb-3 border">
-            <div class="fw-semibold mb-1">Detalle del Pago:</div>
+        <div class="p-2 rounded small mb-3 border" style="background-color: var(--color-bg-subtle); border-color: var(--color-border) !important;">
+            <div class="fw-semibold mb-1" style="color: var(--color-text-dark);">Detalle del Pago:</div>
             @foreach($venta->pagos as $pago)
                 <div class="d-flex justify-content-between">
-                    <span>Método: <strong class="text-uppercase">{{ $pago->metodo }}</strong></span>
-                    <span>Bs. {{ number_format($pago->monto, 2) }}</span>
+                    <span>Método: <strong class="text-uppercase" style="color: var(--color-primary);">{{ $pago->metodo }}</strong></span>
+                    <span class="fw-bold">Bs. {{ number_format($pago->monto, 2) }}</span>
                 </div>
                 @if($pago->referencia)
                     <div class="text-muted" style="font-size: 0.75rem;">Ref: {{ $pago->referencia }}</div>
@@ -115,8 +118,8 @@
         </div>
 
         <!-- Pie de Ticket -->
-        <div class="text-center text-muted small pt-2 border-top">
-            <div class="fw-semibold mb-1">¡Gracias por su preferencia!</div>
+        <div class="text-center text-muted small pt-2 border-top" style="border-color: var(--color-border) !important;">
+            <div class="fw-semibold mb-1" style="color: var(--color-text-dark);">¡Gracias por su preferencia!</div>
             <div>Prendas exclusivas diseñadas para resaltar su elegancia.</div>
             <div class="mt-2" style="font-size: 0.7rem;">Cambios permitidos dentro de los 7 días con este comprobante y etiquetas intactas.</div>
         </div>

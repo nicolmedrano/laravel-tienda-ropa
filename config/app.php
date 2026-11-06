@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => env('APP_NAME', 'Boutique Elegance'),
+    'name' => env('APP_NAME', 'Bella Girls'),
 
     'env' => env('APP_ENV', 'production'),
 
