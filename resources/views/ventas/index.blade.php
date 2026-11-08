@@ -7,7 +7,7 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 2 de 6</span>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Venta</span>
                 <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Historial de Ventas</h2>
             </div>
             <p class="text-muted m-0">Registro histórico de transacciones, tickets emitidos y reversión de inventario.</p>

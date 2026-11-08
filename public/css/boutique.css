@@ -1,116 +1,139 @@
 /* ==========================================================================
-   Bella Girls - Sistema de Diseño Oficial & Paleta Vino / Rosa Palo
-   Centralización de tokens de color y estilos de la aplicación
+   Bella Girls - Sistema de Diseño Oficial
+   Paleta: Rosa Principal, Rosa Intenso, Fucsia Oscuro, Dorado, Champagne,
+           Dorado Oscuro, Rojo Vino, Blanco.
+   Centralización de tokens de color y estilos de toda la aplicación.
    ========================================================================== */
 
 :root {
     /* -------------------------------------------------------------------------
-       1. PALETA OFICIAL BELLA GIRLS (Tonos Vino & Rosa Palo)
+       1. PALETA OFICIAL BELLA GIRLS (Definida en un solo lugar)
        ------------------------------------------------------------------------- */
-    --c-900: #4B0F1E;           /* Vino muy oscuro */
-    --c-800: #6D1D32;           /* Vino oscuro */
-    --c-700: #8E2B44;           /* Vino (Primario del sistema) */
-    --c-600: #B23C59;           /* Frambuesa */
-    --c-500: #CC5671;           /* Rosa frambuesa (Hover / Acentos) */
-    --c-400: #E07A94;           /* Rosa medio */
-    --c-100: #F7D6DC;           /* Rosa palo claro (Fondos, sidebar) */
-
-    /* Tokens semánticos mapeados a la paleta vino/rosa */
-    --color-primary: var(--c-700);           /* #8E2B44 */
-    --color-primary-hover: var(--c-800);     /* #6D1D32 */
-    --color-secondary: var(--c-600);         /* #B23C59 */
-    --color-accent: var(--c-400);            /* #E07A94 */
-    --color-bg-light: var(--c-100);          /* #F7D6DC */
-
-    /* Alias retrocompatibles con la paleta de 5 tonos */
-    --color-pink-1: var(--c-900);
-    --color-pink-2: var(--c-800);
-    --color-pink-3: var(--c-700);
-    --color-pink-4: var(--c-600);
-    --color-pink-5: var(--c-100);
+    --rosa-principal: #FD7EAF;
+    --rosa-intenso: #EB5387;
+    --fucsia-oscuro: #C01548;
+    --dorado-principal: #FCDB72;
+    --dorado-champagne: #FEF1B8;
+    --dorado-oscuro: #E7B049;
+    --rojo-vino: #821110;
+    --blanco: #FFFFFF;
 
     /* -------------------------------------------------------------------------
-       2. CONTRASTE Y TIPOGRAFÍA (Mínimo WCAG AA / AAA)
+       2. GRADIENTES OFICIALES
        ------------------------------------------------------------------------- */
-    --color-text-on-primary: #ffffff;   /* Texto blanco sobre #8E2B44 y #6D1D32 */
-    --color-text-dark: var(--c-900);    /* Texto oscuro #4B0F1E sobre #E07A94 y #F7D6DC */
-    --color-text-main: #340c16;         /* Texto principal de párrafos y títulos */
-    --color-text-muted: #7d4454;        /* Texto secundario y etiquetas atenuadas */
+    /* Acción principal (botones primarios, ítem activo del menú, enlaces):
+       degradado de --fucsia-oscuro a --rosa-intenso, texto blanco */
+    --grad-accion: linear-gradient(135deg, var(--fucsia-oscuro) 0%, var(--rosa-intenso) 100%);
+    /* Hover de acción principal: de --rojo-vino a --fucsia-oscuro */
+    --grad-accion-hover: linear-gradient(135deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
+    /* Header superior: degradado de --rojo-vino a --fucsia-oscuro, texto blanco */
+    --grad-header: linear-gradient(90deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
+    /* Detalles dorados / champagne */
+    --grad-dorado: linear-gradient(135deg, var(--dorado-champagne) 0%, var(--dorado-principal) 60%, var(--dorado-oscuro) 100%);
+    /* Fondos suaves */
+    --grad-suave: linear-gradient(180deg, #FFFFFF 0%, #FFF5F8 100%);
 
     /* -------------------------------------------------------------------------
-       3. FONDOS DEL SISTEMA
+       3. TOKENS SEMÁNTICOS Y RETROCOMPATIBILIDAD
        ------------------------------------------------------------------------- */
-    --color-bg-app: #fcf6f7;            /* Fondo base de la aplicación (rosa ultra sutil) */
-    --color-bg-card: #ffffff;           /* Fondo de tarjetas estándar */
-    --color-bg-sidebar: var(--c-100);   /* Fondo del sidebar según paleta oficial */
-    --color-bg-subtle: #fdf2f4;         /* Tinte ultra suave para contenedores */
-    --color-bg-hover: rgba(247, 214, 220, 0.45);
+    --color-primary: var(--fucsia-oscuro);
+    --color-primary-hover: var(--rojo-vino);
+    --color-secondary: var(--rosa-intenso);
+    --color-accent: var(--dorado-principal);
+    --color-accent-dark: var(--dorado-oscuro);
+    --color-bg-light: #FFF5F8;
+    --color-bg-app: #FFF9FB;
+    --color-bg-card: #FFFFFF;
+    --color-bg-sidebar: #FFFFFF;
+    --color-bg-subtle: #FFF2F6;
+    --color-bg-champagne: var(--dorado-champagne);
+    --color-bg-hover: rgba(253, 126, 175, 0.12);
+
+    --color-border: #FBDCE8;
+    --color-border-strong: var(--rosa-principal);
+    --color-border-focus: var(--rosa-intenso);
+    --color-border-gold: var(--dorado-oscuro);
 
     /* -------------------------------------------------------------------------
-       4. BORDES Y SOMBRAS ARMONIZADAS CON TONO VINO / ROSA
+       4. CONTRASTE Y TIPOGRAFÍA (WCAG AA)
        ------------------------------------------------------------------------- */
-    --color-border: #f2cbd3;            /* Borde suave armonizado */
-    --color-border-strong: var(--c-400);/* Borde secundario / acento */
-    --color-border-focus: var(--c-500); /* Borde al enfocar inputs */
-
-    --shadow-pink-xs: 0 1px 3px rgba(110, 29, 50, 0.08);
-    --shadow-pink-sm: 0 2px 8px rgba(110, 29, 50, 0.14);
-    --shadow-pink-md: 0 4px 16px rgba(110, 29, 50, 0.18);
-    --shadow-pink-lg: 0 8px 28px rgba(110, 29, 50, 0.22);
-    --shadow-card: 0 2px 10px rgba(110, 29, 50, 0.05);
+    --color-text-on-primary: #FFFFFF;
+    --color-text-title: var(--rojo-vino);
+    --color-text-dark: var(--rojo-vino);
+    --color-text-main: #2E1B22;
+    --color-text-muted: #735C65;
+    --color-text-on-gold: var(--rojo-vino); /* WCAG: sobre dorado SIEMPRE texto rojo vino */
 
     /* -------------------------------------------------------------------------
-       5. GRADIENTES OFICIALES BELLA GIRLS
+       5. SOMBRAS ARMONIZADAS
        ------------------------------------------------------------------------- */
-    --boutique-gradient: linear-gradient(135deg, var(--c-800) 0%, var(--c-700) 50%, var(--c-600) 100%);
-    --boutique-gradient-hover: linear-gradient(135deg, var(--c-900) 0%, var(--c-800) 50%, var(--c-700) 100%);
-    --boutique-gradient-subtle: linear-gradient(135deg, #ffffff 0%, var(--c-100) 100%);
-    --boutique-gradient-navbar: linear-gradient(90deg, var(--c-900) 0%, var(--c-800) 50%, var(--c-700) 100%);
-    --boutique-gradient-card: linear-gradient(180deg, #ffffff 0%, #fffbfd 100%);
+    --shadow-pink-xs: 0 1px 3px rgba(192, 21, 72, 0.08);
+    --shadow-pink-sm: 0 2px 8px rgba(192, 21, 72, 0.12);
+    --shadow-pink-md: 0 4px 16px rgba(192, 21, 72, 0.18);
+    --shadow-pink-lg: 0 8px 28px rgba(192, 21, 72, 0.22);
+    --shadow-card: 0 2px 10px rgba(192, 21, 72, 0.04);
+    --shadow-gold: 0 3px 12px rgba(231, 176, 73, 0.25);
 
     /* -------------------------------------------------------------------------
-       6. COLORES SEMÁNTICOS ARMONIZADOS (WCAG AA - NO COLISIONAN CON ROSA)
+       6. ALERTAS Y ESTADOS
        ------------------------------------------------------------------------- */
     --color-success: #15803d;
     --color-success-bg: #ecfdf3;
     --color-success-border: #abefc6;
     --color-success-text: #065f46;
 
-    --color-warning: #b45309;
-    --color-warning-bg: #fffbeb;
-    --color-warning-border: #fde68a;
-    --color-warning-text: #78350f;
+    --color-warning: var(--rojo-vino);
+    --color-warning-bg: var(--dorado-champagne);
+    --color-warning-border: var(--dorado-oscuro);
+    --color-warning-text: var(--rojo-vino);
 
-    /* Rojo carmesí vino profundo */
-    --color-danger: #991b1b;
-    --color-danger-bg: #fef2f2;
-    --color-danger-border: #fecaca;
-    --color-danger-text: #7f1d1d;
+    --color-danger: var(--rojo-vino);
+    --color-danger-bg: #FDF0F3;
+    --color-danger-border: var(--rosa-intenso);
+    --color-danger-text: var(--rojo-vino);
 
-    --color-info: #0369a1;
-    --color-info-bg: #f0f9ff;
-    --color-info-border: #bae6fd;
-    --color-info-text: #075985;
+    --color-info: var(--fucsia-oscuro);
+    --color-info-bg: #FDF2F7;
+    --color-info-border: var(--rosa-principal);
+    --color-info-text: var(--fucsia-oscuro);
 
     /* -------------------------------------------------------------------------
-       7. ALIAS RETROCOMPATIBLES
+       7. DIMENSIONES Y ESCALADO GLOBAL (Compacto 10-15% más ágil y armónico)
        ------------------------------------------------------------------------- */
+    --font-size-base: 0.915rem;       /* ~14.6px (reduce 10% vs 16px estándar) */
+    --font-size-sm: 0.82rem;
+    --font-size-xs: 0.72rem;
+    --line-height-base: 1.45;
+
+    --input-py: 7px;                  /* Altura táctil cómoda: ~38px a 40px */
+    --input-px: 12px;
+    --input-font-size: 0.88rem;
+    --input-min-height: 38px;
+    --input-border-radius: 8px;
+
+    --btn-py: 7px;
+    --btn-px: 15px;
+    --btn-font-size: 0.86rem;
+    --btn-min-height: 38px;
+    --btn-border-radius: 8px;
+
+    --card-padding-compact: 1.15rem;  /* Reduce ~20% el espacio excesivo de p-4 (1.5rem) */
+    --card-border-radius: 12px;
+
+    --top-navbar-height: 56px;        /* De 68px a 56px */
+    --sidebar-width: 245px;           /* De 260px a 245px */
+
+    /* Retrocompatibilidad */
+    --boutique-gradient: var(--grad-accion);
+    --boutique-gradient-hover: var(--grad-accion-hover);
+    --boutique-gradient-navbar: var(--grad-header);
+    --boutique-gradient-card: var(--grad-suave);
+    --boutique-gradient-subtle: linear-gradient(135deg, #FFFFFF 0%, var(--color-bg-light) 100%);
     --boutique-primary: var(--color-primary);
-    --boutique-primary-dark: var(--c-900);
-    --boutique-primary-light: var(--c-500);
-    --boutique-primary-soft: var(--c-100);
-    --boutique-primary-subtle: var(--color-bg-subtle);
-    --boutique-rose: var(--color-primary);
-    --boutique-rose-hover: var(--color-primary-hover);
-    --boutique-soft-rose: #fdf2f5;
     --boutique-border: var(--color-border);
-    --boutique-border-pink: var(--color-accent);
-    --boutique-bg: var(--color-bg-app);
     --boutique-card: var(--color-bg-card);
     --boutique-text: var(--color-text-main);
     --boutique-text-muted: var(--color-text-muted);
-    --boutique-dark: var(--color-text-dark);
-    --boutique-beige: var(--color-bg-light);
 }
 
 /* ==========================================================================
@@ -120,33 +143,37 @@ body {
     background-color: var(--color-bg-app);
     color: var(--color-text-main);
     font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
 
+h1, h2, h3, h4, h5, h6,
 .font-serif {
     font-family: 'Playfair Display', Georgia, serif;
+    color: var(--rojo-vino);
 }
 
 a {
-    color: var(--color-primary);
+    color: var(--fucsia-oscuro);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 a:hover {
-    color: var(--color-primary-hover);
+    color: var(--rojo-vino);
 }
 
 /* ==========================================================================
-   BARRA SUPERIOR (NAVBAR) - Gradiente Vino Elegante
+   BARRA SUPERIOR (HEADER) - Degradado Rojo Vino a Fucsia Oscuro
    ========================================================================== */
 .top-navbar {
-    height: 68px;
-    background: var(--boutique-gradient-navbar) !important;
+    height: var(--top-navbar-height) !important;
+    background: var(--grad-header) !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-    padding: 0 32px;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -154,93 +181,61 @@ a:hover {
     top: 0;
     z-index: 999;
     box-shadow: var(--shadow-pink-sm);
-    color: var(--color-text-on-primary) !important;
+    color: var(--blanco) !important;
 }
 
 .top-navbar .navbar-brand-text,
 .top-navbar strong {
-    color: #ffffff !important;
+    color: var(--blanco) !important;
+    font-weight: 700;
 }
 
-.top-navbar .text-muted,
 .top-navbar .navbar-subtext {
-    color: rgba(255, 255, 255, 0.88) !important;
-}
-
-.top-navbar .btn-logout {
-    color: #ffffff !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-radius: 20px;
-    font-weight: 600;
-    padding: 4px 14px;
-    transition: all 0.2s ease;
-}
-
-.top-navbar .btn-logout:hover {
-    background: #ffffff !important;
-    color: var(--c-900) !important;
-    border-color: #ffffff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    color: var(--dorado-champagne) !important;
 }
 
 .top-navbar .btn-sidebar-toggle {
-    color: #ffffff !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.5) !important;
+    color: var(--blanco) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
     background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px;
 }
 
 .top-navbar .btn-sidebar-toggle:hover {
-    background: #ffffff !important;
-    color: var(--c-900) !important;
-}
-
-.user-avatar-badge {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #ffffff !important;
-    color: var(--c-800) !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
-    font-size: 0.95rem;
+    background: var(--blanco) !important;
+    color: var(--rojo-vino) !important;
 }
 
 /* ==========================================================================
-   MENÚ LATERAL (SIDEBAR) - #F7D6DC Rosa Palo & Vino
+   MENÚ LATERAL (SIDEBAR) - Rosa Suave / Blanco Elegante
    ========================================================================== */
 .sidebar {
-    width: 260px;
+    width: var(--sidebar-width);
     min-height: 100vh;
-    background: linear-gradient(180deg, var(--c-100) 0%, #fae6ea 100%) !important;
-    border-right: 1px solid var(--c-400) !important;
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F8 100%) !important;
+    border-right: 1px solid var(--color-border) !important;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 0 16px rgba(75, 15, 30, 0.08);
+    box-shadow: 2px 0 16px rgba(192, 21, 72, 0.06);
     transition: width 0.3s ease, transform 0.3s ease;
 }
 
 .sidebar-brand {
-    padding: 18px 18px;
-    border-bottom: 1px solid rgba(224, 122, 148, 0.45) !important;
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(4px);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border) !important;
+    background: #FFFFFF;
 }
 
 .sidebar-logo {
-    width: 46px;
-    height: 46px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     object-fit: contain;
-    box-shadow: 0 4px 12px rgba(110, 29, 50, 0.22), 0 0 0 2px rgba(245, 197, 66, 0.45);
+    box-shadow: 0 3px 10px rgba(192, 21, 72, 0.18), 0 0 0 2px var(--dorado-oscuro);
     flex-shrink: 0;
     transition: transform 0.25s ease;
 }
@@ -250,70 +245,134 @@ a:hover {
 }
 
 .sidebar-brand-title {
-    color: var(--c-900) !important;
-    font-size: 1.25rem;
+    color: var(--rojo-vino) !important;
+    font-size: 1.12rem;
     letter-spacing: 0.8px;
     line-height: 1.1;
     margin: 0;
 }
 
 .sidebar-section-title {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     letter-spacing: 0.8px;
     font-weight: 800;
-    color: var(--c-800) !important;
+    color: var(--fucsia-oscuro) !important;
     text-transform: uppercase;
 }
 
 .nav-link-custom {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 18px;
-    color: var(--c-900) !important;
+    gap: 10px;
+    padding: 7px 14px;
+    color: var(--rojo-vino) !important;
     font-weight: 600;
-    font-size: 0.90rem;
+    font-size: 0.86rem;
     text-decoration: none;
-    border-radius: 10px;
-    margin: 3px 10px;
+    border-radius: 8px;
+    margin: 2px 8px;
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
 }
 
+/* Iconos del menú en fucsia oscuro */
 .nav-link-custom i {
-    font-size: 1.15rem;
-    color: var(--c-700);
+    font-size: 1.05rem;
+    color: var(--fucsia-oscuro) !important;
     transition: all 0.2s ease;
 }
 
 .nav-link-custom:hover {
-    color: var(--c-800) !important;
-    background-color: rgba(255, 255, 255, 0.85) !important;
-    border-left: 3px solid var(--c-600);
+    color: var(--fucsia-oscuro) !important;
+    background-color: #FFF0F5 !important;
+    border-left: 3px solid var(--rosa-intenso);
     transform: translateX(3px);
-    box-shadow: 0 2px 8px rgba(110, 29, 50, 0.08);
+    box-shadow: 0 2px 8px rgba(192, 21, 72, 0.06);
 }
 
 .nav-link-custom:hover i {
-    color: var(--c-600);
+    color: var(--rosa-intenso) !important;
 }
 
+/* Ítem activo: degradado de --fucsia-oscuro a --rosa-intenso, texto blanco */
 .nav-link-custom.active {
-    color: #ffffff !important;
-    background: linear-gradient(135deg, var(--c-800) 0%, var(--c-700) 60%, var(--c-600) 100%) !important;
+    color: var(--blanco) !important;
+    background: var(--grad-accion) !important;
     font-weight: 700 !important;
-    border-left: 3px solid var(--c-900) !important;
-    box-shadow: 0 4px 14px rgba(110, 29, 50, 0.28);
+    border-left: 3px solid var(--rojo-vino) !important;
+    box-shadow: 0 4px 14px rgba(192, 21, 72, 0.28);
 }
 
 .nav-link-custom.active i {
-    color: #ffffff !important;
+    color: var(--blanco) !important;
 }
 
-.sidebar-footer {
-    border-top: 1px solid rgba(224, 122, 148, 0.45) !important;
-    background-color: rgba(255, 255, 255, 0.55) !important;
-    color: var(--c-900) !important;
+/* ==========================================================================
+   PIE DEL MENÚ LATERAL (INFORMACIÓN DEL USUARIO AUTENTICADO)
+   ========================================================================== */
+.sidebar-user-footer {
+    border-top: 1px solid var(--color-border) !important;
+    background-color: #FFFFFF !important;
+    margin-top: auto;
+    padding: 10px 14px;
+}
+
+.sidebar-user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--grad-accion) !important;
+    color: var(--blanco) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.05rem;
+    box-shadow: 0 3px 10px rgba(192, 21, 72, 0.25);
+    flex-shrink: 0;
+}
+
+.sidebar-user-name {
+    color: var(--rojo-vino) !important;
+    font-size: 0.88rem;
+    line-height: 1.2;
+}
+
+/* Badge con rol en dorado */
+.badge-role-gold {
+    background-color: var(--dorado-champagne) !important;
+    color: var(--rojo-vino) !important;
+    border: 1px solid var(--dorado-oscuro) !important;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(231, 176, 73, 0.2);
+}
+
+/* Botón Salir discreto en el sidebar */
+.btn-sidebar-logout {
+    color: var(--fucsia-oscuro) !important;
+    border: 1.5px solid var(--fucsia-oscuro) !important;
+    background: #FFFFFF !important;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 7px 12px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.btn-sidebar-logout:hover {
+    background: var(--fucsia-oscuro) !important;
+    color: var(--blanco) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(192, 21, 72, 0.25);
 }
 
 /* Sidebar colapsado */
@@ -330,7 +389,8 @@ a:hover {
 .sidebar.collapsed .sidebar-brand-title,
 .sidebar.collapsed .sidebar-section-title,
 .sidebar.collapsed .nav-link-custom span,
-.sidebar.collapsed .sidebar-footer {
+.sidebar.collapsed .sidebar-user-meta,
+.sidebar.collapsed .btn-sidebar-logout span {
     display: none !important;
 }
 .sidebar.collapsed .nav-link-custom {
@@ -343,17 +403,38 @@ a:hover {
     height: 44px;
     margin: 0 auto;
 }
+.sidebar.collapsed .sidebar-user-footer {
+    padding: 12px 6px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sidebar.collapsed .sidebar-user-avatar {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+}
+.sidebar.collapsed .sidebar-user-info {
+    justify-content: center;
+    margin-bottom: 8px !important;
+}
+.sidebar.collapsed .btn-sidebar-logout {
+    padding: 6px !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin: 0 auto;
+}
 
 /* Layout Wrapper */
 .main-wrapper {
-    margin-left: 260px;
+    margin-left: var(--sidebar-width);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .content-area {
-    padding: 32px;
+    padding: 22px 24px;
     flex-grow: 1;
 }
 
@@ -373,16 +454,21 @@ a:hover {
 /* ==========================================================================
    BOTONES
    ========================================================================== */
+/* Acción principal: degradado de --fucsia-oscuro a --rosa-intenso, texto blanco
+   Hover: de --rojo-vino a --fucsia-oscuro */
 .btn-boutique-rose,
 .btn-rose,
-.btn-primary {
-    background: var(--boutique-gradient) !important;
-    color: var(--color-text-on-primary) !important;
+.btn-primary,
+.btn-login-submit {
+    background: var(--grad-accion) !important;
+    color: var(--blanco) !important;
     border: none !important;
-    border-radius: 8px;
-    padding: 9px 18px;
+    border-radius: var(--btn-border-radius);
+    padding: var(--btn-py) var(--btn-px);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: var(--btn-font-size);
+    min-height: var(--btn-min-height);
+    line-height: 1.35;
     transition: all 0.25s ease;
     box-shadow: var(--shadow-pink-sm);
     display: inline-flex;
@@ -393,26 +479,29 @@ a:hover {
 
 .btn-boutique-rose:hover,
 .btn-rose:hover,
-.btn-primary:hover {
-    background: var(--boutique-gradient-hover) !important;
-    color: var(--color-text-on-primary) !important;
+.btn-primary:hover,
+.btn-login-submit:hover {
+    background: var(--grad-accion-hover) !important;
+    color: var(--blanco) !important;
     transform: translateY(-1px);
     box-shadow: var(--shadow-pink-md);
 }
 
 .btn-boutique-rose:active,
 .btn-rose:active,
-.btn-primary:active {
+.btn-primary:active,
+.btn-login-submit:active {
     transform: translateY(0);
 }
 
 .btn-boutique-rose:disabled,
 .btn-boutique-rose.disabled,
 .btn-rose:disabled,
-.btn-rose.disabled {
-    background: var(--color-accent) !important;
-    color: var(--color-text-dark) !important;
-    opacity: 0.7;
+.btn-rose.disabled,
+.btn-primary:disabled {
+    background: var(--rosa-principal) !important;
+    color: var(--blanco) !important;
+    opacity: 0.65;
     box-shadow: none !important;
     cursor: not-allowed;
     transform: none !important;
@@ -420,13 +509,15 @@ a:hover {
 
 /* Botón Boutique Alternativo / Secundario */
 .btn-boutique {
-    background-color: var(--color-primary) !important;
-    color: var(--color-text-on-primary) !important;
-    border: 1px solid var(--color-primary) !important;
-    border-radius: 8px;
-    padding: 9px 18px;
+    background: var(--grad-accion) !important;
+    color: var(--blanco) !important;
+    border: none !important;
+    border-radius: var(--btn-border-radius);
+    padding: var(--btn-py) var(--btn-px);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: var(--btn-font-size);
+    min-height: var(--btn-min-height);
+    line-height: 1.35;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
@@ -434,52 +525,65 @@ a:hover {
 }
 
 .btn-boutique:hover {
-    background-color: var(--color-primary-hover) !important;
-    border-color: var(--color-primary-hover) !important;
-    color: var(--color-text-on-primary) !important;
+    background: var(--grad-accion-hover) !important;
+    color: var(--blanco) !important;
     box-shadow: var(--shadow-pink-sm);
 }
 
-/* Botón Delineado */
+/* Botón Delineado con Fucsia Oscuro */
 .btn-outline-boutique {
     background: transparent !important;
-    border: 1.5px solid var(--color-secondary) !important;
-    color: var(--color-primary) !important;
+    border: 1.5px solid var(--fucsia-oscuro) !important;
+    color: var(--fucsia-oscuro) !important;
     font-weight: 600;
-    border-radius: 8px;
-    padding: 8px 16px;
+    border-radius: var(--btn-border-radius);
+    padding: calc(var(--btn-py) - 1px) var(--btn-px);
+    font-size: var(--btn-font-size);
+    min-height: var(--btn-min-height);
+    line-height: 1.35;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-outline-boutique:hover {
-    background: var(--color-bg-light) !important;
-    border-color: var(--color-primary-hover) !important;
-    color: var(--color-text-dark) !important;
+    background: var(--grad-accion) !important;
+    border-color: var(--fucsia-oscuro) !important;
+    color: var(--blanco) !important;
+}
+
+.btn-sm {
+    padding: 4px 10px !important;
+    font-size: 0.78rem !important;
+    min-height: 30px !important;
+    border-radius: 6px !important;
+    line-height: 1.3;
 }
 
 /* Overrides para botones secundarios y neutros */
 .btn-outline-secondary {
     border-color: var(--color-border) !important;
     color: var(--color-text-muted) !important;
-    background-color: #ffffff;
+    background-color: #FFFFFF;
 }
 
 .btn-outline-secondary:hover {
     background-color: var(--color-bg-light) !important;
-    border-color: var(--color-accent) !important;
-    color: var(--color-text-dark) !important;
+    border-color: var(--rosa-principal) !important;
+    color: var(--rojo-vino) !important;
 }
 
 .btn-light.border {
-    background-color: #ffffff !important;
+    background-color: #FFFFFF !important;
     border-color: var(--color-border) !important;
     color: var(--color-text-main) !important;
 }
 
 .btn-light.border:hover {
     background-color: var(--color-bg-light) !important;
-    border-color: var(--color-accent) !important;
-    color: var(--color-text-dark) !important;
+    border-color: var(--rosa-principal) !important;
+    color: var(--rojo-vino) !important;
 }
 
 /* ==========================================================================
@@ -488,20 +592,31 @@ a:hover {
 .card-boutique {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border) !important;
-    border-radius: 12px;
+    border-radius: var(--card-border-radius);
     box-shadow: var(--shadow-card);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card-boutique:hover {
-    border-color: var(--color-border-strong) !important;
+    border-color: var(--rosa-principal) !important;
     box-shadow: var(--shadow-pink-sm);
 }
 
+/* Compactar paddings de tarjetas para evitar espacios excesivos */
+.card-boutique.p-4 {
+    padding: var(--card-padding-compact) !important;
+}
+
+.card-boutique.p-3 {
+    padding: 0.90rem !important;
+}
+
+/* Tarjetas destacadas con acento dorado */
 .card-featured {
-    background: linear-gradient(135deg, #fff5f9 0%, var(--color-bg-light) 100%) !important;
-    border: 1.5px solid var(--color-accent) !important;
-    color: var(--color-text-dark) !important;
+    background: var(--grad-suave) !important;
+    border: 1.5px solid var(--dorado-principal) !important;
+    color: var(--rojo-vino) !important;
+    box-shadow: var(--shadow-gold) !important;
 }
 
 /* ==========================================================================
@@ -511,39 +626,61 @@ a:hover {
 .form-select {
     border: 1px solid var(--color-border) !important;
     color: var(--color-text-main) !important;
-    background-color: #ffffff;
-    border-radius: 8px;
+    background-color: #FFFFFF;
+    border-radius: var(--input-border-radius);
+    padding: var(--input-py) var(--input-px);
+    font-size: var(--input-font-size);
+    min-height: var(--input-min-height);
+    line-height: 1.4;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control-sm,
+.form-select-sm {
+    padding: 4px 8px !important;
+    font-size: 0.80rem !important;
+    min-height: 32px !important;
+    border-radius: 6px !important;
+    line-height: 1.35;
+}
+
+.form-label {
+    font-size: 0.84rem;
+    margin-bottom: 0.30rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
 }
 
 .form-control:focus,
 .form-select:focus {
-    border-color: var(--color-border-focus) !important;
-    box-shadow: 0 0 0 0.25rem rgba(204, 86, 113, 0.25) !important;
+    border-color: var(--rosa-intenso) !important;
+    box-shadow: 0 0 0 0.25rem rgba(235, 83, 135, 0.22) !important;
     outline: none;
 }
 
 .input-group-text {
-    background-color: var(--color-bg-subtle) !important;
+    background-color: var(--color-bg-light) !important;
     border-color: var(--color-border) !important;
-    color: var(--color-text-muted) !important;
+    color: var(--fucsia-oscuro) !important;
+    font-size: 0.88rem;
+    padding: var(--input-py) 10px;
 }
 
 .form-check-input:checked {
-    background-color: var(--c-600) !important;
-    border-color: var(--c-600) !important;
+    background-color: var(--fucsia-oscuro) !important;
+    border-color: var(--fucsia-oscuro) !important;
 }
 
 .form-check-input:focus {
-    border-color: var(--color-border-focus) !important;
-    box-shadow: 0 0 0 0.25rem rgba(204, 86, 113, 0.25) !important;
+    border-color: var(--rosa-intenso) !important;
+    box-shadow: 0 0 0 0.25rem rgba(235, 83, 135, 0.22) !important;
 }
 
 /* Botones de radio POS / Método de pago */
 .btn-check:checked + .btn-outline-secondary {
-    background: var(--boutique-gradient) !important;
-    border-color: var(--color-primary) !important;
-    color: #ffffff !important;
+    background: var(--grad-accion) !important;
+    border-color: var(--fucsia-oscuro) !important;
+    color: var(--blanco) !important;
     box-shadow: var(--shadow-pink-sm);
 }
 
@@ -552,26 +689,35 @@ a:hover {
    ========================================================================== */
 .table {
     --bs-table-color: var(--color-text-main);
-    --bs-table-bg: #ffffff;
+    --bs-table-bg: #FFFFFF;
     border-color: var(--color-border) !important;
+}
+
+.table th,
+.table td {
+    padding: 7px 12px !important;
+    font-size: 0.85rem !important;
+    vertical-align: middle;
 }
 
 .table thead th,
 .table-light th,
 .table-hover thead tr {
-    background-color: var(--color-bg-light) !important;
-    color: var(--color-text-dark) !important; /* Alto contraste sobre fondo claro */
+    background-color: #FFF2F6 !important;
+    color: var(--rojo-vino) !important;
     font-weight: 700;
-    border-bottom: 2px solid var(--color-border-strong) !important;
+    border-bottom: 2px solid var(--rosa-principal) !important;
     letter-spacing: 0.3px;
+    padding: 8px 12px !important;
 }
 
+/* Hover de filas en dorado champagne suave */
 .table-hover tbody tr:hover {
-    background-color: rgba(247, 214, 220, 0.35) !important;
+    background-color: rgba(254, 241, 184, 0.40) !important;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(247, 214, 220, 0.18) !important;
+    background-color: rgba(253, 126, 175, 0.05) !important;
 }
 
 /* ==========================================================================
@@ -580,13 +726,14 @@ a:hover {
 .badge-admin,
 .badge-boutique,
 .badge-module {
-    background-color: var(--color-bg-light) !important;
-    color: var(--color-text-dark) !important;
-    border: 1px solid var(--color-secondary) !important;
+    background-color: var(--dorado-champagne) !important;
+    color: var(--rojo-vino) !important;
+    border: 1px solid var(--dorado-oscuro) !important;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(231, 176, 73, 0.2);
 }
 
 .badge-vendedor {
@@ -601,18 +748,18 @@ a:hover {
 
 .badge-pink-soft {
     background-color: var(--color-bg-light) !important;
-    color: var(--color-text-dark) !important;
-    border: 1px solid var(--color-accent) !important;
+    color: var(--rojo-vino) !important;
+    border: 1px solid var(--rosa-principal) !important;
 }
 
 .badge-pink-primary {
-    background-color: var(--color-primary) !important;
-    color: var(--color-text-on-primary) !important;
+    background-color: var(--fucsia-oscuro) !important;
+    color: var(--blanco) !important;
 }
 
 .badge-pink-secondary {
-    background-color: var(--color-secondary) !important;
-    color: var(--color-text-on-primary) !important;
+    background-color: var(--rosa-intenso) !important;
+    color: var(--blanco) !important;
 }
 
 /* Harmonización de Badges Bootstrap */
@@ -624,16 +771,16 @@ a:hover {
 }
 
 .badge.bg-warning {
-    background-color: var(--color-warning-bg) !important;
-    color: var(--color-warning-text) !important;
-    border: 1px solid var(--color-warning-border) !important;
+    background-color: var(--dorado-champagne) !important;
+    color: var(--rojo-vino) !important;
+    border: 1px solid var(--dorado-oscuro) !important;
     font-weight: 700;
 }
 
 .badge.bg-danger {
     background-color: var(--color-danger-bg) !important;
-    color: var(--color-danger-text) !important;
-    border: 1px solid var(--color-danger-border) !important;
+    color: var(--rojo-vino) !important;
+    border: 1px solid var(--rosa-intenso) !important;
     font-weight: 700;
 }
 
@@ -645,15 +792,14 @@ a:hover {
 }
 
 .badge.bg-dark {
-    background-color: var(--color-bg-light) !important;
-    color: var(--color-text-dark) !important;
-    border: 1px solid var(--color-secondary) !important;
+    background-color: var(--rojo-vino) !important;
+    color: var(--blanco) !important;
     font-weight: 700;
 }
 
 .badge.bg-light {
     background-color: var(--color-bg-subtle) !important;
-    color: var(--color-text-dark) !important;
+    color: var(--rojo-vino) !important;
     border: 1px solid var(--color-border) !important;
 }
 
@@ -668,92 +814,99 @@ a:hover {
 
 .alert-danger {
     background-color: var(--color-danger-bg) !important;
-    color: var(--color-danger-text) !important;
-    border: 1px solid var(--color-danger-border) !important;
+    color: var(--rojo-vino) !important;
+    border: 1px solid var(--rosa-intenso) !important;
 }
 
 .alert-warning {
-    background-color: var(--color-warning-bg) !important;
-    color: var(--color-warning-text) !important;
-    border: 1px solid var(--color-warning-border) !important;
+    background-color: var(--dorado-champagne) !important;
+    color: var(--rojo-vino) !important;
+    border: 1px solid var(--dorado-oscuro) !important;
 }
 
 .alert-info {
     background-color: var(--color-info-bg) !important;
-    color: var(--color-info-text) !important;
-    border: 1px solid var(--color-info-border) !important;
+    color: var(--fucsia-oscuro) !important;
+    border: 1px solid var(--rosa-principal) !important;
 }
 
 /* ==========================================================================
    MODALES
    ========================================================================== */
 .modal-content {
-    border-radius: 16px;
+    border-radius: 14px;
     border: 1px solid var(--color-border) !important;
     overflow: hidden;
     box-shadow: var(--shadow-pink-lg) !important;
 }
 
 .modal-header {
-    background: linear-gradient(135deg, #fff5f9 0%, var(--color-bg-light) 100%) !important;
-    border-bottom: 1px solid var(--color-border-strong) !important;
-    color: var(--color-text-dark) !important;
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F8 100%) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    color: var(--rojo-vino) !important;
+    padding: 12px 18px !important;
 }
 
 .modal-header .modal-title {
-    color: var(--color-text-dark) !important;
+    color: var(--rojo-vino) !important;
+    font-size: 1.10rem;
+}
+
+.modal-body.p-4 {
+    padding: 1.25rem !important;
 }
 
 .modal-footer {
     background-color: var(--color-bg-subtle) !important;
     border-top: 1px solid var(--color-border) !important;
+    padding: 10px 18px !important;
 }
 
 /* ==========================================================================
    PAGINACIÓN
    ========================================================================== */
 .pagination .page-item.active .page-link {
-    background: var(--boutique-gradient) !important;
-    border-color: var(--color-primary) !important;
-    color: var(--color-text-on-primary) !important;
-    box-shadow: 0 2px 6px rgba(110, 29, 50, 0.25);
+    background: var(--grad-accion) !important;
+    border-color: var(--fucsia-oscuro) !important;
+    color: var(--blanco) !important;
+    box-shadow: 0 2px 6px rgba(192, 21, 72, 0.25);
 }
 
 .pagination .page-link {
-    color: var(--color-primary) !important;
+    color: var(--fucsia-oscuro) !important;
     border-color: var(--color-border) !important;
-    background-color: #ffffff;
+    background-color: #FFFFFF;
 }
 
 .pagination .page-link:hover {
-    background-color: var(--color-bg-light) !important;
-    border-color: var(--color-secondary) !important;
-    color: var(--color-text-dark) !important;
+    background-color: #FFF2F6 !important;
+    border-color: var(--rosa-principal) !important;
+    color: var(--rojo-vino) !important;
 }
 
 /* ==========================================================================
    UTILIDADES COMPLEMENTARIAS
    ========================================================================== */
 .text-primary {
-    color: var(--color-primary) !important;
+    color: var(--fucsia-oscuro) !important;
 }
 
 .text-secondary {
-    color: var(--color-secondary) !important;
+    color: var(--rosa-intenso) !important;
 }
 
 .bg-primary {
-    background-color: var(--color-primary) !important;
-    color: var(--color-text-on-primary) !important;
+    background-color: var(--fucsia-oscuro) !important;
+    color: var(--blanco) !important;
 }
 
 .bg-secondary {
-    background-color: var(--color-secondary) !important;
-    color: var(--color-text-on-primary) !important;
+    background-color: var(--rosa-intenso) !important;
+    color: var(--blanco) !important;
 }
 
 .border-primary {
-    border-color: var(--color-primary) !important;
+    border-color: var(--fucsia-oscuro) !important;
 }
 
 /* Píldoras de colores para variantes */
@@ -783,8 +936,10 @@ a:hover {
     border: 1px solid rgba(0,0,0,0.15);
 }
 
-.color-dot.color-1 { background-color: var(--color-pink-1); }
-.color-dot.color-2 { background-color: var(--color-pink-2); }
-.color-dot.color-3 { background-color: var(--color-pink-3); }
-.color-dot.color-4 { background-color: var(--color-pink-4); }
-.color-dot.color-5 { background-color: var(--color-pink-5); }
+.color-dot.color-1 { background-color: var(--rosa-principal); }
+.color-dot.color-2 { background-color: var(--rosa-intenso); }
+.color-dot.color-3 { background-color: var(--fucsia-oscuro); }
+.color-dot.color-4 { background-color: var(--dorado-principal); }
+.color-dot.color-5 { background-color: var(--dorado-champagne); }
+.color-dot.color-6 { background-color: var(--dorado-oscuro); }
+.color-dot.color-7 { background-color: var(--rojo-vino); }

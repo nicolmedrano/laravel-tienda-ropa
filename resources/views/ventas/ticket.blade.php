@@ -24,7 +24,7 @@
         <!-- Encabezado de la Tienda -->
         <div class="text-center pb-3 border-bottom mb-3" style="border-color: var(--color-border) !important;">
             <div class="mb-2">
-                <img src="{{ asset('images/logo-bella-girls.png') }}" alt="Bella Girls" style="width: 48px; height: 48px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 10px rgba(142, 43, 68, 0.2);">
+                <img src="{{ asset('images/logo-bella-girls.png') }}" alt="Bella Girls" style="width: 48px; height: 48px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 10px rgba(192, 21, 72, 0.2), 0 0 0 2px var(--dorado-oscuro);">
             </div>
             <h4 class="font-serif fw-bold m-0" style="letter-spacing: -0.5px; color: var(--color-primary);">BELLA GIRLS</h4>
             <div class="text-muted small">Alta Costura y Confecciones</div>

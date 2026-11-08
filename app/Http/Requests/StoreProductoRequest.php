@@ -23,7 +23,7 @@ class StoreProductoRequest extends FormRequest
             'stock_minimo' => 'required|integer|min:0',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120', // Máx 5MB y formatos permitidos
             'variantes' => 'nullable|array',
-            'variantes.*.talla' => 'required_with:variantes|string|max:10',
+            'variantes.*.talla' => 'nullable|string|max:10',
             'variantes.*.color' => 'required_with:variantes|string|max:50',
             'variantes.*.stock' => 'required_with:variantes|integer|min:0',
         ];

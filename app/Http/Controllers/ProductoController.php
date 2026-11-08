@@ -90,13 +90,15 @@ class ProductoController extends Controller
             // Crear variantes de tallas y colores si se proporcionaron
             if (!empty($data['variantes'])) {
                 foreach ($data['variantes'] as $v) {
-                    if (!empty($v['talla']) && !empty($v['color'])) {
-                        $sku = strtoupper($producto->codigo . '-' . Str::slug($v['talla']) . '-' . Str::slug(substr($v['color'], 0, 3)));
+                    $color = !empty($v['color']) ? trim($v['color']) : null;
+                    if (!empty($color)) {
+                        $talla = !empty($v['talla']) ? trim($v['talla']) : 'Única';
+                        $sku = strtoupper($producto->codigo . '-' . Str::slug($talla) . '-' . Str::slug(substr($color, 0, 3)));
                         $variante = ProductoVariante::create([
                             'id_producto' => $producto->id_producto,
                             'codigo_sku' => $sku,
-                            'talla' => $v['talla'],
-                            'color' => $v['color'],
+                            'talla' => $talla,
+                            'color' => $color,
                             'stock_actual' => $v['stock'] ?? 0,
                             'estado' => true,
                         ]);
@@ -108,7 +110,7 @@ class ProductoController extends Controller
                                 'cantidad' => $v['stock'],
                                 'stock_anterior' => 0,
                                 'stock_posterior' => $v['stock'],
-                                'motivo' => 'Inventario inicial al registrar prenda',
+                                'motivo' => 'Inventario inicial al registrar producto',
                                 'id_usuario' => Auth::id() ?? 1,
                                 'fecha' => now(),
                             ]);
@@ -130,7 +132,10 @@ class ProductoController extends Controller
 
     public function edit(Producto $producto)
     {
-        $categorias = Categoria::where('estado', true)->orderBy('nombre')->get();
+        $categorias = Categoria::where('estado', true)
+            ->orWhere('id_categoria', $producto->id_categoria)
+            ->orderBy('nombre')
+            ->get();
         $producto->load('variantes');
         return view('productos.edit', compact('producto', 'categorias'));
     }

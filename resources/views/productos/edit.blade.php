@@ -97,14 +97,28 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold small">Categoría <span class="text-danger">*</span></label>
-                        <select name="id_categoria" class="form-select" required>
-                            @foreach($categorias as $cat)
-                                <option value="{{ $cat->id_categoria }}" {{ old('id_categoria', $producto->id_categoria) == $cat->id_categoria ? 'selected' : '' }}>
-                                    {{ $cat->nombre }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="form-label fw-semibold small m-0">Categoría <span class="text-danger">*</span></label>
+                            @if(Auth::user() && Auth::user()->esAdmin())
+                                <a href="{{ route('categorias.index') }}" target="_blank" class="text-decoration-none" style="font-size: 0.78rem; color: var(--fucsia-oscuro); font-weight: 600;" title="Administrar catálogo de categorías">
+                                    <i class="bi bi-gear-fill me-1"></i> Administrar categorías
+                                </a>
+                            @endif
+                        </div>
+                        <div class="input-group">
+                            <select name="id_categoria" class="form-select" required>
+                                @foreach($categorias as $cat)
+                                    <option value="{{ $cat->id_categoria }}" {{ old('id_categoria', $producto->id_categoria) == $cat->id_categoria ? 'selected' : '' }}>
+                                        {{ $cat->nombre }} {{ !$cat->estado ? ' (Inactiva)' : '' }} {{ !$cat->usa_talla ? ' (Talla única)' : '' }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if(Auth::user() && Auth::user()->esAdmin())
+                                <a href="{{ route('categorias.index') }}" target="_blank" class="btn btn-outline-secondary" title="Crear o administrar categorías">
+                                    <i class="bi bi-plus-lg"></i>
+                                </a>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="mb-3">

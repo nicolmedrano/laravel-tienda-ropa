@@ -7,7 +7,7 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 5 de 6</span>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Proveedor</span>
                 <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Gestión de Proveedores</h2>
             </div>
             <p class="text-muted m-0">Empresas fabricantes y distribuidoras asociadas al módulo de Compras.</p>

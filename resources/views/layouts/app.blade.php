@@ -12,13 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Estilos Oficiales Bella Girls (Paleta Vino / Rosa Palo) -->
+    <!-- Estilos Oficiales Bella Girls (Paleta Rosa, Fucsia y Dorado) -->
     <link rel="stylesheet" href="{{ asset('css/boutique.css') }}">
     @stack('styles')
 </head>
 <body>
 
-    <!-- MENÚ LATERAL (6 Módulos Principales del Diagrama de Componentes) -->
+    <!-- MENÚ LATERAL -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <div class="d-flex align-items-center gap-3">
@@ -38,44 +38,50 @@
                 <span>Panel Principal</span>
             </a>
 
-            <!-- 1. MÓDULO PRODUCTO -->
+            <!-- MÓDULO PRODUCTO -->
             <a href="{{ route('productos.index') }}" class="nav-link-custom {{ request()->routeIs('productos.*') ? 'active' : '' }}">
                 <i class="bi bi-handbag"></i>
-                <span>1. Producto</span>
+                <span>Producto</span>
             </a>
+            @if(Auth::user() && Auth::user()->esAdmin())
+            <a href="{{ route('categorias.index') }}" class="nav-link-custom ps-4 {{ request()->routeIs('categorias.*') ? 'active' : '' }}" style="font-size: 0.85rem;">
+                <i class="bi bi-tags"></i>
+                <span>Categorías</span>
+            </a>
+            @endif
 
-            <!-- 2. MÓDULO VENTA -->
+            <!-- MÓDULO VENTA -->
             <a href="{{ route('ventas.pos') }}" class="nav-link-custom {{ request()->routeIs('ventas.pos') ? 'active' : '' }}">
                 <i class="bi bi-cart3"></i>
-                <span>2. Venta (POS)</span>
+                <span>Venta (POS)</span>
             </a>
             <a href="{{ route('ventas.index') }}" class="nav-link-custom ps-4 {{ request()->routeIs('ventas.index') ? 'active' : '' }}" style="font-size: 0.85rem;">
                 <i class="bi bi-receipt"></i>
                 <span>Historial de Ventas</span>
             </a>
 
-            <!-- 3. MÓDULO COMPRA -->
+            <!-- MÓDULO COMPRA -->
             <a href="{{ route('compras.index') }}" class="nav-link-custom {{ request()->routeIs('compras.*') ? 'active' : '' }}">
                 <i class="bi bi-box-seam"></i>
-                <span>3. Compra</span>
+                <span>Compra</span>
             </a>
 
-            <!-- 4. MÓDULO CLIENTE -->
+            <!-- MÓDULO CLIENTE -->
             <a href="{{ route('clientes.index') }}" class="nav-link-custom {{ request()->routeIs('clientes.*') ? 'active' : '' }}">
                 <i class="bi bi-person-heart"></i>
-                <span>4. Cliente</span>
+                <span>Cliente</span>
             </a>
 
-            <!-- 5. MÓDULO PROVEEDOR -->
+            <!-- MÓDULO PROVEEDOR -->
             <a href="{{ route('proveedores.index') }}" class="nav-link-custom {{ request()->routeIs('proveedores.*') ? 'active' : '' }}">
                 <i class="bi bi-truck"></i>
-                <span>5. Proveedor</span>
+                <span>Proveedor</span>
             </a>
 
-            <!-- 6. MÓDULO USUARIO -->
+            <!-- MÓDULO USUARIO -->
             <a href="{{ route('usuarios.index') }}" class="nav-link-custom {{ request()->routeIs('usuarios.*') ? 'active' : '' }}">
                 <i class="bi bi-shield-lock"></i>
-                <span>6. Usuario</span>
+                <span>Usuario</span>
             </a>
 
             <div class="px-3 pt-3 pb-2 sidebar-section-title">
@@ -89,54 +95,43 @@
             </a>
         </div>
 
-        <!-- Pie del menú lateral -->
-        <div class="p-3 sidebar-footer">
-            <div class="d-flex align-items-center justify-content-between">
-                <div>
-                    <div class="fw-bold" style="font-size: 0.85rem;">PostgreSQL 14+</div>
-                    <small style="color: var(--color-primary); font-size: 0.75rem;"><i class="bi bi-check-circle-fill"></i> DB Conectada</small>
+        <!-- Pie del menú lateral: Información del Usuario Autenticado -->
+        <div class="sidebar-user-footer">
+            <div class="d-flex align-items-center gap-2 mb-2 sidebar-user-info">
+                <div class="sidebar-user-avatar">
+                    {{ substr(Auth::user()->nombre ?? 'A', 0, 1) }}
                 </div>
-                <span class="badge badge-boutique">v1.0</span>
+                <div class="sidebar-user-meta text-truncate">
+                    <div class="fw-bold sidebar-user-name text-truncate" title="{{ Auth::user()->nombre ?? 'Usuario' }} {{ Auth::user()->apellido ?? '' }}">
+                        {{ Auth::user()->nombre ?? 'Valentina' }} {{ Auth::user()->apellido ?? 'Nicol' }}
+                    </div>
+                    <span class="badge-role-gold">
+                        {{ ucfirst(Auth::user()->rol ?? 'Administrador') }}
+                    </span>
+                </div>
             </div>
+            <form action="{{ route('logout') }}" method="POST" class="sidebar-logout-form m-0">
+                @csrf
+                <button type="submit" class="btn btn-sidebar-logout w-100" title="Cerrar sesión">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Salir</span>
+                </button>
+            </form>
         </div>
     </aside>
 
     <!-- ÁREA PRINCIPAL -->
     <div class="main-wrapper">
-        <!-- BARRA SUPERIOR -->
+        <!-- BARRA SUPERIOR (HEADER) -->
         <header class="top-navbar">
             <div class="d-flex align-items-center gap-3">
                 <button class="btn btn-sm btn-sidebar-toggle d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')">
                     <i class="bi bi-list fs-5"></i>
                 </button>
-                <div class="d-none d-md-block">
-                    <span class="navbar-subtext fw-normal" style="font-size: 0.88rem;">Tienda:</span>
-                    <strong class="ms-1 navbar-brand-text">Bella Girls — Sucursal Central</strong>
+                <div class="d-flex align-items-center">
+                    <span class="navbar-subtext fw-normal me-2" style="font-size: 0.88rem;">Tienda:</span>
+                    <strong class="navbar-brand-text">Bella Girls — Sucursal Central</strong>
                 </div>
-            </div>
-
-            <!-- Usuario activo y sesión -->
-            <div class="d-flex align-items-center gap-3">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="user-avatar-badge">
-                        {{ substr(Auth::user()->nombre ?? 'A', 0, 1) }}
-                    </div>
-                    <div class="text-end d-none d-sm-block text-white">
-                        <div class="fw-semibold" style="font-size: 0.88rem; line-height: 1.2;">
-                            {{ Auth::user()->nombre ?? 'Valentina' }} {{ Auth::user()->apellido ?? 'Nicol' }}
-                        </div>
-                        <span class="{{ (Auth::user()->rol ?? 'administrador') === 'administrador' ? 'badge-admin' : 'badge-vendedor' }}">
-                            {{ ucfirst(Auth::user()->rol ?? 'administrador') }}
-                        </span>
-                    </div>
-                </div>
-
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <button type="submit" class="btn btn-logout btn-sm" title="Cerrar sesión">
-                        <i class="bi bi-box-arrow-right me-1"></i> Salir
-                    </button>
-                </form>
             </div>
         </header>
 

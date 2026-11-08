@@ -12,10 +12,12 @@ class Categoria extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
+        'usa_talla',
         'estado',
     ];
 
     protected $casts = [
+        'usa_talla' => 'boolean',
         'estado' => 'boolean',
     ];
 

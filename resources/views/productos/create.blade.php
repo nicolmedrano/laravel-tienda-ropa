@@ -57,18 +57,35 @@
                     <h6 class="fw-bold mb-3" style="color: var(--color-text-dark);">Clasificación & Alertas</h6>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold small">Categoría <span class="text-danger">*</span></label>
-                        <select name="id_categoria" class="form-select @error('id_categoria') is-invalid @enderror" required>
-                            <option value="">Seleccione una categoría...</option>
-                            @foreach($categorias as $cat)
-                                <option value="{{ $cat->id_categoria }}" {{ old('id_categoria') == $cat->id_categoria ? 'selected' : '' }}>
-                                    {{ $cat->nombre }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label class="form-label fw-semibold small m-0">Categoría <span class="text-danger">*</span></label>
+                            @if(Auth::user() && Auth::user()->esAdmin())
+                                <a href="{{ route('categorias.index') }}" target="_blank" class="text-decoration-none" style="font-size: 0.78rem; color: var(--fucsia-oscuro); font-weight: 600;" title="Administrar catálogo de categorías">
+                                    <i class="bi bi-gear-fill me-1"></i> Administrar categorías
+                                </a>
+                            @endif
+                        </div>
+                        <div class="input-group">
+                            <select name="id_categoria" id="selectCategoria" class="form-select @error('id_categoria') is-invalid @enderror" required onchange="actualizarModoTallas()">
+                                <option value="" data-usa-talla="1">Seleccione una categoría...</option>
+                                @foreach($categorias as $cat)
+                                    <option value="{{ $cat->id_categoria }}" 
+                                            data-usa-talla="{{ $cat->usa_talla ? '1' : '0' }}" 
+                                            {{ old('id_categoria') == $cat->id_categoria ? 'selected' : '' }}>
+                                        {{ $cat->nombre }} {{ !$cat->usa_talla ? ' (Talla única / Accesorio)' : '' }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if(Auth::user() && Auth::user()->esAdmin())
+                                <a href="{{ route('categorias.index') }}" target="_blank" class="btn btn-outline-secondary" title="Crear o administrar categorías">
+                                    <i class="bi bi-plus-lg"></i>
+                                </a>
+                            @endif
+                        </div>
                         @error('id_categoria')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
+                        <div id="categoriaAlertaTalla" class="text-muted small mt-1" style="font-size: 0.76rem;"></div>
                     </div>
 
                     <div class="mb-0">
@@ -145,43 +162,44 @@
                     <!-- Paleta Oficial Bella Girls (Colores Centralizados) -->
                     <div class="p-2 mb-3 rounded" style="background-color: var(--color-bg-subtle); border: 1px solid var(--color-border);">
                         <div class="d-flex justify-content-between align-items-center mb-1">
-                            <small class="fw-bold text-uppercase" style="font-size: 0.72rem; color: var(--color-primary); letter-spacing: 0.5px;">
+                            <small class="fw-bold text-uppercase" style="font-size: 0.72rem; color: var(--fucsia-oscuro); letter-spacing: 0.5px;">
                                 <i class="bi bi-palette-fill me-1"></i> Paleta Oficial Bella Girls (clic para rellenar color):
                             </small>
-                            <small class="text-muted" style="font-size: 0.7rem;">Tonos vino & rosa palo</small>
+                            <small class="text-muted" style="font-size: 0.7rem;">7 tonos oficiales</small>
                         </div>
                         <div class="d-flex flex-wrap gap-1">
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--c-900, #4B0F1E); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Vino Muy Oscuro (#4B0F1E)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> #4B0F1E Vino
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--rosa-principal, #FD7EAF); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rosa principal (#FD7EAF)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--rojo-vino); display: inline-block;"></span> Rosa principal
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--c-700, #8E2B44); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Vino Primario (#8E2B44)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> #8E2B44 Primario
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--rosa-intenso, #EB5387); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rosa intenso (#EB5387)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> Rosa intenso
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--c-600, #B23C59); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Frambuesa (#B23C59)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> #B23C59 Frambuesa
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--fucsia-oscuro, #C01548); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Fucsia oscuro (#C01548)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> Fucsia oscuro
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--c-500, #CC5671); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rosa Frambuesa (#CC5671)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> #CC5671 Rosa
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--dorado-principal, #FCDB72); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Dorado (#FCDB72)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--rojo-vino); display: inline-block;"></span> Dorado
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--c-100, #F7D6DC); color: var(--c-900, #4B0F1E); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rosa Palo (#F7D6DC)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--c-700, #8E2B44); display: inline-block;"></span> #F7D6DC Rosa Palo
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--dorado-champagne, #FEF1B8); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Champagne (#FEF1B8)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--dorado-oscuro); display: inline-block;"></span> Champagne
+                            </button>
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--dorado-oscuro, #E7B049); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Dorado oscuro (#E7B049)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> Dorado oscuro
+                            </button>
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rojo vino (#821110)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--dorado-principal); display: inline-block;"></span> Rojo vino
                             </button>
                         </div>
                     </div>
 
                     <datalist id="coloresBoutique">
-                        <option value="Vino Muy Oscuro (#4B0F1E)"></option>
-                        <option value="Vino Primario (#8E2B44)"></option>
-                        <option value="Frambuesa (#B23C59)"></option>
-                        <option value="Rosa Frambuesa (#CC5671)"></option>
-                        <option value="Rosa Medio (#E07A94)"></option>
-                        <option value="Rosa Palo (#F7D6DC)"></option>
-                        <option value="Negro Clásico"></option>
-                        <option value="Blanco Puro"></option>
-                        <option value="Beige Natural"></option>
-                    </datalist>
-                        <option value="Rosa Pastel (#ff96c5)"></option>
-                        <option value="Rosa Claro (#ffc0dc)"></option>
+                        <option value="Rosa principal (#FD7EAF)"></option>
+                        <option value="Rosa intenso (#EB5387)"></option>
+                        <option value="Fucsia oscuro (#C01548)"></option>
+                        <option value="Dorado (#FCDB72)"></option>
+                        <option value="Champagne (#FEF1B8)"></option>
+                        <option value="Dorado oscuro (#E7B049)"></option>
+                        <option value="Rojo vino (#821110)"></option>
                         <option value="Negro Clásico"></option>
                         <option value="Blanco Puro"></option>
                         <option value="Beige Natural"></option>
@@ -201,7 +219,7 @@
                                 </select>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="variantes[0][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Fucsia Intenso (#f70071)" required>
+                                <input type="text" name="variantes[0][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Rosa principal (#FD7EAF)" required>
                             </div>
                             <div class="col-4">
                                 <div class="input-group input-group-sm">
@@ -229,7 +247,7 @@
                                 </select>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="variantes[1][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Rosa Claro (#ffc0dc)" required>
+                                <input type="text" name="variantes[1][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Dorado (#FCDB72)" required>
                             </div>
                             <div class="col-4">
                                 <div class="input-group input-group-sm">
@@ -317,25 +335,53 @@
         reader.readAsDataURL(file);
     });
 
+    // Adaptar modo de tallas según categoría seleccionada
+    function actualizarModoTallas() {
+        const selectCat = document.getElementById('selectCategoria');
+        const alerta = document.getElementById('categoriaAlertaTalla');
+        if (!selectCat) return;
+
+        const opt = selectCat.options[selectCat.selectedIndex];
+        const usaTalla = opt && opt.getAttribute('data-usa-talla') === '0' ? false : true;
+
+        if (!usaTalla) {
+            alerta.innerHTML = '<span class="badge badge-boutique py-1 px-2"><i class="bi bi-info-circle me-1"></i> Categoría sin tallas: las variantes se asignarán con <strong>Talla Única</strong> automáticamente.</span>';
+        } else {
+            alerta.innerHTML = '';
+        }
+
+        // Si es categoría que no usa tallas, cambiar los selects de talla a Única
+        if (!usaTalla) {
+            document.querySelectorAll('#variantesContainer select[name$="[talla]"]').forEach(sel => {
+                sel.value = 'Única';
+            });
+        }
+    }
+
     // Agregar dinámicamente filas de variantes
     let contadorVariantes = 2;
     function agregarVariante() {
+        const selectCat = document.getElementById('selectCategoria');
+        const opt = selectCat ? selectCat.options[selectCat.selectedIndex] : null;
+        const usaTalla = opt && opt.getAttribute('data-usa-talla') === '0' ? false : true;
+        const tallaDefault = usaTalla ? 'M' : 'Única';
+
         const container = document.getElementById('variantesContainer');
         const row = document.createElement('div');
         row.className = 'row g-2 align-items-center mb-2 variante-fila';
         row.innerHTML = `
             <div class="col-3">
-                <select name="variantes[${contadorVariantes}][talla]" class="form-select form-select-sm" required>
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M" selected>M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="Única">Única</option>
+                <select name="variantes[${contadorVariantes}][talla]" class="form-select form-select-sm">
+                    <option value="XS" ${tallaDefault === 'XS' ? 'selected' : ''}>XS</option>
+                    <option value="S" ${tallaDefault === 'S' ? 'selected' : ''}>S</option>
+                    <option value="M" ${tallaDefault === 'M' ? 'selected' : ''}>M</option>
+                    <option value="L" ${tallaDefault === 'L' ? 'selected' : ''}>L</option>
+                    <option value="XL" ${tallaDefault === 'XL' ? 'selected' : ''}>XL</option>
+                    <option value="Única" ${tallaDefault === 'Única' ? 'selected' : ''}>Única</option>
                 </select>
             </div>
             <div class="col-4">
-                <input type="text" name="variantes[${contadorVariantes}][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Magenta Vibrante (#ff1b82)" required>
+                <input type="text" name="variantes[${contadorVariantes}][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Fucsia oscuro (#C01548)" required>
             </div>
             <div class="col-4">
                 <div class="input-group input-group-sm">
@@ -352,6 +398,10 @@
         container.appendChild(row);
         contadorVariantes++;
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        actualizarModoTallas();
+    });
 
     function eliminarFila(btn) {
         const rows = document.querySelectorAll('.variante-fila');

@@ -12,33 +12,41 @@
     
     <style>
         /* =====================================================================
-           PALETA OFICIAL DE TONOS VINO / ROSA PALO
+           PALETA OFICIAL BELLA GIRLS
+           Rosa Principal, Rosa Intenso, Fucsia Oscuro, Dorado, Champagne,
+           Dorado Oscuro, Rojo Vino, Blanco.
            ===================================================================== */
         :root {
-            --c-900: #4B0F1E;  /* vino muy oscuro */
-            --c-800: #6D1D32;  /* vino oscuro */
-            --c-700: #8E2B44;  /* vino */
-            --c-600: #B23C59;  /* frambuesa */
-            --c-500: #CC5671;  /* rosa frambuesa */
-            --c-400: #E07A94;  /* rosa medio */
-            --c-100: #F7D6DC;  /* rosa palo claro */
+            --rosa-principal: #FD7EAF;
+            --rosa-intenso: #EB5387;
+            --fucsia-oscuro: #C01548;
+            --dorado-principal: #FCDB72;
+            --dorado-champagne: #FEF1B8;
+            --dorado-oscuro: #E7B049;
+            --rojo-vino: #821110;
+            --blanco: #FFFFFF;
 
-            --c-white: #FFFFFF;
-            --c-shadow-wine: rgba(142, 43, 68, 0.16);
-            --c-shadow-wine-sm: rgba(142, 43, 68, 0.08);
-            --c-shadow-wine-lg: rgba(142, 43, 68, 0.14);
+            --grad-accion: linear-gradient(135deg, var(--fucsia-oscuro) 0%, var(--rosa-intenso) 100%);
+            --grad-accion-hover: linear-gradient(135deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
+            --grad-header: linear-gradient(90deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
+            --grad-gold: linear-gradient(135deg, var(--dorado-champagne) 0%, var(--dorado-principal) 60%, var(--dorado-oscuro) 100%);
+
+            --c-shadow-fuchsia: rgba(192, 21, 72, 0.16);
+            --c-shadow-fuchsia-sm: rgba(192, 21, 72, 0.08);
+            --c-shadow-fuchsia-lg: rgba(192, 21, 72, 0.14);
+            --c-border: #FBDCE8;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: radial-gradient(circle at top right, var(--c-100) 0%, rgba(247, 214, 220, 0.45) 45%, var(--c-white) 100%);
+            background: radial-gradient(circle at top right, #FFF2F6 0%, var(--dorado-champagne) 45%, var(--blanco) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
             margin: 0;
-            color: var(--c-900);
+            color: var(--rojo-vino);
         }
 
         .font-serif {
@@ -47,129 +55,137 @@
 
         /* Tarjeta del Login */
         .card-login {
-            background: var(--c-white);
-            border: 1px solid var(--c-100);
-            border-radius: 22px;
-            box-shadow: 0 16px 40px var(--c-shadow-wine-lg), 0 2px 10px var(--c-shadow-wine-sm);
+            background: var(--blanco);
+            border: 1px solid var(--c-border);
+            border-radius: 18px;
+            box-shadow: 0 12px 32px var(--c-shadow-fuchsia-lg), 0 2px 8px var(--c-shadow-fuchsia-sm);
             width: 100%;
-            max-width: 440px;
+            max-width: 395px;
             overflow: hidden;
             transition: box-shadow 0.3s ease;
         }
 
         .card-login:hover {
-            box-shadow: 0 20px 48px var(--c-shadow-wine), 0 4px 12px var(--c-shadow-wine-sm);
+            box-shadow: 0 16px 40px var(--c-shadow-fuchsia), 0 3px 10px var(--c-shadow-fuchsia-sm);
         }
 
         /* Encabezado */
         .card-login-header {
-            background: linear-gradient(180deg, var(--c-white) 0%, rgba(247, 214, 220, 0.25) 100%);
-            border-bottom: 1px solid var(--c-100) !important;
-            padding: 28px 24px 20px 24px;
+            background: linear-gradient(180deg, var(--blanco) 0%, #FFF5F8 100%);
+            border-bottom: 1px solid var(--c-border) !important;
+            padding: 18px 18px 14px 18px;
         }
 
         /* Logo Bella Girls */
         .login-logo-container {
             position: relative;
             display: inline-block;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .login-logo {
-            width: 120px;
-            height: 120px;
+            width: 95px;
+            height: 95px;
             object-fit: contain;
             border-radius: 50%;
-            box-shadow: 0 8px 22px rgba(142, 43, 68, 0.22), 0 0 0 3px rgba(245, 197, 66, 0.35);
+            box-shadow: 0 6px 18px rgba(192, 21, 72, 0.20), 0 0 0 2.5px var(--dorado-oscuro);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: var(--c-white);
+            background-color: var(--blanco);
         }
 
         .login-logo:hover {
             transform: scale(1.04) rotate(1deg);
-            box-shadow: 0 10px 26px rgba(142, 43, 68, 0.30), 0 0 0 4px rgba(245, 197, 66, 0.55);
+            box-shadow: 0 8px 22px rgba(192, 21, 72, 0.28), 0 0 0 3.5px var(--dorado-principal);
         }
 
         .brand-title {
-            color: var(--c-900);
+            color: var(--rojo-vino);
             letter-spacing: -0.5px;
-            font-size: 1.85rem;
+            font-size: 1.55rem;
             font-weight: 700;
         }
 
         .brand-subtitle {
-            color: var(--c-700);
-            font-size: 0.88rem;
+            color: var(--fucsia-oscuro);
+            font-size: 0.80rem;
+            font-weight: 500;
         }
 
         /* Formulario y Etiquetas */
         .form-label {
-            color: var(--c-800);
+            color: var(--rojo-vino);
             font-weight: 600;
+            font-size: 0.82rem;
         }
 
         .input-group-text {
-            background-color: #fff9fa !important;
-            border-color: var(--c-100) !important;
-            color: var(--c-600) !important;
-            font-size: 1.05rem;
+            background-color: #FFF5F8 !important;
+            border-color: var(--c-border) !important;
+            color: var(--fucsia-oscuro) !important;
+            font-size: 0.95rem;
+            padding: 7px 11px;
         }
 
         .form-control {
-            border-color: var(--c-100) !important;
-            color: var(--c-900);
-            background-color: var(--c-white);
-            border-radius: 10px;
-            padding: 10px 14px;
+            border-color: var(--c-border) !important;
+            color: var(--rojo-vino);
+            background-color: var(--blanco);
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-size: 0.88rem;
+            min-height: 38px;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .form-control:focus {
-            border-color: var(--c-500) !important;
-            box-shadow: 0 0 0 0.25rem rgba(204, 86, 113, 0.22) !important;
+            border-color: var(--rosa-intenso) !important;
+            box-shadow: 0 0 0 0.25rem rgba(235, 83, 135, 0.22) !important;
             outline: none;
-            color: var(--c-900);
+            color: var(--rojo-vino);
         }
 
         /* Checkbox Recordar Sesión */
         .form-check-input {
-            border-color: var(--c-400);
+            border-color: var(--rosa-principal);
             cursor: pointer;
         }
 
         .form-check-input:checked {
-            background-color: var(--c-600) !important;
-            border-color: var(--c-600) !important;
+            background-color: var(--fucsia-oscuro) !important;
+            border-color: var(--fucsia-oscuro) !important;
         }
 
         .form-check-input:focus {
-            border-color: var(--c-500) !important;
-            box-shadow: 0 0 0 0.25rem rgba(204, 86, 113, 0.22) !important;
+            border-color: var(--rosa-intenso) !important;
+            box-shadow: 0 0 0 0.25rem rgba(235, 83, 135, 0.22) !important;
         }
 
         .form-check-label {
-            color: var(--c-800) !important;
+            color: var(--rojo-vino) !important;
             cursor: pointer;
+            font-size: 0.82rem;
         }
 
         /* Botón Iniciar Sesión */
         .btn-login-submit {
-            background: linear-gradient(135deg, var(--c-700) 0%, var(--c-500) 100%) !important;
-            color: var(--c-white) !important;
+            background: var(--grad-accion) !important;
+            color: var(--blanco) !important;
             border: none;
             font-weight: 700;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 9px 14px;
+            font-size: 0.88rem;
+            min-height: 40px;
+            border-radius: 10px;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 14px rgba(142, 43, 68, 0.24);
+            box-shadow: 0 3px 12px rgba(192, 21, 72, 0.22);
             letter-spacing: 0.3px;
         }
 
         .btn-login-submit:hover {
-            background: linear-gradient(135deg, var(--c-800) 0%, var(--c-600) 100%) !important;
-            color: var(--c-white) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(142, 43, 68, 0.35);
+            background: var(--grad-accion-hover) !important;
+            color: var(--blanco) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(192, 21, 72, 0.32);
         }
 
         .btn-login-submit:active {
@@ -181,53 +197,53 @@
            ===================================================================== */
         .quick-switch-section {
             background: transparent;
-            margin-top: 18px;
-            padding-top: 16px;
-            border-top: 1px solid var(--c-100);
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid var(--c-border);
         }
 
         .quick-switch-title {
-            color: var(--c-700);
-            font-size: 0.74rem;
+            color: var(--fucsia-oscuro);
+            font-size: 0.68rem;
             letter-spacing: 0.6px;
             font-weight: 700;
             text-transform: uppercase;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 9px;
         }
 
         /* Tarjeta de Perfil */
         .profile-card {
-            background: var(--c-white);
-            border: 1px solid var(--c-100);
-            border-radius: 16px;
-            padding: 12px 14px;
+            background: var(--blanco);
+            border: 1.5px solid var(--c-border);
+            border-radius: 12px;
+            padding: 8px 10px;
             text-align: left;
             width: 100%;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 2px 8px var(--c-shadow-wine-sm);
+            gap: 9px;
+            box-shadow: 0 2px 6px var(--c-shadow-fuchsia-sm);
             transition: all 0.2s ease;
             cursor: pointer;
             text-decoration: none;
         }
 
         .profile-card:hover {
-            border-color: var(--c-500);
-            box-shadow: 0 6px 16px var(--c-shadow-wine);
-            transform: translateY(-2px);
+            border-color: var(--rosa-intenso);
+            box-shadow: 0 4px 12px var(--c-shadow-fuchsia);
+            transform: translateY(-1px);
         }
 
         /* Estado Activo / Seleccionado */
         .profile-card.active {
-            border: 1.5px solid var(--c-600) !important;
-            background: rgba(247, 214, 220, 0.35) !important;
-            box-shadow: 0 4px 14px var(--c-shadow-wine-sm);
+            border: 2px solid var(--fucsia-oscuro) !important;
+            background: #FFF2F6 !important;
+            box-shadow: 0 3px 10px var(--c-shadow-fuchsia-sm);
         }
 
         .profile-card-icon {
-            font-size: 1.55rem;
+            font-size: 1.30rem;
             line-height: 1;
             display: flex;
             align-items: center;
@@ -242,43 +258,45 @@
         }
 
         .profile-card-name {
-            color: var(--c-900);
+            color: var(--rojo-vino);
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.82rem;
             line-height: 1.2;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         .profile-card-role {
-            color: var(--c-700);
-            opacity: 0.75;
-            font-size: 0.74rem;
+            color: var(--fucsia-oscuro);
+            opacity: 0.85;
+            font-size: 0.70rem;
             line-height: 1.2;
             white-space: nowrap;
         }
 
         /* Mensajes de Alerta Armonizados */
         .alert-custom-info {
-            background-color: var(--c-100) !important;
-            border: 1px solid var(--c-400) !important;
-            color: var(--c-800) !important;
+            background-color: var(--dorado-champagne) !important;
+            border: 1px solid var(--dorado-oscuro) !important;
+            color: var(--rojo-vino) !important;
             border-radius: 12px;
             font-size: 0.85rem;
+            font-weight: 600;
         }
 
         .alert-custom-danger {
-            background-color: var(--c-100) !important;
-            border: 1px solid var(--c-700) !important;
-            color: var(--c-700) !important;
+            background-color: #FDF0F3 !important;
+            border: 1px solid var(--rosa-intenso) !important;
+            color: var(--rojo-vino) !important;
             border-radius: 12px;
             font-size: 0.85rem;
+            font-weight: 600;
         }
 
         /* Footer */
         .card-login-footer {
-            background-color: rgba(247, 214, 220, 0.15);
-            border-top: 1px solid var(--c-100) !important;
-            color: var(--c-700);
+            background-color: #FFF8FA;
+            border-top: 1px solid var(--c-border) !important;
+            color: var(--rojo-vino);
             opacity: 0.85;
             font-size: 0.76rem;
             padding: 14px 20px;
@@ -307,7 +325,7 @@
             <p class="brand-subtitle mb-0">Sistema de Gestión para Tienda de Ropa</p>
         </div>
 
-        <div class="p-4">
+        <div class="p-3 p-sm-4">
             <!-- Mensajes de Notificación -->
             @if($errors->any())
                 <div class="alert alert-custom-danger py-2 px-3 mb-3 border d-flex align-items-center gap-2">

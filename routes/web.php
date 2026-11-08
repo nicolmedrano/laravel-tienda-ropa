@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DashboardController;
@@ -23,7 +24,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::redirect('/', '/dashboard');
+Route::redirect('/', '/login');
 
 // Rutas protegidas
 Route::group([], function () {
@@ -40,6 +41,13 @@ Route::group([], function () {
     Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+
+    // GESTIÓN DE CATEGORÍAS (Exclusivo Administrador)
+    Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+    Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
+    Route::put('/categorias/{categoria}', [CategoriaController::class, 'update'])->name('categorias.update');
+    Route::patch('/categorias/{categoria}/toggle', [CategoriaController::class, 'toggleEstado'])->name('categorias.toggle');
+    Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
 
     // 2. MÓDULO VENTA (POS y Facturación)
     Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');

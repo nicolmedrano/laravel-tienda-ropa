@@ -8,7 +8,7 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Módulo 1 de 6</span>
+                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Producto</span>
                 <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Catálogo de Productos</h2>
             </div>
             <p class="text-muted m-0">Prendas de vestir con fotografía, control de tallas, colores y existencias sincronizadas.</p>
