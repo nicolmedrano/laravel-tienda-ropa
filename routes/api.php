@@ -5,6 +5,7 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\Venta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,12 @@ Route::get('/clientes', function () {
 });
 
 Route::get('/proveedores', function () {
+    if (!Auth::check() || !Auth::user()->esAdmin()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Acceso denegado. Se requieren permisos de administrador.',
+        ], 403);
+    }
     return response()->json(Proveedor::where('estado', true)->get());
 });
 

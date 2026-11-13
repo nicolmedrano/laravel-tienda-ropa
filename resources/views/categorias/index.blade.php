@@ -300,7 +300,7 @@
                     </div>
 
                     <!-- Switch: Estado Activo -->
-                    <div class="p-3 rounded" style="background-color: #FFFFFF; border: 1px solid var(--color-border);">
+                    <div class="p-3 rounded" style="background-color: var(--color-bg-subtle); border: 1px solid var(--color-border);">
                         <div class="form-check form-switch m-0">
                             <input class="form-check-input" 
                                    type="checkbox" 

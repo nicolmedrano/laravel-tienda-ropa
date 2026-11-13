@@ -7,10 +7,10 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Compra</span>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Compras & Abastecimiento</h2>
+                <span class="badge badge-module px-2 py-1">Compra</span>
+                <h2 class="font-serif fw-bold m-0 page-title" style="color: var(--color-text-dark);">Compras & Abastecimiento</h2>
             </div>
-            <p class="text-muted m-0">Recepción de mercadería de proveedores y actualización automática de existencias.</p>
+            <p class="page-subtitle text-muted m-0">Recepción de mercadería de proveedores y actualización automática de existencias.</p>
         </div>
         <div>
             <a href="{{ route('compras.create') }}" class="btn btn-boutique-rose">

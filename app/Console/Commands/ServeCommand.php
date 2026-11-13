@@ -42,7 +42,7 @@ class ServeCommand extends BaseServeCommand
     }
 
     /**
-     * Si otro proceso en Windows (como PalmaSIG o un php huérfano) está bloqueando el puerto,
+     * Si otro proceso en Windows (como PalmaSIG u otro php huérfano) está bloqueando el puerto,
      * lo libera para que Bella Girls responda siempre en el enlace esperado.
      */
     protected function liberarPuertoSiEstaOcupado(): void
@@ -51,18 +51,20 @@ class ServeCommand extends BaseServeCommand
 
         if (PHP_OS_FAMILY === 'Windows') {
             $output = @shell_exec("netstat -ano | findstr :{$port}");
-            if ($output && preg_match('/LISTENING\s+(\d+)/', $output, $matches)) {
-                $pid = (int) $matches[1];
+            if ($output && preg_match_all('/LISTENING\s+(\d+)/', $output, $matches)) {
+                $pids = array_unique(array_map('intval', $matches[1]));
                 $miPid = getmypid();
 
-                if ($pid > 0 && $pid !== $miPid) {
-                    $cmdOutput = @shell_exec("powershell -NoProfile -Command \"(Get-CimInstance Win32_Process -Filter 'ProcessId = {$pid}').CommandLine\" 2>nul");
-                    
-                    // Si el proceso no pertenece a este proyecto, cerrarlo para evitar colisiones
-                    if ($cmdOutput && !str_contains($cmdOutput, 'laravel-tienda-ropa')) {
-                        @shell_exec("taskkill /F /PID {$pid} 2>nul");
-                        $this->components->warn("Se liberó el puerto {$port} (se cerró el proceso externo PID {$pid} que lo estaba ocupando).");
-                        usleep(400000);
+                foreach ($pids as $pid) {
+                    if ($pid > 0 && $pid !== $miPid) {
+                        $cmdOutput = @shell_exec("powershell -NoProfile -Command \"(Get-CimInstance Win32_Process -Filter 'ProcessId = {$pid}').CommandLine\" 2>nul");
+                        
+                        // Si el proceso no pertenece a este proyecto (ej: PalmaSIG), cerrarlo para evitar colisiones
+                        if (!$cmdOutput || !str_contains($cmdOutput, 'laravel-tienda-ropa')) {
+                            @shell_exec("taskkill /F /T /PID {$pid} 2>nul");
+                            $this->components->warn("Se liberó el puerto {$port} (se cerró el proceso externo PID {$pid} que lo estaba ocupando).");
+                            usleep(400000);
+                        }
                     }
                 }
             }

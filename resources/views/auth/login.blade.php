@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Bella Girls</title>
+    <!-- Script Anti-Parpadeo de Tema (Se ejecuta inmediatamente antes del CSS) -->
+    <script>
+        (function() {
+            try {
+                var stored = localStorage.getItem('bg-theme');
+                var theme = stored;
+                if (!theme || (theme !== 'light' && theme !== 'dark')) {
+                    theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/bella-theme.css') }}">
     
     <style>
         /* =====================================================================
@@ -35,6 +51,10 @@
             --c-shadow-fuchsia-sm: rgba(192, 21, 72, 0.08);
             --c-shadow-fuchsia-lg: rgba(192, 21, 72, 0.14);
             --c-border: #FBDCE8;
+        }
+
+        html {
+            font-size: 14px;
         }
 
         body {
@@ -313,7 +333,13 @@
         }
     </style>
 </head>
-<body>
+<body class="login-body">
+
+    <!-- Botón Flotante para Alternar Modo Claro / Nocturno -->
+    <button type="button" class="theme-toggle-btn theme-toggle-login" aria-label="Cambiar tema" title="Cambiar tema">
+        <i class="bi bi-sun-fill theme-icon-sun"></i>
+        <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
+    </button>
 
     <div class="card-login">
         <!-- Encabezado de Marca con Logo Bella Girls -->
@@ -443,5 +469,6 @@
             });
         });
     </script>
+    <script src="{{ asset('js/boutique.js') }}"></script>
 </body>
 </html>

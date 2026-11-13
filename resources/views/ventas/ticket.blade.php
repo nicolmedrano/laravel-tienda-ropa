@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid p-0 d-flex flex-column align-items-center">
     <!-- Botones de Acción Superiores -->
-    <div class="d-flex justify-content-between align-items-center mb-4 no-print" style="width: 100%; max-width: 480px;">
+    <div class="d-flex justify-content-between align-items-center mb-3 no-print" style="width: 100%; max-width: 380px;">
         <a href="{{ route('ventas.pos') }}" class="btn btn-outline-secondary btn-sm">
             <i class="bi bi-arrow-left me-1"></i> Volver al POS
         </a>
@@ -14,37 +14,37 @@
                 <i class="bi bi-list me-1"></i> Ventas
             </a>
             <button onclick="window.print()" class="btn btn-boutique-rose btn-sm fw-bold">
-                <i class="bi bi-printer me-1"></i> Imprimir Ticket
+                <i class="bi bi-printer me-1"></i> Imprimir
             </button>
         </div>
     </div>
 
-    <!-- TICKET DE VENTA (ESTILO TÉRMICO ELEGANTE ROSA) -->
-    <div class="card-boutique p-4 bg-white shadow-sm ticket-imprimible" style="width: 100%; max-width: 460px; font-family: 'Plus Jakarta Sans', monospace; font-size: 0.88rem; border: 1.5px dashed var(--color-border-strong);">
+    <!-- TICKET DE VENTA (ESTILO TÉRMICO ELEGANTE ROSA COMPACTO) -->
+    <div class="card-boutique p-3 bg-white shadow-sm ticket-imprimible" style="width: 100%; max-width: 380px; font-family: 'Plus Jakarta Sans', monospace; font-size: 0.79rem; border: 1.5px dashed var(--color-border-strong);">
         <!-- Encabezado de la Tienda -->
-        <div class="text-center pb-3 border-bottom mb-3" style="border-color: var(--color-border) !important;">
-            <div class="mb-2">
-                <img src="{{ asset('images/logo-bella-girls.png') }}" alt="Bella Girls" style="width: 48px; height: 48px; border-radius: 50%; object-fit: contain; box-shadow: 0 4px 10px rgba(192, 21, 72, 0.2), 0 0 0 2px var(--dorado-oscuro);">
+        <div class="text-center pb-2 border-bottom mb-2" style="border-color: var(--color-border) !important;">
+            <div class="mb-1">
+                <img src="{{ asset('images/logo-bella-girls.png') }}" alt="Bella Girls" style="width: 38px; height: 38px; border-radius: 50%; object-fit: contain; box-shadow: 0 3px 8px rgba(192, 21, 72, 0.2), 0 0 0 2px var(--dorado-oscuro);">
             </div>
-            <h4 class="font-serif fw-bold m-0" style="letter-spacing: -0.5px; color: var(--color-primary);">BELLA GIRLS</h4>
-            <div class="text-muted small">Alta Costura y Confecciones</div>
-            <div class="small text-muted">Av. Principal Los Rosales #1024, La Paz - Bolivia</div>
-            <div class="small text-muted">Teléfono: +591 2 2790000 &bull; NIT: 8493021018</div>
+            <h5 class="font-serif fw-bold m-0" style="letter-spacing: -0.3px; color: var(--color-primary); font-size: 1.15rem;">BELLA GIRLS</h5>
+            <div class="text-muted" style="font-size: 0.72rem;">Alta Costura y Confecciones</div>
+            <div class="text-muted" style="font-size: 0.70rem;">Av. Principal Los Rosales #1024, La Paz - Bolivia</div>
+            <div class="text-muted" style="font-size: 0.70rem;">Tel: +591 2 2790000 &bull; NIT: 8493021018</div>
         </div>
 
         <!-- Datos del Comprobante y Relaciones del Sistema -->
-        <div class="mb-3 small">
+        <div class="mb-2" style="font-size: 0.76rem; line-height: 1.35;">
             <div class="d-flex justify-content-between">
                 <span class="text-muted">Factura N°:</span>
                 <span class="fw-bold font-monospace" style="color: var(--color-primary);">{{ $venta->numero_factura }}</span>
             </div>
             <div class="d-flex justify-content-between">
-                <span class="text-muted">Fecha y Hora:</span>
+                <span class="text-muted">Fecha / Hora:</span>
                 <span>{{ $venta->fecha_venta ? $venta->fecha_venta->format('d/m/Y H:i:s') : now()->format('d/m/Y H:i:s') }}</span>
             </div>
             <div class="d-flex justify-content-between">
                 <span class="text-muted">Atendido por:</span>
-                <span>{{ $venta->usuario->nombre ?? 'Valentina' }} {{ $venta->usuario->apellido ?? 'Nicol' }} ({{ ucfirst($venta->usuario->rol ?? 'Vendedora') }})</span>
+                <span>{{ $venta->usuario->nombre ?? 'Valentina' }} ({{ ucfirst($venta->usuario->rol ?? 'Vendedora') }})</span>
             </div>
             <div class="d-flex justify-content-between pt-1 mt-1 border-top" style="border-color: var(--color-border) !important;">
                 <span class="text-muted">Cliente:</span>
@@ -59,11 +59,11 @@
         </div>
 
         <!-- Tabla de Prendas Vendidas -->
-        <div class="border-top border-bottom py-2 mb-3" style="border-color: var(--color-border) !important;">
-            <table class="w-100 small">
+        <div class="border-top border-bottom py-1 mb-2" style="border-color: var(--color-border) !important;">
+            <table class="w-100" style="font-size: 0.75rem;">
                 <thead>
-                    <tr class="text-muted border-bottom" style="font-size: 0.75rem; border-color: var(--color-border) !important;">
-                        <th class="text-start pb-1">Prenda / Talla / Color</th>
+                    <tr class="text-muted border-bottom" style="font-size: 0.70rem; border-color: var(--color-border) !important;">
+                        <th class="text-start pb-1">Prenda / Detalle</th>
                         <th class="text-center pb-1">Cant.</th>
                         <th class="text-end pb-1">P. Unit</th>
                         <th class="text-end pb-1">Subtotal</th>
@@ -73,12 +73,12 @@
                     @foreach($venta->detalles as $det)
                         <tr>
                             <td class="py-1">
-                                <div class="fw-semibold" style="color: var(--color-text-dark);">{{ $det->variante->producto->nombre ?? 'Prenda' }}</div>
-                                <small class="text-muted">{{ $det->variante->talla ?? '' }} / {{ $det->variante->color ?? '' }}</small>
+                                <div class="fw-semibold" style="color: var(--color-text-dark); line-height: 1.2;">{{ $det->variante->producto->nombre ?? 'Prenda' }}</div>
+                                <span class="text-muted" style="font-size: 0.68rem;">{{ $det->variante->talla ?? '' }} / {{ $det->variante->color ?? '' }}</span>
                             </td>
-                            <td class="text-center py-1">{{ $det->cantidad }}</td>
-                            <td class="text-end py-1">Bs. {{ number_format($det->precio_unitario, 2) }}</td>
-                            <td class="text-end py-1 fw-bold" style="color: var(--color-primary);">Bs. {{ number_format($det->subtotal, 2) }}</td>
+                            <td class="text-center py-1 align-top">{{ $det->cantidad }}</td>
+                            <td class="text-end py-1 align-top">Bs. {{ number_format($det->precio_unitario, 2) }}</td>
+                            <td class="text-end py-1 align-top fw-bold" style="color: var(--color-primary);">Bs. {{ number_format($det->subtotal, 2) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -86,7 +86,7 @@
         </div>
 
         <!-- Totales -->
-        <div class="mb-3 small">
+        <div class="mb-2" style="font-size: 0.78rem;">
             <div class="d-flex justify-content-between mb-1">
                 <span class="text-muted">Subtotal:</span>
                 <span>Bs. {{ number_format($venta->subtotal, 2) }}</span>
@@ -97,31 +97,31 @@
                     <span>- Bs. {{ number_format($venta->descuento, 2) }}</span>
                 </div>
             @endif
-            <div class="d-flex justify-content-between fs-5 fw-bold pt-2 border-top" style="color: var(--color-primary); border-color: var(--color-border) !important;">
+            <div class="d-flex justify-content-between fw-bold pt-1 border-top" style="font-size: 0.95rem; color: var(--color-primary); border-color: var(--color-border) !important;">
                 <span>TOTAL:</span>
                 <span>Bs. {{ number_format($venta->total, 2) }}</span>
             </div>
         </div>
 
         <!-- Métodos de Pago Registrados -->
-        <div class="p-2 rounded small mb-3 border" style="background-color: var(--color-bg-subtle); border-color: var(--color-border) !important;">
-            <div class="fw-semibold mb-1" style="color: var(--color-text-dark);">Detalle del Pago:</div>
+        <div class="p-2 rounded mb-2 border" style="font-size: 0.74rem; background-color: var(--color-bg-subtle); border-color: var(--color-border) !important;">
+            <div class="fw-semibold mb-1" style="color: var(--color-text-dark); font-size: 0.72rem;">Detalle del Pago:</div>
             @foreach($venta->pagos as $pago)
                 <div class="d-flex justify-content-between">
                     <span>Método: <strong class="text-uppercase" style="color: var(--color-primary);">{{ $pago->metodo }}</strong></span>
                     <span class="fw-bold">Bs. {{ number_format($pago->monto, 2) }}</span>
                 </div>
                 @if($pago->referencia)
-                    <div class="text-muted" style="font-size: 0.75rem;">Ref: {{ $pago->referencia }}</div>
+                    <div class="text-muted" style="font-size: 0.68rem;">Ref: {{ $pago->referencia }}</div>
                 @endif
             @endforeach
         </div>
 
         <!-- Pie de Ticket -->
-        <div class="text-center text-muted small pt-2 border-top" style="border-color: var(--color-border) !important;">
+        <div class="text-center text-muted pt-2 border-top" style="border-color: var(--color-border) !important; font-size: 0.70rem;">
             <div class="fw-semibold mb-1" style="color: var(--color-text-dark);">¡Gracias por su preferencia!</div>
             <div>Prendas exclusivas diseñadas para resaltar su elegancia.</div>
-            <div class="mt-2" style="font-size: 0.7rem;">Cambios permitidos dentro de los 7 días con este comprobante y etiquetas intactas.</div>
+            <div class="mt-1" style="font-size: 0.65rem;">Cambios permitidos dentro de los 7 días con este comprobante y etiquetas intactas.</div>
         </div>
     </div>
 </div>
@@ -129,24 +129,34 @@
 
 @push('styles')
 <style>
+    @page {
+        size: 80mm auto;
+        margin: 2mm 3mm;
+    }
     @media print {
         body {
             background-color: #FFFFFF !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
-        .sidebar, .top-navbar, .no-print {
+        .sidebar, .top-navbar, .no-print, header, footer {
             display: none !important;
         }
         .main-wrapper {
-            margin-left: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         .content-area {
             padding: 0 !important;
+            margin: 0 !important;
         }
         .ticket-imprimible {
             border: none !important;
             box-shadow: none !important;
             max-width: 100% !important;
             width: 100% !important;
+            padding: 0 !important;
+            margin: 0 auto !important;
         }
     }
 </style>

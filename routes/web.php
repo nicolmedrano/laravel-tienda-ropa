@@ -26,13 +26,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::redirect('/', '/login');
 
-// Rutas protegidas
-Route::group([], function () {
+// Rutas protegidas del sistema
+Route::middleware('auth')->group(function () {
 
-    // Panel Principal
+    // Panel Principal (Dashboard) - Accesible por Administrador y Vendedor
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // 1. MÓDULO PRODUCTO (Prendas y Catálogo)
+    // 1. MÓDULO PRODUCTO (Prendas y Catálogo) - Accesible por Administrador y Vendedor
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
     Route::get('/productos/tabla', [ProductoController::class, 'tabla'])->name('productos.tabla');
     Route::get('/productos/crear', [ProductoController::class, 'create'])->name('productos.create');
@@ -42,47 +42,58 @@ Route::group([], function () {
     Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
     Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
-    // GESTIÓN DE CATEGORÍAS (Exclusivo Administrador)
-    Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
-    Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
-    Route::put('/categorias/{categoria}', [CategoriaController::class, 'update'])->name('categorias.update');
-    Route::patch('/categorias/{categoria}/toggle', [CategoriaController::class, 'toggleEstado'])->name('categorias.toggle');
-    Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
-
-    // 2. MÓDULO VENTA (POS y Facturación)
+    // 2. MÓDULO VENTA (POS y Facturación) - Accesible por Administrador y Vendedor
     Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
     Route::get('/ventas/pos', [VentaController::class, 'pos'])->name('ventas.pos');
     Route::post('/ventas', [VentaController::class, 'store'])->name('ventas.store');
     Route::get('/ventas/{venta}/ticket', [VentaController::class, 'ticket'])->name('ventas.ticket');
     Route::post('/ventas/{venta}/anular', [VentaController::class, 'anular'])->name('ventas.anular');
 
-    // 3. MÓDULO COMPRA (Abastecimiento a Proveedores)
-    Route::get('/compras', [CompraController::class, 'index'])->name('compras.index');
-    Route::get('/compras/crear', [CompraController::class, 'create'])->name('compras.create');
-    Route::post('/compras', [CompraController::class, 'store'])->name('compras.store');
-    Route::get('/compras/{compra}', [CompraController::class, 'show'])->name('compras.show');
-    Route::post('/compras/{compra}/anular', [CompraController::class, 'anular'])->name('compras.anular');
-
-    // 4. MÓDULO CLIENTE
+    // 3. MÓDULO CLIENTE - Accesible por Administrador y Vendedor
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
     Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
     Route::get('/clientes/{cliente}', [ClienteController::class, 'show'])->name('clientes.show');
     Route::put('/clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
     Route::patch('/clientes/{cliente}/toggle', [ClienteController::class, 'toggleEstado'])->name('clientes.toggle');
 
-    // 5. MÓDULO PROVEEDOR
-    Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
-    Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store');
-    Route::get('/proveedores/{proveedor}', [ProveedorController::class, 'show'])->name('proveedores.show');
-    Route::put('/proveedores/{proveedor}', [ProveedorController::class, 'update'])->name('proveedores.update');
-    Route::patch('/proveedores/{proveedor}/toggle', [ProveedorController::class, 'toggleEstado'])->name('proveedores.toggle');
+    // =========================================================================
+    // MÓDULOS EXCLUSIVOS DEL ROL ADMINISTRADOR (Middleware 'admin')
+    // =========================================================================
+    Route::middleware('admin')->group(function () {
 
-    // 6. MÓDULO USUARIO
-    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-    Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
-    Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
-    Route::patch('/usuarios/{usuario}/toggle', [UsuarioController::class, 'toggleEstado'])->name('usuarios.toggle');
+        // GESTIÓN DE CATEGORÍAS
+        Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+        Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
+        Route::put('/categorias/{categoria}', [CategoriaController::class, 'update'])->name('categorias.update');
+        Route::patch('/categorias/{categoria}/toggle', [CategoriaController::class, 'toggleEstado'])->name('categorias.toggle');
+        Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
 
-    // PAGOS (Auxiliar de Ventas)
-    Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
+        // MÓDULO COMPRA (Abastecimiento a Proveedores)
+        Route::get('/compras', [CompraController::class, 'index'])->name('compras.index');
+        Route::get('/compras/crear', [CompraController::class, 'create'])->name('compras.create');
+        Route::post('/compras', [CompraController::class, 'store'])->name('compras.store');
+        Route::get('/compras/{compra}', [CompraController::class, 'show'])->name('compras.show');
+        Route::post('/compras/{compra}/anular', [CompraController::class, 'anular'])->name('compras.anular');
+
+        // MÓDULO PROVEEDOR
+        Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
+        Route::post('/proveedores', [ProveedorController::class, 'store'])->name('proveedores.store');
+        Route::get('/proveedores/{proveedor}', [ProveedorController::class, 'show'])->name('proveedores.show');
+        Route::put('/proveedores/{proveedor}', [ProveedorController::class, 'update'])->name('proveedores.update');
+        Route::patch('/proveedores/{proveedor}/toggle', [ProveedorController::class, 'toggleEstado'])->name('proveedores.toggle');
+
+        // MÓDULO USUARIO
+        Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+        Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+        Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+        Route::patch('/usuarios/{usuario}/toggle', [UsuarioController::class, 'toggleEstado'])->name('usuarios.toggle');
+
+        // ARQUEO DE PAGOS (Auxiliar de Ventas)
+        Route::get('/pagos', [PagoController::class, 'index'])->name('pagos.index');
+    });
+});
+
+// Redirección segura para cualquier ruta no encontrada dentro del sistema
+Route::fallback(function () {
+    return redirect()->route('dashboard');
 });

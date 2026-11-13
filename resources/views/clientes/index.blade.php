@@ -7,10 +7,10 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
         <div>
             <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="badge badge-module px-2 py-1" style="font-size: 0.72rem;">Cliente</span>
-                <h2 class="font-serif fw-bold m-0" style="color: var(--color-text-dark);">Gestión de Clientes</h2>
+                <span class="badge badge-module px-2 py-1">Cliente</span>
+                <h2 class="font-serif fw-bold m-0 page-title" style="color: var(--color-text-dark);">Gestión de Clientes</h2>
             </div>
-            <p class="text-muted m-0">Registro, edición y trazabilidad de compras asociadas al módulo de Ventas.</p>
+            <p class="page-subtitle text-muted m-0">Registro, edición y trazabilidad de compras asociadas al módulo de Ventas.</p>
         </div>
         <div>
             <button type="button" class="btn btn-boutique-rose" data-bs-toggle="modal" data-bs-target="#modalNuevoCliente">
@@ -42,7 +42,7 @@
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
                 <thead>
-                    <tr style="font-size: 0.82rem;">
+                    <tr>
                         <th>ID</th>
                         <th>Cliente</th>
                         <th>Teléfono</th>
