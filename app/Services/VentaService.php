@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Contracts\NumeradorFactura;
 use App\Models\DetalleVenta;
 use App\Models\Pago;
 use App\Models\ProductoVariante;
@@ -12,7 +13,8 @@ use Illuminate\Validation\ValidationException;
 class VentaService
 {
     public function __construct(
-        protected InventarioService $inventarioService
+        protected InventarioService $inventarioService,
+        protected NumeradorFactura $numeradorFactura
     ) {}
 
     /**
@@ -35,9 +37,11 @@ class VentaService
 
             $totalFinal = $subtotalGeneral - $descuento;
 
-            $numeroFactura = $this->generarNumeroFactura();
+            $idReservado = $this->reservarIdVenta();
+            $numeroFactura = $this->numeradorFactura->numeroPara($idReservado);
 
             $venta = $this->crearVenta(
+                $idReservado,
                 $numeroFactura,
                 $datos,
                 $idUsuario,
@@ -115,6 +119,8 @@ class VentaService
 
             $consolidados[$idVariante] += $cantidad;
         }
+
+        ksort($consolidados);
 
         return $consolidados;
     }
@@ -216,20 +222,22 @@ class VentaService
     }
 
     /**
-     * Genera el correlativo secuencial de factura.
+     * Reserva el siguiente ID de la secuencia PostgreSQL para la tabla ventas.
      *
-     * @return string
+     * @return int
      */
-    private function generarNumeroFactura(): string
+    private function reservarIdVenta(): int
     {
-        $ultimoId = Venta::max('id_venta') ?? 0;
-        return 'FAC-' . str_pad($ultimoId + 1, 5, '0', STR_PAD_LEFT);
+        $resultado = DB::selectOne("select nextval(pg_get_serial_sequence('ventas','id_venta')) as id");
+
+        return (int) $resultado->id;
     }
 
     /**
-     * Crea el registro principal de la venta.
+     * Crea el registro principal de la venta asignando explícitamente el id_venta reservado.
      */
     private function crearVenta(
+        int $idVenta,
         string $numeroFactura,
         array $datos,
         int $idUsuario,
@@ -237,7 +245,8 @@ class VentaService
         float $descuento,
         float $total
     ): Venta {
-        return Venta::create([
+        return Venta::forceCreate([
+            'id_venta' => $idVenta,
             'numero_factura' => $numeroFactura,
             'id_cliente' => $datos['id_cliente'] ?? null,
             'id_usuario' => $idUsuario,
