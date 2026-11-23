@@ -51,10 +51,17 @@ Route::middleware('auth')->group(function () {
 
     // 3. MÓDULO CLIENTE - Accesible por Administrador y Vendedor
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+    Route::get('/clientes/verificar-duplicado', [ClienteController::class, 'verificarDuplicado'])->name('clientes.verificar-duplicado');
     Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
     Route::get('/clientes/{cliente}', [ClienteController::class, 'show'])->name('clientes.show');
     Route::put('/clientes/{cliente}', [ClienteController::class, 'update'])->name('clientes.update');
     Route::patch('/clientes/{cliente}/toggle', [ClienteController::class, 'toggleEstado'])->name('clientes.toggle');
+
+    // Gestión de múltiples direcciones del cliente
+    Route::post('/clientes/{cliente}/direcciones', [ClienteController::class, 'storeDireccion'])->name('clientes.direcciones.store');
+    Route::put('/clientes/direcciones/{direccion}', [ClienteController::class, 'updateDireccion'])->name('clientes.direcciones.update');
+    Route::delete('/clientes/direcciones/{direccion}', [ClienteController::class, 'destroyDireccion'])->name('clientes.direcciones.destroy');
+    Route::patch('/clientes/direcciones/{direccion}/principal', [ClienteController::class, 'setPrincipalDireccion'])->name('clientes.direcciones.principal');
 
     // =========================================================================
     // MÓDULOS EXCLUSIVOS DEL ROL ADMINISTRADOR (Middleware 'admin')
