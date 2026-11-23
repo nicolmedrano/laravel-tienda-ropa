@@ -21,7 +21,6 @@ class StoreVentaRequest extends FormRequest
             'items' => 'required|array|min:1',
             'items.*.id_variante' => 'required|exists:variantes_producto,id_variante',
             'items.*.cantidad' => 'required|integer|min:1',
-            'items.*.precio_unitario' => 'required|numeric|min:0',
         ];
     }
 

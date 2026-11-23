@@ -25,11 +25,15 @@ class VentaService
     public function registrar(array $datos, int $idUsuario): Venta
     {
         return DB::transaction(function () use ($datos, $idUsuario) {
-            $itemsValidados = $this->validarYCalcularItems($datos['items']);
+            $itemsConsolidados = $this->consolidarItems($datos['items']);
+            $itemsValidados = $this->validarYCalcularItems($itemsConsolidados);
 
             $subtotalGeneral = array_sum(array_column($itemsValidados, 'subtotal'));
             $descuento = (float) ($datos['descuento'] ?? 0);
-            $totalFinal = max(0, $subtotalGeneral - $descuento);
+
+            $this->validarDescuento($descuento, $subtotalGeneral);
+
+            $totalFinal = $subtotalGeneral - $descuento;
 
             $numeroFactura = $this->generarNumeroFactura();
 
@@ -92,32 +96,52 @@ class VentaService
     }
 
     /**
-     * Valida el stock de los items y calcula sus subtotales bloqueando las variantes.
+     * Consolida los items del carrito sumando las cantidades de variantes repetidas.
      *
      * @param array $items
+     * @return array<int, int> Mapa asociativo [id_variante => cantidad_total]
+     */
+    private function consolidarItems(array $items): array
+    {
+        $consolidados = [];
+
+        foreach ($items as $item) {
+            $idVariante = (int) $item['id_variante'];
+            $cantidad = (int) $item['cantidad'];
+
+            if (!isset($consolidados[$idVariante])) {
+                $consolidados[$idVariante] = 0;
+            }
+
+            $consolidados[$idVariante] += $cantidad;
+        }
+
+        return $consolidados;
+    }
+
+    /**
+     * Valida existencias y estado de los items consolidados y calcula los subtotales usando el precio de la base de datos.
+     *
+     * @param array<int, int> $itemsConsolidados Mapa [id_variante => cantidad]
      * @return array
      *
      * @throws ValidationException
      */
-    private function validarYCalcularItems(array $items): array
+    private function validarYCalcularItems(array $itemsConsolidados): array
     {
         $itemsValidados = [];
 
-        foreach ($items as $item) {
+        foreach ($itemsConsolidados as $idVariante => $cantidad) {
             $variante = ProductoVariante::with('producto')
-                ->where('id_variante', $item['id_variante'])
+                ->where('id_variante', $idVariante)
                 ->lockForUpdate()
                 ->firstOrFail();
 
-            $cantidad = (int) $item['cantidad'];
+            $this->validarEstadoVarianteYProducto($variante);
+            $this->validarStock($variante, $cantidad);
 
-            if ($variante->stock_actual < $cantidad) {
-                throw ValidationException::withMessages([
-                    'items' => "Stock insuficiente para {$variante->producto->nombre} (Talla: {$variante->talla}, Color: {$variante->color}). Stock actual: {$variante->stock_actual}, solicitado: {$cantidad}.",
-                ]);
-            }
-
-            $precioUnitario = (float) $item['precio_unitario'];
+            // El precio unitario proviene exclusivamente de la base de datos (producto)
+            $precioUnitario = (float) $variante->producto->precio_venta;
             $subtotalLinea = $cantidad * $precioUnitario;
 
             $itemsValidados[] = [
@@ -129,6 +153,66 @@ class VentaService
         }
 
         return $itemsValidados;
+    }
+
+    /**
+     * Valida que la variante y su producto padre se encuentren activos.
+     *
+     * @param ProductoVariante $variante
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    private function validarEstadoVarianteYProducto(ProductoVariante $variante): void
+    {
+        if (!$variante->estado) {
+            throw ValidationException::withMessages([
+                'items' => "La variante {$variante->descripcion_completa} se encuentra inactiva.",
+            ]);
+        }
+
+        if (!$variante->producto || !$variante->producto->estado) {
+            $nombre = $variante->producto ? $variante->producto->nombre : 'desconocido';
+            throw ValidationException::withMessages([
+                'items' => "El producto {$nombre} se encuentra inactivo.",
+            ]);
+        }
+    }
+
+    /**
+     * Valida que la variante cuente con stock suficiente para la cantidad solicitada.
+     *
+     * @param ProductoVariante $variante
+     * @param int $cantidad
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    private function validarStock(ProductoVariante $variante, int $cantidad): void
+    {
+        if ($variante->stock_actual < $cantidad) {
+            throw ValidationException::withMessages([
+                'items' => "Stock insuficiente para {$variante->producto->nombre} (Talla: {$variante->talla}, Color: {$variante->color}). Stock actual: {$variante->stock_actual}, solicitado: {$cantidad}.",
+            ]);
+        }
+    }
+
+    /**
+     * Valida que el descuento no sea mayor que el subtotal.
+     *
+     * @param float $descuento
+     * @param float $subtotal
+     * @return void
+     *
+     * @throws ValidationException
+     */
+    private function validarDescuento(float $descuento, float $subtotal): void
+    {
+        if ($descuento > $subtotal) {
+            throw ValidationException::withMessages([
+                'descuento' => "El descuento (Bs. {$descuento}) no puede ser mayor que el subtotal (Bs. {$subtotal}).",
+            ]);
+        }
     }
 
     /**
