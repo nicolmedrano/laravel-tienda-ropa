@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Bella Girls</title>
-    <!-- Script Anti-Parpadeo de Tema (Se ejecuta inmediatamente antes del CSS) -->
+    <title>Iniciar Sesión - Bella Girls Boutique</title>
+    <!-- Script Anti-Parpadeo de Tema -->
     <script>
         (function() {
             try {
@@ -23,451 +23,609 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bella-theme.css') }}">
     
     <style>
         /* =====================================================================
-           PALETA OFICIAL BELLA GIRLS
-           Rosa Principal, Rosa Intenso, Fucsia Oscuro, Dorado, Champagne,
-           Dorado Oscuro, Rojo Vino, Blanco.
+           TEMA SAKURA & GLASSMORPHISM (Paleta Durazno, Crema, Rosa y Marfil)
            ===================================================================== */
         :root {
-            --rosa-principal: #FD7EAF;
-            --rosa-intenso: #EB5387;
-            --fucsia-oscuro: #C01548;
-            --dorado-principal: #FCDB72;
-            --dorado-champagne: #FEF1B8;
-            --dorado-oscuro: #E7B049;
-            --rojo-vino: #821110;
-            --blanco: #FFFFFF;
-
-            --grad-accion: linear-gradient(135deg, var(--fucsia-oscuro) 0%, var(--rosa-intenso) 100%);
-            --grad-accion-hover: linear-gradient(135deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
-            --grad-header: linear-gradient(90deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
-            --grad-gold: linear-gradient(135deg, var(--dorado-champagne) 0%, var(--dorado-principal) 60%, var(--dorado-oscuro) 100%);
-
-            --c-shadow-fuchsia: rgba(192, 21, 72, 0.16);
-            --c-shadow-fuchsia-sm: rgba(192, 21, 72, 0.08);
-            --c-shadow-fuchsia-lg: rgba(192, 21, 72, 0.14);
-            --c-border: #FBDCE8;
+            --peach-coral:  #FEA38E;
+            --cream:        #FFDFC3;
+            --pink:         #FBA2A8;
+            --ivory:        #F6E8D0;
+            --peach-soft:   #F3B5A0;
+            --wine-dark:    #4A1F2A;
+            --coral-btn:    #D84C38;
+            --coral-hover:  #BF3B28;
+            --grad-sakura:  linear-gradient(135deg, #FFDFC3 0%, #F3B5A0 35%, #FEA38E 70%, #FBA2A8 100%);
+            --grad-coral:   linear-gradient(135deg, #FEA38E 0%, #D84C38 100%);
+            --grad-coral-hover: linear-gradient(135deg, #D84C38 0%, #BF3B28 100%);
         }
 
-        html {
-            font-size: 14px;
+        * {
+            box-sizing: border-box;
         }
 
-        body {
+        body.login-sakura-body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: radial-gradient(circle at top right, #FFF2F6 0%, var(--dorado-champagne) 45%, var(--blanco) 100%);
+            background: var(--grad-sakura);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 24px 16px;
             margin: 0;
-            color: var(--rojo-vino);
+            position: relative;
+            overflow-x: hidden;
+            color: var(--wine-dark);
         }
 
-        .font-serif {
-            font-family: 'Playfair Display', Georgia, serif;
+        /* Formas Orgánicas Decorativas en Fondo (Estilo Sakura / Pétalos sin Copyright) */
+        .sakura-bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(55px);
+            opacity: 0.65;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatShape 16s ease-in-out infinite alternate;
         }
 
-        /* Tarjeta del Login */
-        .card-login {
-            background: var(--blanco);
-            border: 1px solid var(--c-border);
-            border-radius: 18px;
-            box-shadow: 0 12px 32px var(--c-shadow-fuchsia-lg), 0 2px 8px var(--c-shadow-fuchsia-sm);
+        .shape-1 {
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, #FBA2A8 0%, #FEA38E 100%);
+            top: -60px;
+            left: -80px;
+        }
+
+        .shape-2 {
+            width: 440px;
+            height: 440px;
+            background: radial-gradient(circle, #FFDFC3 0%, #F3B5A0 100%);
+            bottom: -90px;
+            right: -90px;
+            animation-duration: 22s;
+        }
+
+        .shape-3 {
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, #FFFFFF 0%, #FBA2A8 80%);
+            top: 40%;
+            left: 75%;
+            filter: blur(40px);
+            opacity: 0.5;
+        }
+
+        /* Ilustración SVG Floral Decorativa */
+        .floral-backdrop-svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            max-width: 95vw;
+            height: 900px;
+            max-height: 95vh;
+            opacity: 0.22;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatShape {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(25px) rotate(8deg) scale(1.05); }
+            100% { transform: translateY(-20px) rotate(-6deg) scale(0.96); }
+        }
+
+        /* TARJETA GLASSMORPHISM CENTRAL */
+        .glass-card-login {
+            background: rgba(255, 255, 255, 0.76);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1.5px solid rgba(255, 255, 255, 0.88);
+            border-radius: 30px;
+            box-shadow: 0 25px 60px rgba(74, 31, 42, 0.14), 0 6px 20px rgba(254, 163, 142, 0.22);
             width: 100%;
-            max-width: 395px;
-            overflow: hidden;
-            transition: box-shadow 0.3s ease;
+            max-width: 440px;
+            padding: 38px 34px 30px 34px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .card-login:hover {
-            box-shadow: 0 16px 40px var(--c-shadow-fuchsia), 0 3px 10px var(--c-shadow-fuchsia-sm);
+        [data-theme="dark"] .glass-card-login {
+            background: rgba(43, 20, 30, 0.80);
+            backdrop-filter: blur(26px);
+            -webkit-backdrop-filter: blur(26px);
+            border: 1.5px solid rgba(243, 181, 160, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.50);
+            color: #FFDFC3;
         }
 
         /* Encabezado */
-        .card-login-header {
-            background: linear-gradient(180deg, var(--blanco) 0%, #FFF5F8 100%);
-            border-bottom: 1px solid var(--c-border) !important;
-            padding: 18px 18px 14px 18px;
-        }
-
-        /* Logo Bella Girls */
-        .login-logo-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .login-logo {
-            width: 95px;
-            height: 95px;
+        .login-header-logo {
+            width: 82px;
+            height: 82px;
             object-fit: contain;
             border-radius: 50%;
-            box-shadow: 0 6px 18px rgba(192, 21, 72, 0.20), 0 0 0 2.5px var(--dorado-oscuro);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: var(--blanco);
+            padding: 4px;
+            background: #FFFFFF;
+            border: 2px solid var(--peach-coral);
+            box-shadow: 0 6px 16px rgba(254, 163, 142, 0.35);
+            transition: transform 0.3s ease;
         }
 
-        .login-logo:hover {
-            transform: scale(1.04) rotate(1deg);
-            box-shadow: 0 8px 22px rgba(192, 21, 72, 0.28), 0 0 0 3.5px var(--dorado-principal);
+        .login-header-logo:hover {
+            transform: scale(1.05) rotate(2deg);
         }
 
-        .brand-title {
-            color: var(--rojo-vino);
-            letter-spacing: -0.5px;
-            font-size: 1.55rem;
+        .login-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: var(--wine-dark);
+            font-size: 1.85rem;
             font-weight: 700;
+            margin: 12px 0 3px 0;
         }
 
-        .brand-subtitle {
-            color: var(--fucsia-oscuro);
-            font-size: 0.80rem;
-            font-weight: 500;
+        [data-theme="dark"] .login-title {
+            color: #FFDFC3;
         }
 
-        /* Formulario y Etiquetas */
-        .form-label {
-            color: var(--rojo-vino);
-            font-weight: 600;
-            font-size: 0.82rem;
-        }
-
-        .input-group-text {
-            background-color: #FFF5F8 !important;
-            border-color: var(--c-border) !important;
-            color: var(--fucsia-oscuro) !important;
-            font-size: 0.95rem;
-            padding: 7px 11px;
-        }
-
-        .form-control {
-            border-color: var(--c-border) !important;
-            color: var(--rojo-vino);
-            background-color: var(--blanco);
-            border-radius: 8px;
-            padding: 7px 12px;
+        .login-subtitle {
+            color: var(--muted, #7D5863);
             font-size: 0.88rem;
-            min-height: 38px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            font-weight: 400;
+            margin-bottom: 24px;
         }
 
-        .form-control:focus {
-            border-color: var(--rosa-intenso) !important;
-            box-shadow: 0 0 0 0.25rem rgba(235, 83, 135, 0.22) !important;
+        [data-theme="dark"] .login-subtitle {
+            color: #F3B5A0;
+        }
+
+        /* INPUTS CON ESTILO DE LÍNEA INFERIOR (REFERENCIA IMAGEN 1) */
+        .bottom-line-group {
+            position: relative;
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .bottom-line-group .input-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--wine-dark);
+            margin-bottom: 4px;
+        }
+
+        [data-theme="dark"] .bottom-line-group .input-label {
+            color: #F3B5A0;
+        }
+
+        .bottom-line-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon-left {
+            position: absolute;
+            left: 2px;
+            font-size: 1.15rem;
+            color: var(--peach-coral);
+            transition: color 0.25s ease;
+            pointer-events: none;
+        }
+
+        .form-control-bottom-line {
+            width: 100%;
+            background: transparent !important;
+            border: none;
+            border-bottom: 2px solid var(--peach-soft);
+            border-radius: 0;
+            padding: 9px 34px 9px 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--wine-dark);
             outline: none;
-            color: var(--rojo-vino);
+            transition: all 0.25s ease;
         }
 
-        /* Checkbox Recordar Sesión */
+        [data-theme="dark"] .form-control-bottom-line {
+            color: #FFDFC3;
+            border-bottom-color: rgba(243, 181, 160, 0.35);
+        }
+
+        .form-control-bottom-line:focus {
+            border-bottom-color: var(--coral-btn);
+            box-shadow: 0 2px 0 0 var(--coral-btn);
+        }
+
+        .form-control-bottom-line:focus ~ .input-icon-left {
+            color: var(--coral-btn);
+        }
+
+        .toggle-password-btn {
+            position: absolute;
+            right: 2px;
+            background: none;
+            border: none;
+            color: var(--peach-soft);
+            font-size: 1.1rem;
+            padding: 0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .toggle-password-btn:hover {
+            color: var(--coral-btn);
+        }
+
+        /* Error bajo el campo */
+        .invalid-feedback-bottom {
+            font-size: 0.78rem;
+            color: var(--danger-warm, #C0392B);
+            margin-top: 5px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Checkbox y Olvidaste tu contraseña */
         .form-check-input {
-            border-color: var(--rosa-principal);
+            border-color: var(--peach-soft);
             cursor: pointer;
         }
 
         .form-check-input:checked {
-            background-color: var(--fucsia-oscuro) !important;
-            border-color: var(--fucsia-oscuro) !important;
-        }
-
-        .form-check-input:focus {
-            border-color: var(--rosa-intenso) !important;
-            box-shadow: 0 0 0 0.25rem rgba(235, 83, 135, 0.22) !important;
+            background-color: var(--coral-btn);
+            border-color: var(--coral-btn);
         }
 
         .form-check-label {
-            color: var(--rojo-vino) !important;
+            font-size: 0.85rem;
+            color: var(--wine-dark);
             cursor: pointer;
-            font-size: 0.82rem;
+            user-select: none;
         }
 
-        /* Botón Iniciar Sesión */
-        .btn-login-submit {
-            background: var(--grad-accion) !important;
-            color: var(--blanco) !important;
+        [data-theme="dark"] .form-check-label {
+            color: #FFDFC3;
+        }
+
+        .forgot-link {
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: var(--coral-btn);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .forgot-link:hover {
+            color: var(--coral-hover);
+            text-decoration: underline;
+        }
+
+        /* BOTÓN PRINCIPAL REDONDEADO CON EL CORAL */
+        .btn-sakura-login {
+            background: var(--grad-coral);
+            color: #FFFFFF !important;
             border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 0.95rem;
             font-weight: 700;
-            padding: 9px 14px;
-            font-size: 0.88rem;
-            min-height: 40px;
-            border-radius: 10px;
-            transition: all 0.25s ease;
-            box-shadow: 0 3px 12px rgba(192, 21, 72, 0.22);
             letter-spacing: 0.3px;
+            box-shadow: 0 6px 18px rgba(216, 76, 56, 0.35);
+            transition: all 0.25s ease;
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
         }
 
-        .btn-login-submit:hover {
-            background: var(--grad-accion-hover) !important;
-            color: var(--blanco) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(192, 21, 72, 0.32);
+        .btn-sakura-login:hover {
+            background: var(--grad-coral-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(216, 76, 56, 0.45);
+            color: #FFFFFF;
         }
 
-        .btn-login-submit:active {
+        .btn-sakura-login:active {
             transform: translateY(0);
         }
 
-        /* =====================================================================
-           SECCIÓN: CAMBIAR RÁPIDO DE PERFIL (ACCESO INMEDIATO)
-           ===================================================================== */
-        .quick-switch-section {
-            background: transparent;
-            margin-top: 14px;
-            padding-top: 12px;
-            border-top: 1px solid var(--c-border);
+        .btn-sakura-login:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .quick-switch-title {
-            color: var(--fucsia-oscuro);
-            font-size: 0.68rem;
-            letter-spacing: 0.6px;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 9px;
-        }
-
-        /* Tarjeta de Perfil */
-        .profile-card {
-            background: var(--blanco);
-            border: 1.5px solid var(--c-border);
-            border-radius: 12px;
-            padding: 8px 10px;
-            text-align: left;
-            width: 100%;
+        /* SECCIÓN RÁPIDA DE PERFILES DE DEMO */
+        .demo-roles-divider {
             display: flex;
             align-items: center;
-            gap: 9px;
-            box-shadow: 0 2px 6px var(--c-shadow-fuchsia-sm);
-            transition: all 0.2s ease;
-            cursor: pointer;
-            text-decoration: none;
+            margin: 24px 0 14px 0;
+            color: var(--muted, #7D5863);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
         }
 
-        .profile-card:hover {
-            border-color: var(--rosa-intenso);
-            box-shadow: 0 4px 12px var(--c-shadow-fuchsia);
-            transform: translateY(-1px);
+        .demo-roles-divider::before,
+        .demo-roles-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--peach-soft);
+            opacity: 0.6;
         }
 
-        /* Estado Activo / Seleccionado */
-        .profile-card.active {
-            border: 2px solid var(--fucsia-oscuro) !important;
-            background: #FFF2F6 !important;
-            box-shadow: 0 3px 10px var(--c-shadow-fuchsia-sm);
+        .demo-roles-divider span {
+            padding: 0 10px;
         }
 
-        .profile-card-icon {
-            font-size: 1.30rem;
-            line-height: 1;
+        .btn-pill-role {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1.5px solid var(--peach-soft);
+            border-radius: 50px;
+            padding: 8px 14px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--wine-dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            gap: 6px;
+            width: 100%;
+            transition: all 0.2s ease;
+            cursor: pointer;
         }
 
-        .profile-card-info {
+        [data-theme="dark"] .btn-pill-role {
+            background: rgba(43, 20, 30, 0.6);
+            color: #FFDFC3;
+            border-color: rgba(243, 181, 160, 0.3);
+        }
+
+        .btn-pill-role:hover {
+            border-color: var(--coral-btn);
+            background: #FFFFFF;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(216, 76, 56, 0.15);
+        }
+
+        /* Botón de tema flotante */
+        .theme-toggle-floating {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            color: var(--wine-dark);
             display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(74, 31, 42, 0.1);
+            transition: all 0.2s ease;
+            z-index: 99;
         }
 
-        .profile-card-name {
-            color: var(--rojo-vino);
-            font-weight: 700;
-            font-size: 0.82rem;
-            line-height: 1.2;
-            margin-bottom: 1px;
+        .theme-toggle-floating:hover {
+            transform: scale(1.08);
+            color: var(--coral-btn);
         }
 
-        .profile-card-role {
-            color: var(--fucsia-oscuro);
-            opacity: 0.85;
-            font-size: 0.70rem;
-            line-height: 1.2;
-            white-space: nowrap;
+        [data-theme="dark"] .theme-toggle-floating {
+            background: rgba(43, 20, 30, 0.8);
+            border-color: rgba(243, 181, 160, 0.25);
+            color: #FFDFC3;
         }
 
-        /* Mensajes de Alerta Armonizados */
-        .alert-custom-info {
-            background-color: var(--dorado-champagne) !important;
-            border: 1px solid var(--dorado-oscuro) !important;
-            color: var(--rojo-vino) !important;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .alert-custom-danger {
-            background-color: #FDF0F3 !important;
-            border: 1px solid var(--rosa-intenso) !important;
-            color: var(--rojo-vino) !important;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        .card-login-footer {
-            background-color: #FFF8FA;
-            border-top: 1px solid var(--c-border) !important;
-            color: var(--rojo-vino);
-            opacity: 0.85;
-            font-size: 0.76rem;
-            padding: 14px 20px;
-        }
-
-        /* Celular muy pequeño (< 400px) */
-        @media (max-width: 400px) {
-            .profile-card {
-                padding: 10px 12px;
+        /* Responsive móvil */
+        @media (max-width: 480px) {
+            .glass-card-login {
+                padding: 28px 22px 22px 22px;
+                border-radius: 24px;
             }
-            .profile-card-icon {
-                font-size: 1.35rem;
+            .login-title {
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
-<body class="login-body">
+<body class="login-sakura-body">
+
+    <!-- Formas orgánicas decorativas en el fondo (Sakura / Durazno) -->
+    <div class="sakura-bg-shape shape-1"></div>
+    <div class="sakura-bg-shape shape-2"></div>
+    <div class="sakura-bg-shape shape-3"></div>
+
+    <!-- Ilustración SVG botánica / sakura de fondo sin derechos de autor -->
+    <svg class="floral-backdrop-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M250 50C265 140 340 160 410 180C330 210 320 280 320 370C270 300 210 320 150 400C160 310 100 270 40 250C120 220 150 160 170 80C190 150 240 180 250 50Z" fill="url(#gradFloral)" />
+        <circle cx="110" cy="120" r="35" fill="#FEA38E" fill-opacity="0.3"/>
+        <circle cx="390" cy="340" r="45" fill="#FBA2A8" fill-opacity="0.3"/>
+        <circle cx="370" cy="110" r="28" fill="#FFDFC3" fill-opacity="0.4"/>
+        <defs>
+            <linearGradient id="gradFloral" x1="40" y1="50" x2="410" y2="400" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFDFC3" stop-opacity="0.6"/>
+                <stop offset="0.5" stop-color="#FEA38E" stop-opacity="0.4"/>
+                <stop offset="1" stop-color="#FBA2A8" stop-opacity="0.5"/>
+            </linearGradient>
+        </defs>
+    </svg>
 
     <!-- Botón Flotante para Alternar Modo Claro / Nocturno -->
-    <button type="button" class="theme-toggle-btn theme-toggle-login" aria-label="Cambiar tema" title="Cambiar tema">
+    <button type="button" class="theme-toggle-floating theme-toggle-btn" aria-label="Cambiar tema" title="Cambiar tema">
         <i class="bi bi-sun-fill theme-icon-sun"></i>
         <i class="bi bi-moon-stars-fill theme-icon-moon"></i>
     </button>
 
-    <div class="card-login">
-        <!-- Encabezado de Marca con Logo Bella Girls -->
-        <div class="text-center card-login-header">
-            <div class="login-logo-container">
-                <img src="{{ asset('images/logo-bella-girls.png') }}" alt="Logo Bella Girls" class="login-logo">
-            </div>
-            <h2 class="font-serif fw-bold mb-1 brand-title">Bella Girls</h2>
-            <p class="brand-subtitle mb-0">Sistema de Gestión para Tienda de Ropa</p>
+    <!-- TARJETA CENTRAL GLASSMORPHISM -->
+    <div class="glass-card-login text-center">
+        <!-- Logo y Nombre de Tienda -->
+        <div>
+            <img src="{{ asset('images/logo-bella-girls.png') }}" alt="Bella Girls Logo" class="login-header-logo">
+            <h1 class="login-title">Iniciar sesión</h1>
+            <p class="login-subtitle">Bella Girls &bull; Panel de Gestión Boutique</p>
         </div>
 
-        <div class="p-3 p-sm-4">
-            <!-- Mensajes de Notificación -->
-            @if($errors->any())
-                <div class="alert alert-custom-danger py-2 px-3 mb-3 border d-flex align-items-center gap-2">
-                    <i class="bi bi-exclamation-circle-fill"></i>
-                    <span>{{ $errors->first() }}</span>
-                </div>
-            @endif
+        <!-- Alerta de sesión o error general -->
+        @if(session('info'))
+            <div class="alert alert-info py-2 px-3 mb-3 border-0 rounded-3 small text-start d-flex align-items-center gap-2">
+                <i class="bi bi-info-circle-fill text-primary"></i>
+                <span>{{ session('info') }}</span>
+            </div>
+        @endif
 
-            @if(session('info'))
-                <div class="alert alert-custom-info py-2 px-3 mb-3 border d-flex align-items-center gap-2">
-                    <i class="bi bi-info-circle-fill"></i>
-                    <span>{{ session('info') }}</span>
-                </div>
-            @endif
+        @if(isset($errors) && $errors->has('usuario') && !old('usuario'))
+            <div class="alert alert-danger py-2 px-3 mb-3 border-0 rounded-3 small text-start d-flex align-items-center gap-2">
+                <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+                <span>{{ $errors->first('usuario') }}</span>
+            </div>
+        @endif
 
-            <!-- Formulario de Autenticación -->
-            <form action="{{ route('login') }}" method="POST" id="formLogin">
-                @csrf
-                <div class="mb-3">
-                    <label for="inputUsuario" class="form-label small mb-1">Usuario</label>
-                    <div class="input-group">
-                        <span class="input-group-text border-end-0"><i class="bi bi-person"></i></span>
-                        <input type="text" name="usuario" id="inputUsuario" class="form-control border-start-0" placeholder="Ingresa tu usuario" value="{{ old('usuario') }}" required autofocus>
+        <!-- Formulario -->
+        <form action="{{ route('login') }}" method="POST" id="formLogin">
+            @csrf
+
+            <!-- Campo 1: Usuario con línea inferior -->
+            <div class="bottom-line-group">
+                <label for="inputUsuario" class="input-label">Usuario</label>
+                <div class="bottom-line-wrapper">
+                    <i class="bi bi-person input-icon-left"></i>
+                    <input type="text" name="usuario" id="inputUsuario" class="form-control-bottom-line" placeholder="ej. admin o vendedor" value="{{ old('usuario') }}" required autofocus autocomplete="username">
+                </div>
+                @error('usuario')
+                    <div class="invalid-feedback-bottom">
+                        <i class="bi bi-exclamation-circle-fill"></i> {{ $message }}
                     </div>
-                </div>
+                @enderror
+            </div>
 
-                <div class="mb-3">
-                    <label for="inputPassword" class="form-label small mb-1">Contraseña</label>
-                    <div class="input-group">
-                        <span class="input-group-text border-end-0"><i class="bi bi-lock"></i></span>
-                        <input type="password" name="password" id="inputPassword" class="form-control border-start-0" placeholder="••••••••" required>
+            <!-- Campo 2: Contraseña con línea inferior y botón toggle ver/ocultar -->
+            <div class="bottom-line-group">
+                <label for="inputPassword" class="input-label">Contraseña</label>
+                <div class="bottom-line-wrapper">
+                    <i class="bi bi-lock input-icon-left"></i>
+                    <input type="password" name="password" id="inputPassword" class="form-control-bottom-line" placeholder="••••••••" required autocomplete="current-password">
+                    <button type="button" class="toggle-password-btn" id="btnTogglePassword" aria-label="Mostrar u ocultar contraseña">
+                        <i class="bi bi-eye" id="iconoEye"></i>
+                    </button>
+                </div>
+                @error('password')
+                    <div class="invalid-feedback-bottom">
+                        <i class="bi bi-exclamation-circle-fill"></i> {{ $message }}
                     </div>
-                </div>
+                @enderror
+            </div>
 
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" checked>
-                        <label class="form-check-label small" for="remember">Recordar sesión</label>
-                    </div>
+            <!-- Recordarme & Olvidaste tu contraseña -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-check text-start">
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember" checked>
+                    <label class="form-check-label" for="remember">Recordarme</label>
                 </div>
+                <a href="#" onclick="alert('Para restablecer tu contraseña o crear una nueva cuenta, comunícate con la administración de Bella Girls.'); return false;" class="forgot-link">
+                    ¿Olvidaste tu contraseña?
+                </a>
+            </div>
 
-                <button type="submit" id="btnSubmitLogin" class="btn btn-login-submit w-100">
-                    <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+            <!-- Botón principal redondeado -->
+            <button type="submit" id="btnSubmitLogin" class="btn btn-sakura-login">
+                <span class="spinner-border spinner-border-sm" id="loginSpinner" style="display: none;" role="status"></span>
+                <span id="textoBtnLogin">Ingresar al Sistema</span>
+                <i class="bi bi-arrow-right" id="iconoArrowLogin"></i>
+            </button>
+        </form>
+
+        <!-- Acceso Rápido para Pruebas / Demostración -->
+        <div class="demo-roles-divider">
+            <span>Acceso rápido</span>
+        </div>
+
+        <div class="row g-2">
+            <div class="col-6">
+                <button type="button" class="btn-pill-role" onclick="autoCompletarCredenciales('admin', 'admin123')">
+                    <span>👑</span> <span>Admin</span>
                 </button>
-            </form>
-
-            <!-- Sección: Cambiar Rápido de Perfil (Acceso Inmediato) -->
-            <div class="quick-switch-section">
-                <div class="quick-switch-title">
-                    CAMBIAR RÁPIDO DE PERFIL (ACCESO INMEDIATO)
-                </div>
-
-                <div class="row g-2">
-                    <!-- Tarjeta 1: Administrador -->
-                    <div class="col-12 col-sm-6">
-                        <button type="button" class="profile-card" data-user="admin" data-pass="admin123" title="Perfil Administrador">
-                            <span class="profile-card-icon">👑</span>
-                            <div class="profile-card-info">
-                                <span class="profile-card-name">Administrador</span>
-                                <span class="profile-card-role">Acceso total</span>
-                            </div>
-                        </button>
-                    </div>
-
-                    <!-- Tarjeta 2: Vendedor -->
-                    <div class="col-12 col-sm-6">
-                        <button type="button" class="profile-card" data-user="vendedor" data-pass="vendedor123" title="Perfil Vendedor">
-                            <span class="profile-card-icon">🛍️</span>
-                            <div class="profile-card-info">
-                                <span class="profile-card-name">Vendedor</span>
-                                <span class="profile-card-role">Ventas y clientes</span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn-pill-role" onclick="autoCompletarCredenciales('vendedor', 'vendedor123')">
+                    <span>🛍️</span> <span>Ventas</span>
+                </button>
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="text-center card-login-footer">
-            Bella Girls &copy; 2026 &bull; Sistema de Gestión
+        <div class="mt-4 pt-2 text-center text-muted" style="font-size: 0.76rem;">
+            &copy; {{ date('Y') }} Bella Girls &bull; Todos los derechos reservados
         </div>
     </div>
 
-    <!-- Script de selección y autocompletado -->
+    <!-- Scripts de Interacción: Toggle Password, Spinner y Autocompletar -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle de mostrar/ocultar contraseña
+            const btnToggle = document.getElementById('btnTogglePassword');
+            const passInput = document.getElementById('inputPassword');
+            const eyeIcon = document.getElementById('iconoEye');
+
+            if (btnToggle && passInput) {
+                btnToggle.addEventListener('click', function () {
+                    const isPassword = passInput.type === 'password';
+                    passInput.type = isPassword ? 'text' : 'password';
+                    eyeIcon.className = isPassword ? 'bi bi-eye-slash' : 'bi bi-eye';
+                });
+            }
+
+            // Spinner en el botón de submit
+            const form = document.getElementById('formLogin');
+            const btnSubmit = document.getElementById('btnSubmitLogin');
+            const spinner = document.getElementById('loginSpinner');
+            const arrow = document.getElementById('iconoArrowLogin');
+            const textoBtn = document.getElementById('textoBtnLogin');
+
+            if (form && btnSubmit) {
+                form.addEventListener('submit', function () {
+                    btnSubmit.disabled = true;
+                    if (spinner) spinner.style.display = 'inline-block';
+                    if (arrow) arrow.style.display = 'none';
+                    if (textoBtn) textoBtn.textContent = 'Verificando...';
+                });
+            }
+        });
+
+        // Autocompletar credenciales de demostración
+        function autoCompletarCredenciales(usuario, password) {
             const userInput = document.getElementById('inputUsuario');
             const passInput = document.getElementById('inputPassword');
             const btnSubmit = document.getElementById('btnSubmitLogin');
-            const cards = document.querySelectorAll('.profile-card');
 
-            cards.forEach(function(card) {
-                card.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    // Marcar tarjeta activa y desmarcar las demás
-                    cards.forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Rellenar usuario y contraseña desde data-*
-                    const user = this.getAttribute('data-user');
-                    const pass = this.getAttribute('data-pass');
-
-                    if (userInput && passInput) {
-                        userInput.value = user;
-                        passInput.value = pass;
-
-                        // Efecto de enfoque hacia el botón de iniciar sesión
-                        if (btnSubmit) {
-                            btnSubmit.focus();
-                        }
-                    }
-                });
-            });
-        });
+            if (userInput && passInput) {
+                userInput.value = usuario;
+                passInput.value = password;
+                btnSubmit.focus();
+            }
+        }
     </script>
     <script src="{{ asset('js/boutique.js') }}"></script>
 </body>
