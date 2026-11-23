@@ -162,44 +162,40 @@
                     <!-- Paleta Oficial Bella Girls (Colores Centralizados) -->
                     <div class="p-2 mb-3 rounded" style="background-color: var(--color-bg-subtle); border: 1px solid var(--color-border);">
                         <div class="d-flex justify-content-between align-items-center mb-1">
-                            <small class="fw-bold text-uppercase" style="font-size: 0.72rem; color: var(--fucsia-oscuro); letter-spacing: 0.5px;">
+                            <small class="fw-bold text-uppercase" style="font-size: 0.72rem; color: var(--coral-contrast, #D84C38); letter-spacing: 0.5px;">
                                 <i class="bi bi-palette-fill me-1"></i> Paleta Oficial Bella Girls (clic para rellenar color):
                             </small>
-                            <small class="text-muted" style="font-size: 0.7rem;">7 tonos oficiales</small>
+                            <small class="text-muted" style="font-size: 0.7rem;">Tonos oficiales</small>
                         </div>
                         <div class="d-flex flex-wrap gap-1">
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--rosa-principal, #FD7EAF); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rosa principal (#FD7EAF)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--rojo-vino); display: inline-block;"></span> Rosa principal
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--peach-coral, #FEA38E); color: var(--wine-dark, #4A1F2A); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Coral Durazno (#FEA38E)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--coral-contrast, #D84C38); display: inline-block;"></span> Coral Durazno
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--rosa-intenso, #EB5387); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rosa intenso (#EB5387)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> Rosa intenso
+                            <button type="button" class="btn btn-sm py-1 px-2 border fw-bold d-flex align-items-center gap-1" style="background-color: var(--cream, #FFDFC3); color: var(--wine-dark, #4A1F2A); border-color: var(--peach-soft, #F3B5A0) !important; border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Crema (#FFDFC3)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--peach-soft, #F3B5A0); display: inline-block;"></span> Crema
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--fucsia-oscuro, #C01548); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Fucsia oscuro (#C01548)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> Fucsia oscuro
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold d-flex align-items-center gap-1" style="background-color: var(--pink, #FBA2A8); color: var(--wine-dark, #4A1F2A); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rosa (#FBA2A8)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> Rosa
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--dorado-principal, #FCDB72); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Dorado (#FCDB72)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--rojo-vino); display: inline-block;"></span> Dorado
+                            <button type="button" class="btn btn-sm py-1 px-2 border fw-bold d-flex align-items-center gap-1" style="background-color: var(--ivory, #F6E8D0); color: var(--wine-dark, #4A1F2A); border-color: var(--peach-soft, #F3B5A0) !important; border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Marfil (#F6E8D0)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cream, #FFDFC3); display: inline-block;"></span> Marfil
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--dorado-champagne, #FEF1B8); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Champagne (#FEF1B8)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--dorado-oscuro); display: inline-block;"></span> Champagne
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--peach-soft, #F3B5A0); color: var(--wine-dark, #4A1F2A); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Durazno Suave (#F3B5A0)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--peach-coral, #FEA38E); display: inline-block;"></span> Durazno Suave
                             </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-bold d-flex align-items-center gap-1" style="background-color: var(--dorado-oscuro, #E7B049); color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Dorado oscuro (#E7B049)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: #fff; display: inline-block;"></span> Dorado oscuro
-                            </button>
-                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--rojo-vino, #821110); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Rojo vino (#821110)')">
-                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--dorado-principal); display: inline-block;"></span> Rojo vino
+                            <button type="button" class="btn btn-sm py-1 px-2 border-0 fw-semibold text-white d-flex align-items-center gap-1" style="background-color: var(--wine-dark, #4A1F2A); border-radius: 6px; font-size: 0.74rem;" onclick="asignarColor('Vino Oscuro (#4A1F2A)')">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--peach-coral, #FEA38E); display: inline-block;"></span> Vino Oscuro
                             </button>
                         </div>
                     </div>
 
                     <datalist id="coloresBoutique">
-                        <option value="Rosa principal (#FD7EAF)"></option>
-                        <option value="Rosa intenso (#EB5387)"></option>
-                        <option value="Fucsia oscuro (#C01548)"></option>
-                        <option value="Dorado (#FCDB72)"></option>
-                        <option value="Champagne (#FEF1B8)"></option>
-                        <option value="Dorado oscuro (#E7B049)"></option>
-                        <option value="Rojo vino (#821110)"></option>
+                        <option value="Coral Durazno (#FEA38E)"></option>
+                        <option value="Crema (#FFDFC3)"></option>
+                        <option value="Rosa (#FBA2A8)"></option>
+                        <option value="Marfil (#F6E8D0)"></option>
+                        <option value="Durazno Suave (#F3B5A0)"></option>
+                        <option value="Vino Oscuro (#4A1F2A)"></option>
                         <option value="Negro Clásico"></option>
                         <option value="Blanco Puro"></option>
                         <option value="Beige Natural"></option>
@@ -219,7 +215,7 @@
                                 </select>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="variantes[0][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Rosa principal (#FD7EAF)" required>
+                                <input type="text" name="variantes[0][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Coral Durazno (#FEA38E)" required>
                             </div>
                             <div class="col-4">
                                 <div class="input-group input-group-sm">
@@ -247,7 +243,7 @@
                                 </select>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="variantes[1][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Dorado (#FCDB72)" required>
+                                <input type="text" name="variantes[1][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Crema (#FFDFC3)" required>
                             </div>
                             <div class="col-4">
                                 <div class="input-group input-group-sm">
@@ -381,7 +377,7 @@
                 </select>
             </div>
             <div class="col-4">
-                <input type="text" name="variantes[${contadorVariantes}][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Fucsia oscuro (#C01548)" required>
+                <input type="text" name="variantes[${contadorVariantes}][color]" list="coloresBoutique" class="form-control form-select-sm" placeholder="Color" value="Rosa (#FBA2A8)" required>
             </div>
             <div class="col-4">
                 <div class="input-group input-group-sm">

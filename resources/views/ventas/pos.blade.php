@@ -103,10 +103,12 @@
                     <!-- 1. Módulo Cliente: Selección de Cliente -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold small mb-1">Cliente Asociado</label>
-                        <select name="id_cliente" class="form-select form-select-sm">
+                        <select name="id_cliente" id="selectClientePos" class="form-select form-select-sm">
                             <option value="">Cliente Ocasional / Mostrador</option>
                             @foreach($clientes as $cli)
-                                <option value="{{ $cli->id_cliente }}">{{ $cli->nombre_completo }} ({{ $cli->telefono ?? 'Sin tel.' }})</option>
+                                <option value="{{ $cli->id_cliente }}" {{ (request('cliente_id') == $cli->id_cliente || request('id_cliente') == $cli->id_cliente || old('id_cliente') == $cli->id_cliente) ? 'selected' : '' }}>
+                                    {{ $cli->nombre_completo }} ({{ $cli->telefono ?? 'Sin tel.' }})
+                                </option>
                             @endforeach
                         </select>
                     </div>

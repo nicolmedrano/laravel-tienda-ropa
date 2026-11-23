@@ -1,7 +1,8 @@
 /* ==========================================================================
-   Bella Girls - Tema Oficial (Claro / Nocturno)
+   Bella Girls - Tema Oficial Rediseñado (Paleta Durazno, Crema, Rosa y Marfil)
    Archivo centralizado del tema: bella-theme.css
-   Paleta: Vino, Rosa, Dorado, Champagne, Blanco.
+   Paleta: Peach-Coral (#FEA38E), Cream (#FFDFC3), Pink (#FBA2A8), 
+           Ivory (#F6E8D0), Peach-Soft (#F3B5A0), Wine-Dark (#4A1F2A), Coral-Contrast (#D84C38).
    Soporte Completo para data-theme="light" | "dark" y prefers-color-scheme.
    ========================================================================== */
 
@@ -11,64 +12,98 @@ html {
 }
 
 /* ==========================================================================
-   1. VARIABLES DE TEMA (CLARO Y NOCTURNO)
+   1. VARIABLES DE TEMA Y TOKENS OBLIGATORIOS (CLARO Y NOCTURNO)
    ========================================================================== */
+
+:root {
+    /* Paleta Obligatoria */
+    --peach-coral:  #FEA38E;  /* Acento principal, botones, elementos activos */
+    --cream:        #FFDFC3;  /* Fondos suaves, tarjetas, hover */
+    --pink:         #FBA2A8;  /* Acento secundario, badges, gráficos */
+    --ivory:        #F6E8D0;  /* Fondo general de la app */
+    --peach-soft:   #F3B5A0;  /* Bordes, detalles, estados hover */
+
+    /* Colores de Apoyo para Accesibilidad y Contraste AA (4.5:1+) */
+    --wine-dark:      #4A1F2A;  /* Texto principal y títulos con alto contraste */
+    --wine-darker:    #36121D;  /* Fondo profundo para sidebar */
+    --coral-contrast: #D84C38;  /* Coral más intenso para botones con texto blanco */
+    --coral-hover:    #BE3C29;  /* Hover de botones coral */
+    
+    /* Estados Semánticos en Temperatura Cálida */
+    --success-warm:   #2E7D52;
+    --success-bg:     #E2F5E9;
+    --danger-warm:    #C0392B;
+    --danger-bg:      #FDEDEC;
+    --warning-warm:   #B87333;
+    --warning-bg:     #FFF1E0;
+
+    /* Gradientes Oficiales del Sistema */
+    --grad-coral:     linear-gradient(135deg, var(--peach-coral) 0%, var(--coral-contrast) 100%);
+    --grad-coral-hover: linear-gradient(135deg, var(--coral-contrast) 0%, var(--coral-hover) 100%);
+    --grad-warm:      linear-gradient(135deg, var(--cream) 0%, var(--peach-soft) 50%, var(--peach-coral) 100%);
+    --grad-sakura:    linear-gradient(135deg, #FFDFC3 0%, #F3B5A0 40%, #FEA38E 70%, #FBA2A8 100%);
+    --grad-sidebar:   linear-gradient(180deg, #4A1F2A 0%, #36121D 100%);
+}
 
 /* Tema claro (por defecto, en :root y en [data-theme="light"]) */
 :root,
 [data-theme="light"] {
-    --cream: #FFF6F1;
+    --app-bg: #F6E8D0;
     --card: #FFFFFF;
-    --ink: #2A0A16;
-    --muted: #6B4A55;
-    --line: #F1D5DC;
-    --okbg: #DDF5E8;
-    --ok: #0F7A4B;
-    --warnbg: #FFE6B8;
-    --warn: #8A4B00;
-    --badbg: #FFD9DE;
-    --bad: #A8071A;
-    --input-icon-bg: #FFE3EC;
-    --title: #5E0B26;
-    --shadow: rgba(94, 11, 38, 0.08);
+    --ink: #4A1F2A;
+    --muted: #7D5863;
+    --line: #F3B5A0;
+    --okbg: #E2F5E9;
+    --ok: #2E7D52;
+    --warnbg: #FFF1E0;
+    --warn: #B87333;
+    --badbg: #FDEDEC;
+    --bad: #C0392B;
+    --input-icon-bg: #FFDFC3;
+    --title: #4A1F2A;
+    --shadow: rgba(74, 31, 42, 0.08);
 
-    /* Variables del Menú Lateral (Sidebar) - Tema Claro */
+    /* Variables del Menú Lateral (Sidebar) - Modo Claro con Paleta Durazno, Crema y Rosa */
     --side-bg: #FFFFFF;
-    --side-text: #5E0B26;
-    --side-text-muted: #8A5A6A;
-    --side-section: #B0345E;
-    --side-border: #F1D5DC;
-    --side-hover: #FFE3EC;
-    --side-card: #FFF1F5;
+    --side-text: #4A1F2A;
+    --side-text-muted: #7D5863;
+    --side-section: #D84C38;
+    --side-border: #F3B5A0;
+    --side-hover: #FFDFC3;
+    --side-card: #FFF8F2;
+    --side-active-bg: linear-gradient(135deg, #FEA38E 0%, #D84C38 100%);
+    --side-active-border: #D84C38;
 
     color-scheme: light;
 }
 
 /* Tema nocturno ([data-theme="dark"]) */
 [data-theme="dark"] {
-    --cream: #1B0710;
-    --card: #2A0E1A;
-    --ink: #FDEFF3;
+    --app-bg: #1D0B12;
+    --card: #2B141E;
+    --ink: #FFDFC3;
     --muted: #D9B3C0;
-    --line: #4A1A2C;
-    --okbg: #0E3B27;
+    --line: #4E2533;
+    --okbg: #133A26;
     --ok: #7BE0AE;
-    --warnbg: #4A3205;
+    --warnbg: #4A2E12;
     --warn: #FFD68A;
-    --badbg: #4F121C;
+    --badbg: #4A161E;
     --bad: #FF9AA8;
-    --input-icon-bg: #4A1A2C;
-    --title: #FFD98A;
-    --shadow: rgba(0, 0, 0, 0.40);
+    --input-icon-bg: #3D1D28;
+    --title: #FFDFC3;
+    --shadow: rgba(0, 0, 0, 0.45);
 
     /* Variables del Menú Lateral (Sidebar) - Tema Nocturno */
-    --side-bg: linear-gradient(180deg, #2A0612, #1B0710);
-    --side-text: #FDEFF3;
+    --side-bg: linear-gradient(180deg, #240C15 0%, #15060C 100%);
+    --side-text: #FFDFC3;
     --side-text-muted: #D9B3C0;
-    --side-section: #FFB7CC;
-    --side-border: #4A1A2C;
-    --side-hover: #4A1A2C;
-    --side-card: #3A0F20;
+    --side-section: #FEA38E;
+    --side-border: #4E2533;
+    --side-hover: rgba(254, 163, 142, 0.14);
+    --side-card: #2F121C;
+    --side-active-bg: rgba(254, 163, 142, 0.20);
+    --side-active-border: #FEA38E;
 
     color-scheme: dark;
 }
@@ -76,29 +111,30 @@ html {
 /* Si no hay data-theme guardado, aplicar las variables oscuras con prefers-color-scheme */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-        --cream: #1B0710;
-        --card: #2A0E1A;
-        --ink: #FDEFF3;
+        --app-bg: #1D0B12;
+        --card: #2B141E;
+        --ink: #FFDFC3;
         --muted: #D9B3C0;
-        --line: #4A1A2C;
-        --okbg: #0E3B27;
+        --line: #4E2533;
+        --okbg: #133A26;
         --ok: #7BE0AE;
-        --warnbg: #4A3205;
+        --warnbg: #4A2E12;
         --warn: #FFD68A;
-        --badbg: #4F121C;
+        --badbg: #4A161E;
         --bad: #FF9AA8;
-        --input-icon-bg: #4A1A2C;
-        --title: #FFD98A;
-        --shadow: rgba(0, 0, 0, 0.40);
+        --input-icon-bg: #3D1D28;
+        --title: #FFDFC3;
+        --shadow: rgba(0, 0, 0, 0.45);
 
-        /* Variables del Menú Lateral (Sidebar) - Tema Nocturno */
-        --side-bg: linear-gradient(180deg, #2A0612, #1B0710);
-        --side-text: #FDEFF3;
+        --side-bg: linear-gradient(180deg, #240C15 0%, #15060C 100%);
+        --side-text: #FFDFC3;
         --side-text-muted: #D9B3C0;
-        --side-section: #FFB7CC;
-        --side-border: #4A1A2C;
-        --side-hover: #4A1A2C;
-        --side-card: #3A0F20;
+        --side-section: #FEA38E;
+        --side-border: #4E2533;
+        --side-hover: rgba(254, 163, 142, 0.14);
+        --side-card: #2F121C;
+        --side-active-bg: rgba(254, 163, 142, 0.20);
+        --side-active-border: #FEA38E;
 
         color-scheme: dark;
     }
@@ -108,45 +144,45 @@ html {
    2. VARIABLES DE MARCA Y TOKENS CONSTANTES (NO CAMBIAN)
    ========================================================================== */
 :root {
-    --wine: #821110;
-    --wine2: #5E0B26;
-    --rose: #EB5387;
-    --pink: #FD7EAF;
-    --gold: #FCDB72;
-    --gold-champagne: #FEF1B8;
-    --gold-dark: #E7B049;
+    --wine: var(--wine-dark);
+    --wine2: var(--wine-darker);
+    --rose: var(--peach-coral);
+    --pink: #FBA2A8;
+    --gold: var(--cream);
+    --gold-champagne: var(--ivory);
+    --gold-dark: var(--peach-soft);
 
     /* Compatibilidad con variables previas */
-    --rosa-principal: var(--pink);
-    --rosa-intenso: var(--rose);
-    --fucsia-oscuro: #C01548;
-    --dorado-principal: var(--gold);
-    --dorado-champagne: var(--gold-champagne);
-    --dorado-oscuro: var(--gold-dark);
-    --rojo-vino: var(--wine);
+    --rosa-principal: var(--peach-coral);
+    --rosa-intenso: var(--coral-contrast);
+    --fucsia-oscuro: var(--coral-contrast);
+    --dorado-principal: var(--cream);
+    --dorado-champagne: var(--ivory);
+    --dorado-oscuro: var(--peach-soft);
+    --rojo-vino: var(--wine-dark);
     --blanco: #FFFFFF;
 
-    /* Gradientes oficiales */
-    --grad-accion: linear-gradient(135deg, #C01548 0%, var(--rose) 100%);
-    --grad-accion-hover: linear-gradient(135deg, var(--wine) 0%, #C01548 100%);
-    --grad-header: linear-gradient(90deg, var(--wine) 0%, #C01548 100%);
-    --grad-gold: linear-gradient(135deg, var(--gold-champagne) 0%, var(--gold) 60%, var(--gold-dark) 100%);
+    /* Gradientes oficiales actualizados con Paleta Coral y Durazno */
+    --grad-accion: var(--grad-coral);
+    --grad-accion-hover: var(--grad-coral-hover);
+    --grad-header: #FFFFFF;
+    --grad-gold: linear-gradient(135deg, var(--ivory) 0%, var(--cream) 60%, var(--peach-soft) 100%);
     --grad-suave: linear-gradient(180deg, var(--card) 0%, var(--cream) 100%);
 
     /* Mapeos semánticos dinámicos hacia variables de tema */
-    --color-primary: #C01548;
-    --color-primary-hover: var(--wine);
-    --color-secondary: var(--rose);
-    --color-accent: var(--gold);
-    --color-accent-dark: var(--gold-dark);
+    --color-primary: var(--coral-contrast);
+    --color-primary-hover: var(--coral-hover);
+    --color-secondary: var(--peach-coral);
+    --color-accent: var(--peach-soft);
+    --color-accent-dark: var(--coral-contrast);
     --color-bg-light: var(--cream);
-    --color-bg-app: var(--cream);
+    --color-bg-app: var(--ivory);
     --color-bg-card: var(--card);
     --color-bg-subtle: var(--input-icon-bg);
     --color-border: var(--line);
     --color-border-strong: var(--pink);
-    --color-border-focus: var(--rose);
-    --color-border-gold: var(--gold-dark);
+    --color-border-focus: var(--coral-contrast);
+    --color-border-gold: var(--peach-soft);
     --color-text-main: var(--ink);
     --color-text-muted: var(--muted);
     --color-text-dark: var(--ink);
@@ -265,7 +301,7 @@ body,
    6. ESTILOS BASE Y TIPOGRAFÍA
    ========================================================================== */
 body {
-    background-color: var(--cream) !important;
+    background-color: var(--app-bg, #F6E8D0) !important;
     color: var(--ink) !important;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: var(--font-base);
@@ -452,8 +488,8 @@ a:hover {
    ========================================================================== */
 .top-navbar {
     height: var(--top-navbar-height) !important;
-    background: var(--grad-header) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: var(--card, #FFFFFF) !important;
+    border-bottom: 1.5px solid var(--peach-soft, #F3B5A0) !important;
     padding: 0 18px;
     display: flex;
     align-items: center;
@@ -461,20 +497,36 @@ a:hover {
     position: sticky;
     top: 0;
     z-index: 999;
-    box-shadow: 0 2px 10px rgba(130, 17, 16, 0.20);
-    color: #FFFFFF !important;
+    box-shadow: 0 2px 10px rgba(74, 31, 42, 0.05);
+    color: var(--ink, #4A1F2A) !important;
+}
+
+[data-theme="dark"] .top-navbar {
+    background: #2B141E !important;
+    border-bottom: 1px solid #4E2533 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.40);
+    color: #FFDFC3 !important;
 }
 
 .top-navbar .navbar-brand-text,
 .top-navbar strong {
-    color: #FFFFFF !important;
+    color: var(--ink, #4A1F2A) !important;
     font-weight: 700;
     font-size: 0.88rem;
 }
 
+[data-theme="dark"] .top-navbar .navbar-brand-text,
+[data-theme="dark"] .top-navbar strong {
+    color: #FFDFC3 !important;
+}
+
 .top-navbar .navbar-subtext {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: var(--muted, #7D5863) !important;
     font-size: 0.88rem;
+}
+
+[data-theme="dark"] .top-navbar .navbar-subtext {
+    color: #D9B3C0 !important;
 }
 
 /* ==========================================================================
@@ -486,8 +538,8 @@ a:hover {
     min-width: 42px;
     min-height: 42px;
     border-radius: 12px;
-    background: var(--side-hover, rgba(216, 27, 96, 0.15));
-    border: 1px solid var(--side-border, #F1D5DC);
+    background: rgba(254, 163, 142, 0.15);
+    border: 1px solid var(--peach-soft, #F3B5A0);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -500,9 +552,9 @@ a:hover {
 }
 
 .sidebar-toggle-btn:hover {
-    background: rgba(216, 27, 96, 0.22);
+    background: rgba(254, 163, 142, 0.28);
     transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(216, 27, 96, 0.18);
+    box-shadow: 0 3px 8px rgba(216, 76, 56, 0.15);
 }
 
 .sidebar-toggle-btn:active {
@@ -510,12 +562,17 @@ a:hover {
 }
 
 .sidebar-toggle-btn:focus-visible {
-    outline: 2px solid #D81B60 !important;
+    outline: 2px solid var(--coral-contrast, #D84C38) !important;
     outline-offset: 2px !important;
 }
 
+[data-theme="dark"] .sidebar-toggle-btn {
+    background: #3D1722;
+    border-color: #4E2533;
+}
+
 [data-theme="dark"] .sidebar-toggle-btn:focus-visible {
-    outline-color: #FF5C93 !important;
+    outline-color: #FEA38E !important;
 }
 
 /* Icono: 3 rayas horizontales de 20px x 2.5px con 5px de separación */
@@ -532,34 +589,43 @@ a:hover {
 .hamburger-line {
     width: 20px;
     height: 2.5px;
-    background-color: #D81B60;
+    background-color: var(--coral-contrast, #D84C38);
     border-radius: 2px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, background-color 0.25s ease;
     display: block;
 }
 
 [data-theme="dark"] .hamburger-line {
-    background-color: #FF5C93;
+    background-color: var(--peach-coral, #FEA38E);
 }
 
-/* Botón en la Barra Superior (.top-navbar con degradado vino) */
+/* Botón en la Barra Superior */
 .top-navbar .sidebar-toggle-btn {
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(254, 163, 142, 0.15);
+    border: 1px solid var(--peach-soft, #F3B5A0);
 }
 
 .top-navbar .sidebar-toggle-btn .hamburger-line {
-    background-color: #FFFFFF;
+    background-color: var(--coral-contrast, #D84C38);
+}
+
+[data-theme="dark"] .top-navbar .sidebar-toggle-btn {
+    background: #3D1722;
+    border-color: #4E2533;
+}
+
+[data-theme="dark"] .top-navbar .sidebar-toggle-btn .hamburger-line {
+    background-color: var(--peach-coral, #FEA38E);
 }
 
 .top-navbar .sidebar-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.28);
-    border-color: rgba(255, 255, 255, 0.60);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    background: rgba(254, 163, 142, 0.28);
+    border-color: var(--coral-contrast, #D84C38);
+    box-shadow: 0 3px 10px rgba(74, 31, 42, 0.12);
 }
 
 .top-navbar .sidebar-toggle-btn:focus-visible {
-    outline-color: #FFFFFF !important;
+    outline-color: var(--coral-contrast, #D84C38) !important;
 }
 
 /* Animación a X en móvil cuando el sidebar está abierto */
@@ -647,12 +713,12 @@ a:hover {
 }
 
 [data-theme="dark"] .sidebar-brand-title {
-    color: #F2B84B !important;
+    color: var(--peach-coral, #FEA38E) !important;
 }
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .sidebar-brand-title {
-        color: #F2B84B !important;
+        color: var(--peach-coral, #FEA38E) !important;
     }
 }
 
@@ -742,13 +808,13 @@ a:hover {
     box-shadow: none !important;
 }
 
-/* Ítem ACTIVO: degradado linear-gradient(135deg, #D81B60, #FF5C93) con texto blanco, igual en ambos modos */
+/* Ítem ACTIVO: degradado coral oficial con texto blanco */
 .nav-link-custom.active {
     color: #FFFFFF !important;
-    background: linear-gradient(135deg, #D81B60, #FF5C93) !important;
+    background: linear-gradient(135deg, #FEA38E, #D84C38) !important;
     font-weight: 700 !important;
-    border-left: 3px solid #D81B60 !important;
-    box-shadow: 0 4px 14px rgba(216, 27, 96, 0.35) !important;
+    border-left: 3px solid #D84C38 !important;
+    box-shadow: 0 4px 14px rgba(216, 76, 56, 0.30) !important;
 }
 
 .nav-link-custom.active i {
@@ -757,7 +823,7 @@ a:hover {
 
 .nav-link-custom.active:hover {
     color: #FFFFFF !important;
-    background: linear-gradient(135deg, #D81B60, #FF5C93) !important;
+    background: linear-gradient(135deg, #FEA38E, #D84C38) !important;
 }
 
 /* Tarjeta de usuario al fondo */
@@ -774,14 +840,14 @@ a:hover {
     width: var(--sidebar-user-avatar-size);
     height: var(--sidebar-user-avatar-size);
     border-radius: 50%;
-    background: linear-gradient(135deg, #D81B60, #FF5C93) !important;
+    background: linear-gradient(135deg, #FEA38E, #D84C38) !important;
     color: #FFFFFF !important;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     font-size: 16px;
-    box-shadow: 0 2px 8px rgba(216, 27, 96, 0.35);
+    box-shadow: 0 2px 8px rgba(216, 76, 56, 0.30);
     flex-shrink: 0;
 }
 
@@ -793,23 +859,23 @@ a:hover {
     transition: color 0.25s ease;
 }
 
-/* Badge de rol Administrador (dorado con texto vino) */
+/* Badge de rol Administrador en tonos cálidos */
 .badge-role-gold {
-    background-color: var(--gold-champagne) !important;
-    color: #5E0B26 !important;
-    border: 1px solid var(--gold-dark) !important;
+    background-color: rgba(254, 163, 142, 0.25) !important;
+    color: var(--coral-contrast, #D84C38) !important;
+    border: 1px solid var(--peach-soft, #F3B5A0) !important;
     font-size: var(--sidebar-user-role-size);
     font-weight: 700;
     padding: 2px 8px;
     border-radius: 20px;
     display: inline-block;
-    box-shadow: 0 1px 3px rgba(231, 176, 73, 0.2);
+    box-shadow: 0 1px 3px rgba(216, 76, 56, 0.15);
 }
 
 /* Botón Salir */
 .btn-sidebar-logout {
     color: var(--side-text) !important;
-    border: 1.5px solid var(--rose) !important;
+    border: 1.5px solid var(--peach-soft, #F3B5A0) !important;
     background: transparent !important;
     border-radius: 8px;
     font-weight: 600;
@@ -822,6 +888,17 @@ a:hover {
     justify-content: center;
     gap: 8px;
     cursor: pointer;
+}
+
+.btn-sidebar-logout i {
+    color: currentColor !important;
+    transition: transform 0.2s ease;
+}
+
+.btn-sidebar-logout:hover {
+    background: linear-gradient(135deg, #FEA38E, #D84C38) !important;
+    border-color: #D84C38 !important;
+    color: #FFFFFF !important;
 }
 
 .btn-sidebar-logout i {
@@ -974,12 +1051,13 @@ a:hover {
 }
 
 /* Hover de filas */
-[data-theme="light"] .table-hover tbody tr:hover {
-    background-color: rgba(254, 241, 184, 0.40) !important;
+[data-theme="light"] .table-hover tbody tr:hover,
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 223, 195, 0.50) !important;
 }
 
 [data-theme="dark"] .table-hover tbody tr:hover {
-    background-color: rgba(235, 83, 135, 0.12) !important;
+    background-color: rgba(254, 163, 142, 0.15) !important;
 }
 
 [data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
@@ -1002,18 +1080,19 @@ a:hover {
 .btn-boutique-rose,
 .btn-rose,
 .btn-primary,
-.btn-boutique {
-    background: var(--grad-accion) !important;
+.btn-boutique,
+.btn-coral {
+    background: var(--grad-coral) !important;
     color: #FFFFFF !important;
     border: none !important;
-    border-radius: var(--btn-border-radius);
-    padding: var(--btn-py) var(--btn-px);
+    border-radius: 50px !important;
+    padding: var(--btn-py) 20px;
     font-weight: 600;
     font-size: var(--btn-font-size) !important;
     min-height: var(--btn-min-height);
     line-height: 1.35;
     transition: all 0.25s ease;
-    box-shadow: 0 2px 8px rgba(192, 21, 72, 0.20);
+    box-shadow: 0 4px 14px rgba(216, 76, 56, 0.25);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1023,27 +1102,30 @@ a:hover {
 .btn-boutique-rose:hover,
 .btn-rose:hover,
 .btn-primary:hover,
-.btn-boutique:hover {
-    background: var(--grad-accion-hover) !important;
+.btn-boutique:hover,
+.btn-coral:hover {
+    background: var(--grad-coral-hover) !important;
     color: #FFFFFF !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(192, 21, 72, 0.30);
+    box-shadow: 0 6px 18px rgba(216, 76, 56, 0.35);
 }
 
 .btn-outline-boutique {
     background: transparent !important;
-    border: 1.5px solid var(--fucsia-oscuro) !important;
-    color: var(--fucsia-oscuro) !important;
+    border: 1.5px solid var(--coral-contrast) !important;
+    color: var(--coral-contrast) !important;
     font-weight: 600;
-    border-radius: var(--btn-border-radius);
-    padding: var(--btn-py) var(--btn-px);
+    border-radius: 50px !important;
+    padding: var(--btn-py) 18px;
     font-size: var(--btn-font-size) !important;
     min-height: var(--btn-min-height);
+    transition: all 0.2s ease;
 }
 
 .btn-outline-boutique:hover {
-    background: var(--grad-accion) !important;
+    background: var(--grad-coral) !important;
     color: #FFFFFF !important;
+    border-color: transparent !important;
 }
 
 .btn-sm {
@@ -1255,7 +1337,7 @@ a:hover {
    16. LOGIN EN MODO NOCTURNO
    ========================================================================== */
 [data-theme="dark"] body.login-body {
-    background: radial-gradient(circle at top right, #8A1238 0%, #5E0B26 45%, #2A0612 100%) !important;
+    background: radial-gradient(circle at top right, #3D1722 0%, #2B141E 45%, #1D0B12 100%) !important;
     color: var(--ink) !important;
 }
 
@@ -1578,5 +1660,30 @@ a:hover {
         --font-title-card: 17px;
         --font-stat-number: 26px;
     }
+}
+
+/* ==========================================================================
+   19. ACCESIBILIDAD Y PREFERS-REDUCED-MOTION (WCAG AA)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Foco visible accesible con contraste */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.form-check-input:focus-visible {
+    outline: 2.5px solid var(--coral-contrast, #D84C38) !important;
+    outline-offset: 2px !important;
 }
 

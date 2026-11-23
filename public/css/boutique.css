@@ -7,95 +7,103 @@
 
 :root {
     /* -------------------------------------------------------------------------
-       1. PALETA OFICIAL BELLA GIRLS (Definida en un solo lugar)
+       1. PALETA OFICIAL BELLA GIRLS (Durazno, Crema, Rosa, Marfil, Durazno Suave)
        ------------------------------------------------------------------------- */
-    --rosa-principal: #FD7EAF;
-    --rosa-intenso: #EB5387;
-    --fucsia-oscuro: #C01548;
-    --dorado-principal: #FCDB72;
-    --dorado-champagne: #FEF1B8;
-    --dorado-oscuro: #E7B049;
-    --rojo-vino: #821110;
-    --blanco: #FFFFFF;
+    --peach-coral:     #FEA38E;  /* Acento principal, botones, elementos activos */
+    --cream:           #FFDFC3;  /* Fondos suaves, tarjetas, hover */
+    --pink:            #FBA2A8;  /* Acento secundario, badges, gráficos */
+    --ivory:           #F6E8D0;  /* Fondo general de la app */
+    --peach-soft:      #F3B5A0;  /* Bordes, detalles, estados hover */
+
+    /* Colores de Apoyo y Contraste WCAG AA (4.5:1+) */
+    --wine-dark:       #4A1F2A;  /* Texto principal y títulos con alto contraste */
+    --wine-darker:     #36121D;  /* Fondo profundo para sidebar nocturno */
+    --coral-contrast:  #D84C38;  /* Coral más intenso para botones con texto blanco */
+    --coral-hover:     #BE3C29;  /* Hover de botones coral */
+
+    /* Mapeo de tokens heredados para retrocompatibilidad total */
+    --rosa-principal:   var(--peach-coral);
+    --rosa-intenso:     var(--coral-contrast);
+    --fucsia-oscuro:    var(--coral-contrast);
+    --dorado-principal: var(--cream);
+    --dorado-champagne: var(--ivory);
+    --dorado-oscuro:    var(--peach-soft);
+    --rojo-vino:        var(--wine-dark);
+    --blanco:           #FFFFFF;
 
     /* -------------------------------------------------------------------------
        2. GRADIENTES OFICIALES
        ------------------------------------------------------------------------- */
-    /* Acción principal (botones primarios, ítem activo del menú, enlaces):
-       degradado de --fucsia-oscuro a --rosa-intenso, texto blanco */
-    --grad-accion: linear-gradient(135deg, var(--fucsia-oscuro) 0%, var(--rosa-intenso) 100%);
-    /* Hover de acción principal: de --rojo-vino a --fucsia-oscuro */
-    --grad-accion-hover: linear-gradient(135deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
-    /* Header superior: degradado de --rojo-vino a --fucsia-oscuro, texto blanco */
-    --grad-header: linear-gradient(90deg, var(--rojo-vino) 0%, var(--fucsia-oscuro) 100%);
-    /* Detalles dorados / champagne */
-    --grad-dorado: linear-gradient(135deg, var(--dorado-champagne) 0%, var(--dorado-principal) 60%, var(--dorado-oscuro) 100%);
-    /* Fondos suaves */
-    --grad-suave: linear-gradient(180deg, #FFFFFF 0%, #FFF5F8 100%);
+    /* Acción principal (botones primarios, ítem activo del menú, enlaces) */
+    --grad-accion: linear-gradient(135deg, var(--peach-coral) 0%, var(--coral-contrast) 100%);
+    --grad-accion-hover: linear-gradient(135deg, var(--coral-contrast) 0%, var(--coral-hover) 100%);
+    --grad-coral: linear-gradient(135deg, var(--peach-coral) 0%, var(--coral-contrast) 100%);
+    --grad-header: #FFFFFF;
+    --grad-suave: linear-gradient(180deg, #FFFFFF 0%, var(--cream) 100%);
 
     /* -------------------------------------------------------------------------
        3. TOKENS SEMÁNTICOS Y RETROCOMPATIBILIDAD
        ------------------------------------------------------------------------- */
-    --color-primary: var(--fucsia-oscuro);
-    --color-primary-hover: var(--rojo-vino);
-    --color-secondary: var(--rosa-intenso);
-    --color-accent: var(--dorado-principal);
-    --color-accent-dark: var(--dorado-oscuro);
-    --color-bg-light: #FFF5F8;
-    --color-bg-app: #FFF9FB;
+    --color-primary: var(--coral-contrast);
+    --color-primary-hover: var(--coral-hover);
+    --color-secondary: var(--peach-coral);
+    --color-accent: var(--peach-soft);
+    --color-accent-dark: var(--coral-contrast);
+    --color-bg-light: var(--cream);
+    --color-bg-app: var(--ivory);
     --color-bg-card: #FFFFFF;
     --color-bg-sidebar: #FFFFFF;
-    --color-bg-subtle: #FFF2F6;
-    --color-bg-champagne: var(--dorado-champagne);
-    --color-bg-hover: rgba(253, 126, 175, 0.12);
+    --color-bg-subtle: rgba(254, 163, 142, 0.12);
+    --color-bg-champagne: var(--ivory);
+    --color-bg-hover: rgba(254, 163, 142, 0.16);
 
-    --color-border: #FBDCE8;
-    --color-border-strong: var(--rosa-principal);
-    --color-border-focus: var(--rosa-intenso);
-    --color-border-gold: var(--dorado-oscuro);
+    --color-border: var(--peach-soft);
+    --color-border-strong: var(--peach-coral);
+    --color-border-focus: var(--coral-contrast);
+    --color-border-gold: var(--peach-soft);
 
     /* -------------------------------------------------------------------------
        4. CONTRASTE Y TIPOGRAFÍA (WCAG AA)
        ------------------------------------------------------------------------- */
     --color-text-on-primary: #FFFFFF;
-    --color-text-title: var(--rojo-vino);
-    --color-text-dark: var(--rojo-vino);
-    --color-text-main: #2E1B22;
-    --color-text-muted: #735C65;
-    --color-text-on-gold: var(--rojo-vino); /* WCAG: sobre dorado SIEMPRE texto rojo vino */
+    --color-text-title: var(--wine-dark);
+    --color-text-dark: var(--wine-dark);
+    --color-text-main: var(--wine-dark);
+    --color-text-muted: #7D5863;
+    --color-text-on-gold: var(--wine-dark);
 
     /* -------------------------------------------------------------------------
        5. SOMBRAS ARMONIZADAS
        ------------------------------------------------------------------------- */
-    --shadow-pink-xs: 0 1px 3px rgba(192, 21, 72, 0.08);
-    --shadow-pink-sm: 0 2px 8px rgba(192, 21, 72, 0.12);
-    --shadow-pink-md: 0 4px 16px rgba(192, 21, 72, 0.18);
-    --shadow-pink-lg: 0 8px 28px rgba(192, 21, 72, 0.22);
-    --shadow-card: 0 2px 10px rgba(192, 21, 72, 0.04);
-    --shadow-gold: 0 3px 12px rgba(231, 176, 73, 0.25);
+    --shadow-pink-xs: 0 1px 3px rgba(74, 31, 42, 0.05);
+    --shadow-pink-sm: 0 2px 8px rgba(74, 31, 42, 0.08);
+    --shadow-pink-md: 0 4px 16px rgba(74, 31, 42, 0.12);
+    --shadow-pink-lg: 0 8px 28px rgba(74, 31, 42, 0.16);
+    --shadow-card: 0 2px 10px rgba(74, 31, 42, 0.04);
+    --shadow-gold: 0 3px 12px rgba(216, 76, 56, 0.15);
 
     /* -------------------------------------------------------------------------
-       6. ALERTAS Y ESTADOS
+       6. ALERTAS Y ESTADOS CÁLIDOS
        ------------------------------------------------------------------------- */
-    --color-success: #15803d;
-    --color-success-bg: #ecfdf3;
-    --color-success-border: #abefc6;
-    --color-success-text: #065f46;
+    --color-success: #2E7D52;
+    --color-success-bg: #E2F5E9;
+    --color-success-border: #A3E0BF;
+    --color-success-text: #2E7D52;
 
-    --color-warning: var(--rojo-vino);
-    --color-warning-bg: var(--dorado-champagne);
-    --color-warning-border: var(--dorado-oscuro);
-    --color-warning-text: var(--rojo-vino);
+    --color-warning: #B87333;
+    --color-warning-bg: #FFF1E0;
+    --color-warning-border: var(--peach-soft);
+    --color-warning-text: #B87333;
 
-    --color-danger: var(--rojo-vino);
-    --color-danger-bg: #FDF0F3;
-    --color-danger-border: var(--rosa-intenso);
-    --color-danger-text: var(--rojo-vino);
+    --color-danger: #C0392B;
+    --color-danger-bg: #FDEDEC;
+    --color-danger-border: var(--pink);
+    --color-danger-text: #C0392B;
 
-    --color-info: var(--fucsia-oscuro);
-    --color-info-bg: #FDF2F7;
-    --color-info-border: var(--rosa-principal);
-    --color-info-text: var(--fucsia-oscuro);
+    --color-info: var(--coral-contrast);
+    --color-info-bg: rgba(254, 163, 142, 0.15);
+    --color-info-border: var(--peach-soft);
+    --color-info-text: var(--coral-contrast);
 
     /* -------------------------------------------------------------------------
        7. DIMENSIONES Y ESCALADO GLOBAL (Compacto 10-15% más ágil y armónico)
@@ -167,12 +175,12 @@ a:hover {
 }
 
 /* ==========================================================================
-   BARRA SUPERIOR (HEADER) - Degradado Rojo Vino a Fucsia Oscuro
+   BARRA SUPERIOR (HEADER) - Fondo Blanco/Crema con Bordes Durazno Suave
    ========================================================================== */
 .top-navbar {
     height: var(--top-navbar-height) !important;
-    background: var(--grad-header) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background: var(--card, #FFFFFF) !important;
+    border-bottom: 1.5px solid var(--peach-soft, #F3B5A0) !important;
     padding: 0 24px;
     display: flex;
     align-items: center;
@@ -180,53 +188,53 @@ a:hover {
     position: sticky;
     top: 0;
     z-index: 999;
-    box-shadow: var(--shadow-pink-sm);
-    color: var(--blanco) !important;
+    box-shadow: 0 2px 10px rgba(74, 31, 42, 0.05);
+    color: var(--wine-dark, #4A1F2A) !important;
 }
 
 .top-navbar .navbar-brand-text,
 .top-navbar strong {
-    color: var(--blanco) !important;
+    color: var(--wine-dark, #4A1F2A) !important;
     font-weight: 700;
 }
 
 .top-navbar .navbar-subtext {
-    color: var(--dorado-champagne) !important;
+    color: var(--muted, #7D5863) !important;
 }
 
 .top-navbar .btn-sidebar-toggle {
-    color: var(--blanco) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px;
+    color: var(--wine-dark, #4A1F2A) !important;
+    border: 1.5px solid var(--peach-soft, #F3B5A0) !important;
+    background: rgba(254, 163, 142, 0.15) !important;
+    border-radius: 12px;
 }
 
 .top-navbar .btn-sidebar-toggle:hover {
-    background: var(--blanco) !important;
-    color: var(--rojo-vino) !important;
+    background: var(--cream, #FFDFC3) !important;
+    color: var(--coral-contrast, #D84C38) !important;
 }
 
 /* ==========================================================================
-   MENÚ LATERAL (SIDEBAR) - Rosa Suave / Blanco Elegante
+   MENÚ LATERAL (SIDEBAR) - Armonizado con Paleta Durazno, Crema y Rosa
    ========================================================================== */
 .sidebar {
     width: var(--sidebar-width);
     min-height: 100vh;
-    background: var(--side-bg, linear-gradient(180deg, #FFFFFF 0%, #FFF5F8 100%)) !important;
-    border-right: 1px solid var(--side-border, var(--color-border)) !important;
+    background: var(--side-bg, #FFFFFF) !important;
+    border-right: 1px solid var(--side-border, var(--peach-soft)) !important;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 0 16px rgba(192, 21, 72, 0.06);
+    box-shadow: 2px 0 16px rgba(74, 31, 42, 0.06);
     transition: width 0.3s ease, transform 0.3s ease, background 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .sidebar-brand {
     padding: 12px 16px;
-    border-bottom: 1px solid var(--side-border, var(--color-border)) !important;
+    border-bottom: 1px solid var(--side-border, var(--peach-soft)) !important;
     background: var(--side-bg, #FFFFFF) !important;
     transition: background 0.25s ease, border-color 0.25s ease;
 }
@@ -236,7 +244,7 @@ a:hover {
     height: 38px;
     border-radius: 50%;
     object-fit: contain;
-    box-shadow: 0 3px 10px rgba(192, 21, 72, 0.18), 0 0 0 2px var(--dorado-oscuro);
+    box-shadow: 0 3px 10px rgba(74, 31, 42, 0.12), 0 0 0 2px var(--peach-soft);
     flex-shrink: 0;
     transition: transform 0.25s ease;
 }
@@ -246,7 +254,7 @@ a:hover {
 }
 
 .sidebar-brand-title {
-    color: var(--side-text, var(--rojo-vino)) !important;
+    color: var(--side-text, var(--wine-dark)) !important;
     font-size: 1.12rem;
     letter-spacing: 0.8px;
     line-height: 1.1;
@@ -255,10 +263,10 @@ a:hover {
 }
 
 .sidebar-section-title {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     letter-spacing: 0.8px;
     font-weight: 800;
-    color: var(--side-section, var(--fucsia-oscuro)) !important;
+    color: var(--side-section, var(--coral-contrast)) !important;
     text-transform: uppercase;
     transition: color 0.25s ease;
 }
@@ -268,7 +276,7 @@ a:hover {
     align-items: center;
     gap: 10px;
     padding: 7px 14px;
-    color: var(--side-text, var(--rojo-vino)) !important;
+    color: var(--side-text, var(--wine-dark)) !important;
     font-weight: 600;
     font-size: 0.86rem;
     text-decoration: none;
@@ -291,15 +299,15 @@ a:hover {
     background-color: transparent !important;
     border-left: 3px solid transparent !important;
     box-shadow: none !important;
-    color: var(--side-text, var(--rojo-vino)) !important;
+    color: var(--side-text, var(--wine-dark)) !important;
 }
 
 .nav-link-custom:not(.active):hover {
-    color: var(--side-text, var(--fucsia-oscuro)) !important;
-    background-color: var(--side-hover, #FFF0F5) !important;
-    border-left: 3px solid var(--rosa-intenso);
+    color: var(--side-text, var(--wine-dark)) !important;
+    background-color: var(--side-hover, var(--cream)) !important;
+    border-left: 3px solid var(--peach-coral);
     transform: translateX(3px);
-    box-shadow: 0 2px 8px rgba(192, 21, 72, 0.06);
+    box-shadow: 0 2px 8px rgba(74, 31, 42, 0.06);
 }
 
 .nav-link-custom:not(.active):focus,
@@ -310,25 +318,25 @@ a:hover {
     box-shadow: none !important;
 }
 
-/* Ítem activo: degradado con texto blanco */
+/* Ítem activo: degradado coral oficial con texto blanco */
 .nav-link-custom.active {
-    color: var(--blanco) !important;
-    background: linear-gradient(135deg, #D81B60, #FF5C93) !important;
+    color: #FFFFFF !important;
+    background: linear-gradient(135deg, #FEA38E, #D84C38) !important;
     font-weight: 700 !important;
-    border-left: 3px solid #D81B60 !important;
-    box-shadow: 0 4px 14px rgba(216, 27, 96, 0.35) !important;
+    border-left: 3px solid #D84C38 !important;
+    box-shadow: 0 4px 14px rgba(216, 76, 56, 0.30) !important;
 }
 
 .nav-link-custom.active i {
-    color: var(--blanco) !important;
+    color: #FFFFFF !important;
 }
 
 /* ==========================================================================
    PIE DEL MENÚ LATERAL (INFORMACIÓN DEL USUARIO AUTENTICADO)
    ========================================================================== */
 .sidebar-user-footer {
-    border-top: 1px solid var(--side-border, var(--color-border)) !important;
-    background-color: var(--side-card, #FFFFFF) !important;
+    border-top: 1px solid var(--side-border, var(--peach-soft)) !important;
+    background-color: var(--side-card, #FFF8F2) !important;
     margin-top: auto;
     padding: 10px 14px;
     transition: background 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
@@ -338,28 +346,29 @@ a:hover {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #D81B60, #FF5C93) !important;
-    color: var(--blanco) !important;
+    background: linear-gradient(135deg, #FEA38E, #D84C38) !important;
+    color: #FFFFFF !important;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     font-size: 1.05rem;
-    box-shadow: 0 3px 10px rgba(192, 21, 72, 0.25);
+    box-shadow: 0 3px 10px rgba(216, 76, 56, 0.25);
     flex-shrink: 0;
 }
 
 .sidebar-user-name {
-    color: var(--side-text, var(--rojo-vino)) !important;
+    color: var(--side-text, var(--wine-dark)) !important;
     font-size: 0.88rem;
     line-height: 1.2;
     transition: color 0.25s ease;
 }
 
-/* Badge con rol en dorado */
+/* Badge con rol en tonos cálidos */
 .badge-role-gold {
-    background-color: var(--dorado-champagne) !important;
-    color: var(--rojo-vino) !important;
+    background-color: rgba(254, 163, 142, 0.25) !important;
+    color: var(--coral-contrast, #D84C38) !important;
+    border: 1px solid var(--peach-soft, #F3B5A0) !important;
     border: 1px solid var(--dorado-oscuro) !important;
     font-size: 0.72rem;
     font-weight: 700;
@@ -495,23 +504,21 @@ html.sidebar-collapsed .main-wrapper {
 /* ==========================================================================
    BOTONES
    ========================================================================== */
-/* Acción principal: degradado de --fucsia-oscuro a --rosa-intenso, texto blanco
-   Hover: de --rojo-vino a --fucsia-oscuro */
 .btn-boutique-rose,
 .btn-rose,
 .btn-primary,
 .btn-login-submit {
-    background: var(--grad-accion) !important;
-    color: var(--blanco) !important;
+    background: var(--grad-coral) !important;
+    color: #FFFFFF !important;
     border: none !important;
-    border-radius: var(--btn-border-radius);
+    border-radius: 50px !important;
     padding: var(--btn-py) var(--btn-px);
     font-weight: 600;
     font-size: var(--btn-font-size);
     min-height: var(--btn-min-height);
     line-height: 1.35;
     transition: all 0.25s ease;
-    box-shadow: var(--shadow-pink-sm);
+    box-shadow: 0 4px 12px rgba(216, 76, 56, 0.20) !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -523,9 +530,9 @@ html.sidebar-collapsed .main-wrapper {
 .btn-primary:hover,
 .btn-login-submit:hover {
     background: var(--grad-accion-hover) !important;
-    color: var(--blanco) !important;
+    color: #FFFFFF !important;
     transform: translateY(-1px);
-    box-shadow: var(--shadow-pink-md);
+    box-shadow: 0 6px 16px rgba(216, 76, 56, 0.30) !important;
 }
 
 .btn-boutique-rose:active,
@@ -540,8 +547,8 @@ html.sidebar-collapsed .main-wrapper {
 .btn-rose:disabled,
 .btn-rose.disabled,
 .btn-primary:disabled {
-    background: var(--rosa-principal) !important;
-    color: var(--blanco) !important;
+    background: var(--peach-soft) !important;
+    color: #FFFFFF !important;
     opacity: 0.65;
     box-shadow: none !important;
     cursor: not-allowed;
@@ -550,10 +557,10 @@ html.sidebar-collapsed .main-wrapper {
 
 /* Botón Boutique Alternativo / Secundario */
 .btn-boutique {
-    background: var(--grad-accion) !important;
-    color: var(--blanco) !important;
+    background: var(--grad-coral) !important;
+    color: #FFFFFF !important;
     border: none !important;
-    border-radius: var(--btn-border-radius);
+    border-radius: 50px !important;
     padding: var(--btn-py) var(--btn-px);
     font-weight: 600;
     font-size: var(--btn-font-size);
@@ -567,17 +574,17 @@ html.sidebar-collapsed .main-wrapper {
 
 .btn-boutique:hover {
     background: var(--grad-accion-hover) !important;
-    color: var(--blanco) !important;
-    box-shadow: var(--shadow-pink-sm);
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 12px rgba(216, 76, 56, 0.25) !important;
 }
 
-/* Botón Delineado con Fucsia Oscuro */
+/* Botón Delineado con Coral de Contraste */
 .btn-outline-boutique {
     background: transparent !important;
-    border: 1.5px solid var(--fucsia-oscuro) !important;
-    color: var(--fucsia-oscuro) !important;
+    border: 1.5px solid var(--coral-contrast) !important;
+    color: var(--coral-contrast) !important;
     font-weight: 600;
-    border-radius: var(--btn-border-radius);
+    border-radius: 50px !important;
     padding: calc(var(--btn-py) - 1px) var(--btn-px);
     font-size: var(--btn-font-size);
     min-height: var(--btn-min-height);
@@ -589,9 +596,9 @@ html.sidebar-collapsed .main-wrapper {
 }
 
 .btn-outline-boutique:hover {
-    background: var(--grad-accion) !important;
-    border-color: var(--fucsia-oscuro) !important;
-    color: var(--blanco) !important;
+    background: var(--grad-coral) !important;
+    border-color: var(--coral-contrast) !important;
+    color: #FFFFFF !important;
 }
 
 .btn-sm {
@@ -744,21 +751,21 @@ html.sidebar-collapsed .main-wrapper {
 .table thead th,
 .table-light th,
 .table-hover thead tr {
-    background-color: #FFF2F6 !important;
-    color: var(--rojo-vino) !important;
+    background-color: var(--cream, #FFDFC3) !important;
+    color: var(--wine-dark, #4A1F2A) !important;
     font-weight: 700;
-    border-bottom: 2px solid var(--rosa-principal) !important;
+    border-bottom: 2px solid var(--peach-soft, #F3B5A0) !important;
     letter-spacing: 0.3px;
     padding: 8px 12px !important;
 }
 
-/* Hover de filas en dorado champagne suave */
+/* Hover de filas en crema suave */
 .table-hover tbody tr:hover {
-    background-color: rgba(254, 241, 184, 0.40) !important;
+    background-color: rgba(255, 223, 195, 0.45) !important;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(253, 126, 175, 0.05) !important;
+    background-color: rgba(254, 163, 142, 0.05) !important;
 }
 
 /* ==========================================================================
@@ -907,22 +914,22 @@ html.sidebar-collapsed .main-wrapper {
    PAGINACIÓN
    ========================================================================== */
 .pagination .page-item.active .page-link {
-    background: var(--grad-accion) !important;
-    border-color: var(--fucsia-oscuro) !important;
-    color: var(--blanco) !important;
-    box-shadow: 0 2px 6px rgba(192, 21, 72, 0.25);
+    background: var(--grad-coral) !important;
+    border-color: var(--coral-contrast) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(216, 76, 56, 0.25);
 }
 
 .pagination .page-link {
-    color: var(--fucsia-oscuro) !important;
-    border-color: var(--color-border) !important;
+    color: var(--coral-contrast) !important;
+    border-color: var(--peach-soft) !important;
     background-color: #FFFFFF;
 }
 
 .pagination .page-link:hover {
-    background-color: #FFF2F6 !important;
-    border-color: var(--rosa-principal) !important;
-    color: var(--rojo-vino) !important;
+    background-color: var(--cream) !important;
+    border-color: var(--peach-soft) !important;
+    color: var(--wine-dark) !important;
 }
 
 /* ==========================================================================
